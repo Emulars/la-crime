@@ -33,3 +33,14 @@ The dataset enables an in-depth exploration of crime patterns over time and acro
 3) The time dimension: Highlight when crimes are most frequent [Slider with year/animation Alluvial chart with: Left: Total crimes Center: most critical neighborhoods (taken from above) Right: Time bands when crimes happen (morning,afternoon,evening)]
 4) Types of crimes and Weapons used
 5) Human Impact: Exploring the effect on different demographic groups
+
+## Command reference
+
+| Command           | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| `npm install`            | Install or reinstall dependencies                        |
+| `npm run dev`        | Start local preview server                               |
+| `npm run build`      | Build your static site, generating `./dist`              |
+| `npm run deploy`     | Deploy your app to Observable                            |
+| `npm run clean`      | Clear the local data loader cache                        |
+| `npm run observable` | Run commands like `observable help`                      |
