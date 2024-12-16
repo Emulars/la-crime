@@ -4,3 +4,5 @@ node_modules/
 yarn-error.log
 
 dataset/Crime-Data-from-2020-to-Present-Cleaned.tsv
+dataset/Crime-Data-from-2010-to-2019-csv.tsv
+dataset/crime-data-2010-2024.tsv

@@ -24,10 +24,10 @@ import numpy as np
 def danger_index(alpha, beta, crime_severity, crime_count, area):
     weighted_crime_index = sum([crime_severity[crime] * crime_count[crime] for crime in crime_severity]) / max([crime_severity[crime] * crime_count[crime] for crime in crime_severity])
     crime_density = sum(crime_count.values()) / area
-    return alpha * weighted_crime_index + beta * crime_density
+    return (alpha * weighted_crime_index) + (beta * crime_density)
 
 # Load dataset
-data = pd.read_csv("Crime-Data-from-2020-to-Present-Cleaned.tsv", sep="\t")
+data = pd.read_csv("crime-data-2010-2024.tsv", sep="\t")
 
 # Preprocess data
 data['DateTime'] = pd.to_datetime(data['DateTime'])
@@ -51,7 +51,7 @@ def analyze_district(df):
         area = group['DistrictKm2'].iloc[0]
         crime_severity = dict(zip(group['Crime type'], group['Crime Value']))
         crime_count_dict = dict(Counter(group['Crime type']))
-        district_index = danger_index(0.5, 0.5, crime_severity, crime_count_dict, area)
+        district_index = danger_index(0.6, 0.4, crime_severity, crime_count_dict, area)
         district_indexes.append(district_index)
         results.append([year, district, total_crimes, most_frequent_crime, crime_count, district_index])
     # Normalize DistrictIndex
