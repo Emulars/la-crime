@@ -38,6 +38,10 @@ const maxYear = d3.rollups(
 
 // Creazione del gradiente di colori per i valori
 const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
+
+// Mapping mesi in abbreviazioni inglesi
+const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 ```
 
 ```js
@@ -47,7 +51,7 @@ function LineChart(yearlyCrimes, monthlyAvg, colorScale, {width} = {}) {
     width: width,
     marginBottom: 50,
     marginLeft: 60,
-    x: { domain: d3.range(1, 13), label: "Month" },
+    x: { domain: d3.range(1, 13), label: "Month", tickFormat: (d) => monthLabels[d - 1] },
     y: { label: "Number of Crimes", grid: true },
     marks: [
       // Linee con Gray-Out per linee sotto la media e linea speciale per maxYear
@@ -56,12 +60,11 @@ function LineChart(yearlyCrimes, monthlyAvg, colorScale, {width} = {}) {
         y: "MonthlyCrimeCount",
         z: "Year",
         stroke: (d) =>
-          d.Year === maxYear
-            ? "red" // Linea rossa per l'anno con il massimo dei crimini
-            : d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) <
-              overallAvg
-            ? "lightgray" // Gray-out per linee sotto la media
-            : colorScale(yearlyCrimes.get(d.Year)),
+          (d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) >
+              overallAvg) || (d.Year === 2020)
+            ? colorScale(yearlyCrimes.get(d.Year))
+            : "lightgray"
+        ,
         strokeWidth: (d) => (d.Year === maxYear ? 3 : 1),
         strokeOpacity: (d) =>
           d.Year === maxYear || d.Year === 2020
@@ -69,7 +72,7 @@ function LineChart(yearlyCrimes, monthlyAvg, colorScale, {width} = {}) {
             : d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) <
               overallAvg
             ? 0.3
-            : 1, // Trasparenza per linee sotto la media
+            : 0.5, // Trasparenza per linee sotto la media
         tip: true
       }),
 
@@ -77,19 +80,36 @@ function LineChart(yearlyCrimes, monthlyAvg, colorScale, {width} = {}) {
       Plot.line([...monthlyAvg], {
         x: (d) => d[0],
         y: (d) => d[1],
-        stroke: "white",
+        stroke: "black",
         strokeDasharray: "4 4",
         strokeWidth: 2,
         tip: true
       }),
-
+      // Label "Mean" vicino alla linea della media
+      Plot.text(
+          [
+            { x: 12, 
+            y: overallAvg, 
+            text: "Mean" 
+            }
+          ], // Posizione e testo della label
+          {
+              x: "x",
+              y: "y",
+              text: "text",
+              fill: "black",
+              textAnchor: "start", // Allineamento a sinistra
+              dx: 5, // Piccolo offset orizzontale
+              fontWeight: "bold"
+          }
+      ),
       // Label solo per le linee sopra la media o speciali
       Plot.text(
         data.filter(
           (d) =>
             d.Month === 12 &&
             (d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) >=
-              overallAvg || d.Year === maxYear )
+              overallAvg || d.Year === maxYear || d.Year === 2020 )
         ),
         {
           x: "Month",
@@ -98,6 +118,7 @@ function LineChart(yearlyCrimes, monthlyAvg, colorScale, {width} = {}) {
           fill: (d) => (d.Year === maxYear ? "red" : colorScale(yearlyCrimes.get(d.Year))),
           textAnchor: "start",
           dx: 5,
+          dy: -5,
           fontWeight: (d) => (d.Year === maxYear ? "bold" : "normal")
         }
       )
@@ -109,18 +130,19 @@ function BarChart(yearlyCrimes, colorScale, {width} = {})
 {
     // Bar Chart: Creazione
     return Plot.plot({
-        height: 100,
+        height: 120,
         width: width,
         marginTop: 20,
         marginBottom: 50,
         x: { label: "Year" },
-        y: { label: "Total Crimes" },
+        y: { label: "Total Crimes", domain: [0, d3.max([...yearlyCrimes.values()], (d) => d) * 1.2] },
         marks: [
             Plot.barY([...yearlyCrimes], {
             x: (d) => d[0], // Anno
             y: (d) => d[1], // Totale crimini
             fill: (d) => colorScale(d[1]),
-            title: (d) => `Year: ${d[0]}\nCrimes: ${d[1]}`
+            title: (d) => `Year: ${d[0]}\nCrimes: ${d[1]}`,
+            tip: true
             })
         ]
     });
