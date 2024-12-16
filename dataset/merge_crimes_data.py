@@ -20,6 +20,9 @@ def merge_csv_files(file1, file2, output_file):
         # Combine the DataFrames
         merged_df = pd.concat([df1, df2])
 
+        # Remove rows with DateTime in the year 2024
+        merged_df = merged_df[~merged_df['DateTime'].str.contains("^2024", na=False)]
+
         # Drop duplicate rows
         merged_df = merged_df.drop_duplicates()
 

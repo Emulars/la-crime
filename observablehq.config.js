@@ -11,7 +11,8 @@ export default {
       name: "Examples",
       pages: [
         {name: "Dashboard", path: "/example-dashboard"},
-        {name: "Report", path: "/example-report"}
+        {name: "Report", path: "/example-report"},
+        {name: "Problem overview", path: "/ProblemOverview"},
         {name: "Data cleaning and Preparation", path: "/dataPreparation"}
       ]
     }
@@ -23,7 +24,7 @@ export default {
   // The path to the source root.
   root: "src",
   footer: ({path}) => `<a href="https://github.com/Emulars/la-crime">Source Code</a>`,
-
+  
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
   // header: "", // what to show in the header (HTML)
