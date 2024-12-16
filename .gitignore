@@ -2,3 +2,5 @@
 /dist/
 node_modules/
 yarn-error.log
+
+dataset/Crime-Data-from-2020-to-Present-Cleaned.tsv
