@@ -1,0 +1,9 @@
+[
+    {"name": "Legalization of medical cannabis", "year": 2014, "month" : "January", "y": 10},
+    {"name": "Introduction of rehabilitation programs for minor offenses instead of prison sentences", "year": 2015, "month" : "November", "y": 20},
+    {"name": "Approval of Proposition 57", "year": 2016, "month" : "November", "y": 30},
+    {"name": "Legalization of recreational cannabis", "year": 2018, "month" : "January", "y": 40},
+    {"name": "Restrictive laws against homelessness", "year": 2019, "month" : "September", "y": 40},
+    {"name": "COVID-19", "year": 2020, "month" : "March", "y": 50},
+    {"name": "Black Lives Matter and George Floyd death", "year": 2020, "month" : "May", "y": 60}
+]
