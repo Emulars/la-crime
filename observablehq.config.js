@@ -13,6 +13,7 @@ export default {
         {name: "Dashboard", path: "/example-dashboard"},
         {name: "Report", path: "/example-report"},
         {name: "Problem overview", path: "/ProblemOverview"},
+        {name: "Victims demographic groups", path: "/Victims"},
         {name: "Data cleaning and Preparation", path: "/dataPreparation"}
       ]
     }

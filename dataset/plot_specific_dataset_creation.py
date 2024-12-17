@@ -78,33 +78,126 @@ def analyze_hourly(df):
 hourly_summary = analyze_hourly(data)
 
 # 4. Victim stats by gender, ethnicity, and age range
-def age_range(age):
-    if pd.isna(age) or age == 0:
-        return 'Unknown'
-    return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
+# def age_range(age):
+#     if pd.isna(age) or age == 0:
+#         return 'Unknown'
+#     return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
 
-data['AgeRange'] = data['Age'].apply(age_range)
+# data['AgeRange'] = data['Age'].apply(age_range)
 
-def analyze_victim_stats(df):
-    results = []
-    for year, group in df.groupby('Year'):
-        gender_counts = group['Gender'].value_counts()
-        ethnicity_counts = group['Ethnicity'].value_counts()
-        age_counts = group['AgeRange'].value_counts()
-        row = {'Year': year}
-        row.update({f'Gender_{gender}': count for gender, count in gender_counts.items()})
-        row.update({f'Ethnicity_{ethnicity}': count for ethnicity, count in ethnicity_counts.items()})
-        row.update({f'AgeRange_{age_range}': count for age_range, count in age_counts.items()})
-        results.append(row)
-    return pd.DataFrame(results)
+# def analyze_victim_stats(df):
+#     results = []
+#     for year, group in df.groupby('Year'):
+#         gender_counts = group['Gender'].value_counts()
+#         ethnicity_counts = group['Ethnicity'].value_counts()
+#         age_counts = group['AgeRange'].value_counts()
+#         row = {'Year': year}
+#         row.update({f'Gender_{gender}': count for gender, count in gender_counts.items()})
+#         row.update({f'Ethnicity_{ethnicity}': count for ethnicity, count in ethnicity_counts.items()})
+#         row.update({f'AgeRange_{age_range}': count for age_range, count in age_counts.items()})
+#         results.append(row)
+#     return pd.DataFrame(results)
 
-victim_stats = analyze_victim_stats(data)
+# victim_stats = analyze_victim_stats(data)
+
+
+def prepare_victim_demographics(df):
+    """
+    Prepare victim demographic data for alluvial visualization with strict ordering
+    to prevent circular links.
+    """
+    def age_range(age):
+        if pd.isna(age) or age == 0:
+            return 'Unknown'
+        return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
+    
+    # Create working copy and age ranges
+    data = df.copy()
+    data['AgeRange'] = data['Age'].apply(age_range)
+    
+    # Add column position for each category to enforce ordering
+    category_positions = {
+        'Gender': 0,
+        'Ethnicity': 1,
+        'AgeRange': 2
+    }
+    
+    # Create nodes dataframe with explicit positioning
+    nodes_list = []
+    
+    # Gender nodes (first column)
+    for gender in data['Gender'].unique():
+        nodes_list.append({
+            'id': f"Gender_{gender}",
+            'name': gender,
+            'category': 'Gender',
+            'column': category_positions['Gender']
+        })
+    
+    # Ethnicity nodes (second column)
+    for ethnicity in data['Ethnicity'].unique():
+        nodes_list.append({
+            'id': f"Ethnicity_{ethnicity}",
+            'name': ethnicity,
+            'category': 'Ethnicity',
+            'column': category_positions['Ethnicity']
+        })
+    
+    # Age range nodes (third column)
+    for age_range in data['AgeRange'].unique():
+        nodes_list.append({
+            'id': f"AgeRange_{age_range}",
+            'name': age_range,
+            'category': 'AgeRange',
+            'column': category_positions['AgeRange']
+        })
+    
+    nodes = pd.DataFrame(nodes_list)
+    
+    # Create links with proper node references
+    links_list = []
+    
+    # Gender to Ethnicity links
+    gender_ethnicity = data.groupby(['Gender', 'Ethnicity']).size().reset_index(name='value')
+    for _, row in gender_ethnicity.iterrows():
+        links_list.append({
+            'source': f"Gender_{row['Gender']}",
+            'target': f"Ethnicity_{row['Ethnicity']}",
+            'value': row['value'],
+            'source_category': 'Gender',
+            'target_category': 'Ethnicity'
+        })
+    
+    # Ethnicity to Age Range links
+    ethnicity_age = data.groupby(['Ethnicity', 'AgeRange']).size().reset_index(name='value')
+    for _, row in ethnicity_age.iterrows():
+        links_list.append({
+            'source': f"Ethnicity_{row['Ethnicity']}",
+            'target': f"AgeRange_{row['AgeRange']}",
+            'value': row['value'],
+            'source_category': 'Ethnicity',
+            'target_category': 'AgeRange'
+        })
+    
+    links = pd.DataFrame(links_list)
+    
+    # Calculate percentages
+    total_victims = len(data)
+    links['percentage'] = (links['value'] / total_victims * 100).round(2)
+    
+    return nodes, links
+
+nodes_df, links_df = prepare_victim_demographics(data)
+
+# Save to JSON for D3
+nodes_df.to_json('nodes.json', orient='records')
+links_df.to_json('links.json', orient='records') 
 
 # Save the datasets
 crime_summary.to_csv("yearly_monthly_crime_summary.csv", index=False)
 district_summary.to_csv("district_crime_analysis.csv", index=False)
 hourly_summary.to_csv("hourly_crime_analysis.csv", index=False)
-victim_stats.to_csv("victim_stats_analysis.csv", index=False)
+#victim_stats.to_csv("victim_stats_analysis.csv", index=False)
 
 
 
