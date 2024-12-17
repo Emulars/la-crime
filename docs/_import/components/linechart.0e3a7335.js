@@ -1,5 +1,5 @@
-import * as Plot from "npm:@observablehq/plot";
-import * as d3 from "d3";
+import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
+import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
 export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, overallAvg , colorScale, {width} = {}) {
 

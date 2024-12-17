@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Data Preparation and Cleaning: From Raw Crime Data to Analytical Insights | LosAngelesCrime</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="modulepreload" href="./_observablehq/client.4585fc9a.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import "./_observablehq/client.4585fc9a.js";
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">LosAngelesCrime</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Examples</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./example-dashboard">Dashboard</a></li>
+    <li class="observablehq-link"><a href="./example-report">Report</a></li>
+    <li class="observablehq-link"><a href="./ProblemOverview">Problem overview</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="data-preparation-and-cleaning-from-raw-crime-data-to-analytical-insights" tabindex="-1"><a class="observablehq-header-anchor" href="#data-preparation-and-cleaning-from-raw-crime-data-to-analytical-insights">Data Preparation and Cleaning: From Raw Crime Data to Analytical Insights</a></h1>
+<p>The data used in this project originates from the City of Los Angeles, capturing crime incidents from 2010 to december 2023. With approximately three million rows and over thirty columns, this dataset provided a rich foundation for analysis but also presented significant challenges due to its complexity and inconsistencies.</p>
+<p>The first step in this process involved retrieving the raw dataset, a comprehensive record of various crimes reported across Los Angeles over the selected time frame. This data, while detailed, contained numerous discrepancies and inconsistencies that needed resolution to ensure its usability. The initial cleaning phase focused on addressing glaring issues such as negative age values, null entries in critical fields, and formatting inconsistencies across columns. These discrepancies, though subtle, had the potential to undermine the integrity of our analysis and were thus systematically corrected.</p>
+<p>A notable challenge was the fragmentation of temporal data. Information related to the timing of crimes was scattered across four separate columns, each with varying formats, including dates and times recorded in the American style. To streamline this, these columns were consolidated into a single standardized field, ensuring consistency and ease of use in subsequent analyses. This step was particularly crucial for analyses involving temporal trends and correlations.</p>
+<p>Not all data fields were essential for the scope of our project. Columns like crime modus operandi and specific crime codes, while detailed, were deemed extraneous for our objectives and were subsequently removed. By focusing on the most relevant fields, we reduced the dataset from over thirty columns to a more manageable fourteen, without sacrificing analytical depth.</p>
+<p>To enhance the dataset's analytical value, additional columns were created to generalize and standardize certain fields. Specifically, a "rollup" approach was applied to crime types and weapon categories. Through clustering techniques and renaming strategies, we grouped similar crimes and weapons into broader, more meaningful categories. This transformation not only simplified the data but also provided a clearer perspective on crime trends and patterns.</p>
+<p>One of the most significant additions was the creation of a "Crime Relevance" column. This field assigned a weighted importance score (ranging from 1 to 5) to each crime type, considering factors such as severity, societal impact, and frequency. This allowed us to prioritize analyses based on the relevance and gravity of incidents. Similarly, district-level data was augmented with a calculated area column, expressing the geographical size of each police district in square kilometers. This provided essential context for spatial analyses, enabling a deeper understanding of crime density and distribution.</p>
+<p>All of these transformations were performed using OpenRefine, a robust tool capable of handling the dataset's substantial size. OpenRefine's powerful features allowed us to address issues of inconsistency, perform sophisticated clustering operations, and manage the large-scale data with efficiency and precision.</p>
+<p>The result of this extensive preprocessing effort is a streamlined and structured dataset, ready for analysis. From over thirty original columns, we now have a concise, coherent dataset with fourteen well-curated fields.</p>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./ProblemOverview"><span>Problem overview</span></a></nav>
+<div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
+</footer>
+</div>
+</body>
+</html>

@@ -1,10 +1,13 @@
 ---
-theme: [dashboard]
 title: Problem overview
-toc: true
 ---
 
 # Problem overview
+
+```js
+import { LineChart } from "./components/linechart.js";
+import { BarChart } from "./components/barchart.js";
+```
 
 ```js
 // Caricamento dati
@@ -36,122 +39,83 @@ const maxYear = d3.rollups(
   (d) => d.Year
 ).sort((a, b) => d3.descending(a[1], b[1]))[0][0];
 
+// Trova il massimo conteggio crimini per mese con l'anno corrispondente
+const maxCrimeByMonth = d3.rollups(
+  data,
+  (v) => {
+    const maxEntry = d3.max(v, (d) => d.MonthlyCrimeCount);
+    const maxRecord = v.find((d) => d.MonthlyCrimeCount === maxEntry);
+    return { year: maxRecord.Year, count: maxRecord.MonthlyCrimeCount };
+  },
+  (d) => d.Month
+);
+
+console.log(maxCrimeByMonth);
+
 // Creazione del gradiente di colori per i valori
 const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
 
 // Mapping mesi in abbreviazioni inglesi
 const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 ```
 
-```js
-function LineChart(yearlyCrimes, monthlyAvg, colorScale, {width} = {}) {
-  return Plot.plot({
-    height: 500,
-    width: width,
-    marginBottom: 50,
-    marginLeft: 60,
-    x: { domain: d3.range(1, 13), label: "Month", tickFormat: (d) => monthLabels[d - 1] },
-    y: { label: "Number of Crimes", grid: true },
-    marks: [
-      // Linee con Gray-Out per linee sotto la media e linea speciale per maxYear
-      Plot.line(data, {
-        x: "Month",
-        y: "MonthlyCrimeCount",
-        z: "Year",
-        stroke: (d) =>
-          (d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) >
-              overallAvg) || (d.Year === 2020)
-            ? colorScale(yearlyCrimes.get(d.Year))
-            : "lightgray"
-        ,
-        strokeWidth: (d) => (d.Year === maxYear ? 3 : 1),
-        strokeOpacity: (d) =>
-          d.Year === maxYear || d.Year === 2020
-            ? 1
-            : d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) <
-              overallAvg
-            ? 0.3
-            : 0.5, // Trasparenza per linee sotto la media
-        tip: true
-      }),
-
-      // Linea tratteggiata che rappresenta la media mensile complessiva
-      Plot.line([...monthlyAvg], {
-        x: (d) => d[0],
-        y: (d) => d[1],
-        stroke: "black",
-        strokeDasharray: "4 4",
-        strokeWidth: 2,
-        tip: true
-      }),
-      // Label "Mean" vicino alla linea della media
-      Plot.text(
-          [
-            { x: 12, 
-            y: overallAvg, 
-            text: "Mean" 
-            }
-          ], // Posizione e testo della label
-          {
-              x: "x",
-              y: "y",
-              text: "text",
-              fill: "black",
-              textAnchor: "start", // Allineamento a sinistra
-              dx: 5, // Piccolo offset orizzontale
-              fontWeight: "bold"
-          }
-      ),
-      // Label solo per le linee sopra la media o speciali
-      Plot.text(
-        data.filter(
-          (d) =>
-            d.Month === 12 &&
-            (d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) >=
-              overallAvg || d.Year === maxYear || d.Year === 2020 )
-        ),
-        {
-          x: "Month",
-          y: "MonthlyCrimeCount",
-          text: (d) => d.Year,
-          fill: (d) => (d.Year === maxYear ? "red" : colorScale(yearlyCrimes.get(d.Year))),
-          textAnchor: "start",
-          dx: 5,
-          dy: -5,
-          fontWeight: (d) => (d.Year === maxYear ? "bold" : "normal")
-        }
-      )
-    ]
-  });
-}
-
-function BarChart(yearlyCrimes, colorScale, {width} = {})
-{
-    // Bar Chart: Creazione
-    return Plot.plot({
-        height: 120,
-        width: width,
-        marginTop: 20,
-        marginBottom: 50,
-        x: { label: "Year" },
-        y: { label: "Total Crimes", domain: [0, d3.max([...yearlyCrimes.values()], (d) => d) * 1.2] },
-        marks: [
-            Plot.barY([...yearlyCrimes], {
-            x: (d) => d[0], // Anno
-            y: (d) => d[1], // Totale crimini
-            fill: (d) => colorScale(d[1]),
-            title: (d) => `Year: ${d[0]}\nCrimes: ${d[1]}`,
-            tip: true
-            })
-        ]
-    });
-}
-```
+<div class="grid grid-cols-4">
+  <div class="card">
+    <h2>January ❄️ [${maxCrimeByMonth[0][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[0][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>February 💘 [${maxCrimeByMonth[1][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[1][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>March 🌱 [${maxCrimeByMonth[2][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[2][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>April 🌷 [${maxCrimeByMonth[3][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[3][1].count.toLocaleString('it-IT')}</span>
+  </div>
+</div>
 
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => LineChart(yearlyCrimes, monthlyAvg, colorScale, {width}))}
+    ${resize((width) => LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, overallAvg , colorScale, {width}))}
     ${resize((width) => BarChart(yearlyCrimes, colorScale, {width}))}
+  </div>
+</div>
+
+<div class="grid grid-cols-2">
+  <div class="card">
+    <h2>May 🌺 [${maxCrimeByMonth[4][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[4][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>June 🏖️ [${maxCrimeByMonth[5][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[5][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>July 🍉 [${maxCrimeByMonth[6][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[6][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>August ☀️ [${maxCrimeByMonth[7][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[7][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>September 🍂 [${maxCrimeByMonth[8][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[8][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>October 🎃 [${maxCrimeByMonth[9][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[9][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>November 🦃 [${maxCrimeByMonth[10][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[10][1].count.toLocaleString('it-IT')}</span>
+  </div>
+  <div class="card">
+    <h2>December 🎄 [${maxCrimeByMonth[11][1].year}]</h2>
+    <span class="big">${maxCrimeByMonth[11][1].count.toLocaleString('it-IT')}</span>
   </div>
 </div>
