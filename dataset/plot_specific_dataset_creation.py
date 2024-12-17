@@ -81,69 +81,83 @@ hourly_summary = analyze_hourly(data)
 def prepare_victim_demographics(df):
     """
     Prepare victim demographic data for alluvial visualization with strict ordering
-    and column adjustments: filter Gender (M/F only) and group small Ethnicity counts as 'Other'.
+    and sorting: Ethnicity and Gender by size (descending), AgeRange by range (ascending).
     """
     def age_range(age):
         if pd.isna(age) or age == 0:
             return 'Unknown'
         return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
-    
-    # Create working copy and clean data
+
+    # Create working copy and age ranges
     data = df.copy()
-    
-    # Filter Gender to include only M or F
-    data = data[data['Gender'].isin(['M', 'F'])]
-    
-    # Compute Ethnicity counts and group smaller ones into 'Other'
-    ethnicity_counts = data['Ethnicity'].value_counts()
-    small_ethnicities = ethnicity_counts[ethnicity_counts < 3000].index
-    data['Ethnicity'] = data['Ethnicity'].replace(small_ethnicities, 'Other')
-    
-    # Generate Age Range
     data['AgeRange'] = data['Age'].apply(age_range)
-    
-    # Add column position for each category to enforce ordering
+
+    # Filter Gender to include only 'M' and 'F'
+    data = data[data['Gender'].isin(['M', 'F'])]
+
+    # Group smaller ethnicities under "Other"
+    ethnicity_counts = data['Ethnicity'].value_counts()
+    data['Ethnicity'] = data['Ethnicity'].apply(
+        lambda x: x if ethnicity_counts[x] >= 3000 else 'Other'
+    )
+
+    # Recompute ethnicity counts after grouping
+    ethnicity_counts = data['Ethnicity'].value_counts()
+
+    # Define order for AgeRange
+    def age_range_sort_key(age_range):
+        if age_range == 'Unknown':
+            return float('inf')  # Put "Unknown" last
+        start = int(age_range.split('-')[0])
+        return start
+
+    # Sort categories
+    sorted_ethnicities = ethnicity_counts.index.tolist()
+    sorted_genders = data['Gender'].value_counts().index.tolist()
+    sorted_age_ranges = sorted(data['AgeRange'].unique(), key=age_range_sort_key)
+
+    # Create category positions for sorted categories
     category_positions = {
         'Ethnicity': 0,
         'Gender': 1,
         'AgeRange': 2
     }
-    
+
     # Create nodes dataframe with explicit positioning
     nodes_list = []
-    
+
     # Ethnicity nodes (first column)
-    for ethnicity in data['Ethnicity'].unique():
+    for ethnicity in sorted_ethnicities:
         nodes_list.append({
             'id': f"Ethnicity_{ethnicity}",
             'name': ethnicity,
             'category': 'Ethnicity',
             'column': category_positions['Ethnicity']
         })
-    
+
     # Gender nodes (second column)
-    for gender in data['Gender'].unique():
+    for gender in sorted_genders:
         nodes_list.append({
             'id': f"Gender_{gender}",
             'name': gender,
             'category': 'Gender',
             'column': category_positions['Gender']
         })
-    
-    # Age range nodes (third column)
-    for age_range in data['AgeRange'].unique():
+
+    # AgeRange nodes (third column)
+    for age_range in sorted_age_ranges:
         nodes_list.append({
             'id': f"AgeRange_{age_range}",
             'name': age_range,
             'category': 'AgeRange',
             'column': category_positions['AgeRange']
         })
-    
+
     nodes = pd.DataFrame(nodes_list)
-    
+
     # Create links with proper node references
     links_list = []
-    
+
     # Ethnicity to Gender links
     ethnicity_gender = data.groupby(['Ethnicity', 'Gender']).size().reset_index(name='value')
     for _, row in ethnicity_gender.iterrows():
@@ -154,8 +168,8 @@ def prepare_victim_demographics(df):
             'source_category': 'Ethnicity',
             'target_category': 'Gender'
         })
-    
-    # Gender to Age Range links
+
+    # Gender to AgeRange links
     gender_age = data.groupby(['Gender', 'AgeRange']).size().reset_index(name='value')
     for _, row in gender_age.iterrows():
         links_list.append({
@@ -165,15 +179,14 @@ def prepare_victim_demographics(df):
             'source_category': 'Gender',
             'target_category': 'AgeRange'
         })
-    
+
     links = pd.DataFrame(links_list)
-    
+
     # Calculate percentages
     total_victims = len(data)
     links['percentage'] = (links['value'] / total_victims * 100).round(2)
-    
-    return nodes, links
 
+    return nodes, links
 
 nodes_df, links_df = prepare_victim_demographics(data)
 

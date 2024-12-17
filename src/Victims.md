@@ -38,7 +38,7 @@ const colorScale = {
 ```
 
 ```js
-const convertToAlluvial = (nodesD, linksD) => {  
+const convertToAlluvial = (nodesD, linksD) => {
   const alluvialData = {
   nodes: nodesD.map(d => ({ 
     id: d.id,
@@ -79,6 +79,7 @@ const drawAlluvialDiagram = () => {
     .nodeId(d => d.id)
     .nodeWidth(15)
     .nodePadding(10)
+    .nodeSort((a, b) => a.category.localeCompare(b.category))
     .extent([[0, 0], [width - padding * 2, height - padding * 2]]);
 
   sankeyGenerator(alluvialData);
@@ -168,7 +169,8 @@ const drawAlluvialDiagram = () => {
     .attr("dy", "0.35em")
     .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
     .text(d => `${d.name} (${d.value})`)
-    .style("font-size", "10px");
+    .style("font-size", "10px")
+    .attr("fill", "#fff");
 
   // Add category headers
 //   const categories = ["Gender", "Ethnicity", "AgeRange"];
