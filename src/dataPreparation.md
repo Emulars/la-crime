@@ -15,3 +15,6 @@ One of the most significant additions was the creation of a "Crime Relevance" co
 All of these transformations were performed using OpenRefine, a robust tool capable of handling the dataset's substantial size. OpenRefine's powerful features allowed us to address issues of inconsistency, perform sophisticated clustering operations, and manage the large-scale data with efficiency and precision.
 
 The result of this extensive preprocessing effort is a streamlined and structured dataset, ready for analysis. From over thirty original columns, we now have a concise, coherent dataset with fourteen well-curated fields.
+
+## Geodata 
+[LAPD Geographic Area](https://geohub.lacity.org/datasets/lahub::lapd-divisions/explore?location=34.018933%2C-118.410104%2C9.68)
