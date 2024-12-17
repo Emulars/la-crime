@@ -50,8 +50,6 @@ const maxCrimeByMonth = d3.rollups(
   (d) => d.Month
 );
 
-console.log(maxCrimeByMonth);
-
 // Creazione del gradiente di colori per i valori
 const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
 

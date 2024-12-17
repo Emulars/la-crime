@@ -23,7 +23,7 @@ export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, 
 
     return Plot.plot({
         title: "Monthly Crime Trends over the Years [2010-2023]",
-        height: 750,
+        height: 650,
         width: width,
         marginBottom: 50,
         marginLeft: 60,
