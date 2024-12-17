@@ -178,13 +178,13 @@ def prepare_victim_demographics(df):
 nodes_df, links_df = prepare_victim_demographics(data)
 
 # Save to JSON for D3
-nodes_df.to_json('nodes.json', orient='records')
-links_df.to_json('links.json', orient='records') 
+nodes_df.to_json('../src/data/nodes.json', orient='records')
+links_df.to_json('../src/data/links.json', orient='records') 
 
 # Save the datasets
-crime_summary.to_csv("yearly_monthly_crime_summary.csv", index=False)
-district_summary.to_csv("district_crime_analysis.csv", index=False)
-hourly_summary.to_csv("hourly_crime_analysis.csv", index=False)
+crime_summary.to_csv("../src/data/yearly_monthly_crime_summary.csv", index=False)
+district_summary.to_csv("../src/data/district_crime_analysis.csv", index=False)
+hourly_summary.to_csv("../src/data/hourly_crime_analysis.csv", index=False)
 
 
 

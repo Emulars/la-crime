@@ -38,9 +38,16 @@ The dataset enables an in-depth exploration of crime patterns over time and acro
 
 | Command           | Description                                              |
 | ----------------- | -------------------------------------------------------- |
-| `npm install`            | Install or reinstall dependencies                        |
-| `npm run dev`        | Start local preview server                               |
-| `npm run build`      | Build your static site, generating `./dist`              |
-| `npm run deploy`     | Deploy your app to Observable                            |
-| `npm run clean`      | Clear the local data loader cache                        |
-| `npm run observable` | Run commands like `observable help`                      |
+| `npm install`        | Install or reinstall dependencies                     |
+| `npm run dev`        | Start local preview server                            |
+| `npm run build`      | Build your static site, generating `./dist`           |
+| `npm run deploy`     | Deploy your app to Observable                         |
+| `npm run clean`      | Clear the local data loader cache                     |
+| `npm run observable` | Run commands like `observable help`                   |
+
+
+## Dataset preparation
+
+1. Unzip both the zip files into dataset folder;
+2. Run 'python merge_crimes_data.py' to merge the two datasets;
+3. Run 'python plot_specific_dataset_creation.py' to create the specific dataset;
