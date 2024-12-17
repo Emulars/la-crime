@@ -20,7 +20,7 @@ const linksData = FileAttachment("data/links.json").json();
 ```js
 // Constants for visualization
 const width = 800;
-const height = 600;
+const height = 800;
 const padding = 20;
 
 const colorScale = {
@@ -38,6 +38,32 @@ const colorScale = {
 };
 ```
 
+```js
+const convertToAlluvial = (nodesD, linksD) => {  
+  const alluvialData = {
+  nodes: nodesD.map(d => ({ 
+    id: d.id,
+    name: d.name,
+    category: d.category 
+  })),
+  links: linksD.map(link => ({
+    source: link.source,
+    target: link.target,
+    value: link.value,
+    sourceCategory: link.source_category,
+    targetCategory: link.target_category,
+    percentage: link.percentage
+  }))
+  };
+
+  return alluvialData;
+};
+```
+
+```js
+const alluvialData = convertToAlluvial(nodesData, linksData);
+console.log(alluvialData);
+```
 
 ```js
 const drawAlluvialDiagram = () => {
@@ -55,28 +81,31 @@ const drawAlluvialDiagram = () => {
     .nodeId(d => d.id)
     .nodeWidth(15)
     .nodePadding(10)
-    .nodeAlign(d3.sankeyLeft) // Force left-to-right alignment
-    .extent([[0, 0], [width - padding * 2, height - padding * 2]]);
+    .extent([[1, 1], [width - 1, height - 5]]);
+    // .nodeAlign(d3.sankeyLeft) // Force left-to-right alignment
+    // .extent([[0, 0], [width - padding * 2, height - padding * 2]]);
 
   // Prepare data structure
-  const sankeyData = {
-    nodes: nodesData.map(node => ({
-      ...node,
-      name: node.name,
-      category: node.category
-    })),
-    links: linksData.map(d => ({
-      source: d.source,
-      target: d.target,
-      value: d.value,
-      sourceCategory: d.source_category,
-      targetCategory: d.target_category,
-      percentage: d.percentage
-    }))
-  };
+//   const sankeyData = {
+//     nodes: nodesData.map(node => ({
+//       ...node,
+//       name: node.name,
+//       category: node.category
+//     })),
+//     links: linksData.map(d => ({
+//       source: d.source,
+//       target: d.target,
+//       value: d.value,
+//       sourceCategory: d.source_category,
+//       targetCategory: d.target_category,
+//       percentage: d.percentage
+//     }))
+//   };
 
-  // Generate layout
-  const { nodes: layoutNodes, links: layoutLinks } = sankeyGenerator(sankeyData);
+//   // Generate layout
+//   const { nodes: layoutNodes, links: layoutLinks } = sankeyGenerator(sankeyData);
+
+    sankeyGenerator(alluvialData);
 
   // Create tooltip
   const tooltip = d3.select("body")
@@ -93,7 +122,7 @@ const drawAlluvialDiagram = () => {
   // Draw links
   svg.append("g")
     .selectAll("path")
-    .data(layoutLinks)
+    .data(alluvialData.links)
     .join("path")
     .attr("d", sankeyLinkHorizontal())
     .attr("fill", "none")
@@ -121,7 +150,7 @@ const drawAlluvialDiagram = () => {
   // Draw nodes
   svg.append("g")
     .selectAll("rect")
-    .data(layoutNodes)
+    .data(alluvialData.nodes)
     .join("rect")
     .attr("x", d => d.x0)
     .attr("y", d => d.y0)
@@ -133,7 +162,7 @@ const drawAlluvialDiagram = () => {
   // Add labels
   svg.append("g")
     .selectAll("text")
-    .data(layoutNodes)
+    .data(alluvialData.nodes)
     .join("text")
     .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
     .attr("y", d => (d.y1 + d.y0) / 2)
