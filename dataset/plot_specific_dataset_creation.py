@@ -78,29 +78,6 @@ def analyze_hourly(df):
 hourly_summary = analyze_hourly(data)
 
 # 4. Victim stats by gender, ethnicity, and age range
-# def age_range(age):
-#     if pd.isna(age) or age == 0:
-#         return 'Unknown'
-#     return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
-
-# data['AgeRange'] = data['Age'].apply(age_range)
-
-# def analyze_victim_stats(df):
-#     results = []
-#     for year, group in df.groupby('Year'):
-#         gender_counts = group['Gender'].value_counts()
-#         ethnicity_counts = group['Ethnicity'].value_counts()
-#         age_counts = group['AgeRange'].value_counts()
-#         row = {'Year': year}
-#         row.update({f'Gender_{gender}': count for gender, count in gender_counts.items()})
-#         row.update({f'Ethnicity_{ethnicity}': count for ethnicity, count in ethnicity_counts.items()})
-#         row.update({f'AgeRange_{age_range}': count for age_range, count in age_counts.items()})
-#         results.append(row)
-#     return pd.DataFrame(results)
-
-# victim_stats = analyze_victim_stats(data)
-
-
 def prepare_victim_demographics(df):
     """
     Prepare victim demographic data for alluvial visualization with strict ordering
@@ -197,7 +174,7 @@ links_df.to_json('links.json', orient='records')
 crime_summary.to_csv("yearly_monthly_crime_summary.csv", index=False)
 district_summary.to_csv("district_crime_analysis.csv", index=False)
 hourly_summary.to_csv("hourly_crime_analysis.csv", index=False)
-#victim_stats.to_csv("victim_stats_analysis.csv", index=False)
+
 
 
 
