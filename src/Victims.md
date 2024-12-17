@@ -1,6 +1,5 @@
 ---
-theme: [dashboard]
-title: Problem overview
+title: Victims demographic groups
 toc: true
 ---
 
@@ -25,11 +24,11 @@ const padding = 20;
 
 const colorScale = {
   Gender: d3.scaleOrdinal()
-    .domain(["M", "F", "Unknown"])
-    .range(["#2c7bb6", "#ffccff", "#999999"]),
+    .domain(["M", "F"])
+    .range(["#2c7bb6", "#ffccff"]),
   
   Ethnicity: d3.scaleOrdinal()
-    .domain(["H", "W", "B", "A", "O", "Unknown"])
+    //.domain(["H", "W", "B", "A", "O", "Unknown"])
     .range(["#7b3294", "#c2a5cf", "#a6dba0", "#008837", "#e66101", "#999999"]),
   
   AgeRange: d3.scaleOrdinal()
