@@ -1,5 +1,4 @@
 ---
-theme: dashboard
 title: Los Angeles Crime Analysis
 toc: true
 ---
