@@ -26,7 +26,7 @@ const padding = 20;
 const colorScale = {
   Gender: d3.scaleOrdinal()
     .domain(["M", "F", "Unknown"])
-    .range(["#2c7bb6", "#d7191c", "#999999"]),
+    .range(["#2c7bb6", "#ffccff", "#999999"]),
   
   Ethnicity: d3.scaleOrdinal()
     .domain(["H", "W", "B", "A", "O", "Unknown"])
@@ -62,7 +62,6 @@ const convertToAlluvial = (nodesD, linksD) => {
 
 ```js
 const alluvialData = convertToAlluvial(nodesData, linksData);
-console.log(alluvialData);
 ```
 
 ```js
@@ -81,31 +80,9 @@ const drawAlluvialDiagram = () => {
     .nodeId(d => d.id)
     .nodeWidth(15)
     .nodePadding(10)
-    .extent([[1, 1], [width - 1, height - 5]]);
-    // .nodeAlign(d3.sankeyLeft) // Force left-to-right alignment
-    // .extent([[0, 0], [width - padding * 2, height - padding * 2]]);
+    .extent([[0, 0], [width - padding * 2, height - padding * 2]]);
 
-  // Prepare data structure
-//   const sankeyData = {
-//     nodes: nodesData.map(node => ({
-//       ...node,
-//       name: node.name,
-//       category: node.category
-//     })),
-//     links: linksData.map(d => ({
-//       source: d.source,
-//       target: d.target,
-//       value: d.value,
-//       sourceCategory: d.source_category,
-//       targetCategory: d.target_category,
-//       percentage: d.percentage
-//     }))
-//   };
-
-//   // Generate layout
-//   const { nodes: layoutNodes, links: layoutLinks } = sankeyGenerator(sankeyData);
-
-    sankeyGenerator(alluvialData);
+  sankeyGenerator(alluvialData);
 
   // Create tooltip
   const tooltip = d3.select("body")
@@ -118,6 +95,33 @@ const drawAlluvialDiagram = () => {
     .style("padding", "8px")
     .style("border-radius", "4px")
     .style("font-size", "12px");
+
+  let selectedNodeId = null; // Track the currently selected node
+  // Function to handle node click and highlight related links
+  const highlightLinks = (nodeId) => {
+    if (selectedNodeId === nodeId) {
+      // If the same node is clicked again, reset the highlighting
+      svg.selectAll("path").attr("stroke-opacity", 0.4);
+      svg.selectAll("rect").attr("opacity", 1);
+      selectedNodeId = null; // Reset the selected node
+    } else {
+      // Highlight the links related to the new node
+      svg.selectAll("path")
+        .attr("stroke-opacity", d => d.source.id === nodeId || d.target.id === nodeId ? 0.8 : 0.1);
+      svg.selectAll("rect")
+        .attr("opacity", d => d.id === nodeId ? 1 : 0.3);
+      selectedNodeId = nodeId; // Update the selected node
+    }
+  };
+
+  // Function to update the tooltip content
+  const updateTooltipContent = (d) => {
+    tooltip.html(`
+        ${d.source.name} → ${d.target.name}<br/>
+        Count: ${d.value}<br/>
+        Percentage: ${d.percentage.toFixed(1)}%
+      `);
+  };
 
   // Draw links
   svg.append("g")
@@ -133,18 +137,11 @@ const drawAlluvialDiagram = () => {
       tooltip.transition()
         .duration(200)
         .style("opacity", .9);
-      tooltip.html(`
-        ${d.source.name} → ${d.target.name}<br/>
-        Count: ${d.value}<br/>
-        Percentage: ${d.percentage.toFixed(1)}%
-      `)
-        .style("left", (event.pageX + 10) + "px")
-        .style("top", (event.pageY - 28) + "px");
+      updateTooltipContent(d)
+      tooltip.style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 28) + "px");
     })
     .on("mouseout", () => {
-      tooltip.transition()
-        .duration(500)
-        .style("opacity", 0);
+      tooltip.transition().duration(200).style("opacity", 0);
     });
 
   // Draw nodes
@@ -157,7 +154,10 @@ const drawAlluvialDiagram = () => {
     .attr("height", d => d.y1 - d.y0)
     .attr("width", d => d.x1 - d.x0)
     .attr("fill", d => colorScale[d.category.split('_')[0]](d.name))
-    .attr("stroke", "#000");
+    .attr("stroke", "#000")
+    .on("click", (event, d) => {
+      highlightLinks(d.id);
+    });
 
   // Add labels
   svg.append("g")
@@ -172,19 +172,19 @@ const drawAlluvialDiagram = () => {
     .style("font-size", "10px");
 
   // Add category headers
-  const categories = ["Gender", "Ethnicity", "AgeRange"];
-  const categoryWidth = width / (categories.length + 1);
+//   const categories = ["Gender", "Ethnicity", "AgeRange"];
+//   const categoryWidth = width / (categories.length + 1);
   
-  svg.append("g")
-    .selectAll("text")
-    .data(categories)
-    .join("text")
-    .attr("x", (d, i) => categoryWidth * (i + 0.5))
-    .attr("y", 0)
-    .attr("text-anchor", "middle")
-    .style("font-size", "14px")
-    .style("font-weight", "bold")
-    .text(d => d);
+//   svg.append("g")
+//     .selectAll("text")
+//     .data(categories)
+//     .join("text")
+//     .attr("x", (d, i) => categoryWidth * (i + 0.5))
+//     .attr("y", 0)
+//     .attr("text-anchor", "middle")
+//     .style("font-size", "14px")
+//     .style("font-weight", "bold")
+//     .text(d => d);
 
   return svg.node();
 };
