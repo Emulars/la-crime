@@ -98,7 +98,7 @@ def prepare_victim_demographics(df):
     # Group smaller ethnicities under "Other"
     ethnicity_counts = data['Ethnicity'].value_counts()
     data['Ethnicity'] = data['Ethnicity'].apply(
-        lambda x: x if ethnicity_counts[x] >= 3000 else 'Other'
+        lambda x: x if ethnicity_counts[x] >= 6000 else 'Other'
     )
 
     # Recompute ethnicity counts after grouping

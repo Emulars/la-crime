@@ -18,7 +18,7 @@ const linksData = FileAttachment("data/links.json").json();
 
 ```js
 // Constants for visualization
-const width = 800;
+//const width = 
 const height = 800;
 const padding = 20;
 
@@ -28,8 +28,8 @@ const colorScale = {
     .range(["#2c7bb6", "#ffccff"]),
   
   Ethnicity: d3.scaleOrdinal()
-    //.domain(["H", "W", "B", "A", "O", "Unknown"])
-    .range(["#7b3294", "#c2a5cf", "#a6dba0", "#008837", "#e66101", "#999999"]),
+    .domain(["Hispanic", "White", "Black", "Other", "Other Asian", "Unknown", "Korean", "Filipino"])
+    .range(["#7b3294", "#22a9cf", "#a6dba0", "#008837", "#e66101", "#999999","#997599","#01329A"]),
   
   AgeRange: d3.scaleOrdinal()
     .domain(["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "Unknown"])
@@ -171,21 +171,6 @@ const drawAlluvialDiagram = () => {
     .text(d => `${d.name} (${d.value})`)
     .style("font-size", "10px")
     .attr("fill", "#fff");
-
-  // Add category headers
-//   const categories = ["Gender", "Ethnicity", "AgeRange"];
-//   const categoryWidth = width / (categories.length + 1);
-  
-//   svg.append("g")
-//     .selectAll("text")
-//     .data(categories)
-//     .join("text")
-//     .attr("x", (d, i) => categoryWidth * (i + 0.5))
-//     .attr("y", 0)
-//     .attr("text-anchor", "middle")
-//     .style("font-size", "14px")
-//     .style("font-weight", "bold")
-//     .text(d => d);
 
   return svg.node();
 };
