@@ -1,4 +1,4 @@
-import * as d3 from "d3";
+import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
 export function choroplethMap(geoData, divisionData, Alldata, year, district_name, { width, height } = {}) {
     // Calculate global min and max DistrictIndex across all years

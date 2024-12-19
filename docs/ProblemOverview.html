@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="generator" content="Observable Framework v1.13.0">
-<title>Problem overview | LosAngelesCrime</title>
+<title>Problem overview | Los Angeles&#x27;s Crime</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
-<link rel="modulepreload" href="./_observablehq/client.4585fc9a.js">
+<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
-<link rel="modulepreload" href="./_import/components/linechart.0e3a7335.js">
-<link rel="modulepreload" href="./_import/components/barchart.d1f38949.js">
+<link rel="modulepreload" href="./_import/components/linechart.f727fc5a.js">
+<link rel="modulepreload" href="./_import/components/barchart.244231d6.js">
+<link rel="modulepreload" href="./_import/components/timeline.12c598be.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
 <link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
@@ -90,24 +91,26 @@
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.4585fc9a.js";
+import {define} from "./_observablehq/client.55fa937c.js";
 import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
-registerFile("./data/yearly_monthly_crime_summary.csv", {"name":"./data/yearly_monthly_crime_summary.csv","mimeType":"text/csv","path":"./_file/data/yearly_monthly_crime_summary.bea7561c.csv","lastModified":1734362646600,"size":5932});
+registerFile("./data/la_events.json", {"name":"./data/la_events.json","mimeType":"application/json","path":"./_file/data/la_events.7202b264.json","lastModified":1734615729964,"size":827});
+registerFile("./data/yearly_monthly_crime_summary.csv", {"name":"./data/yearly_monthly_crime_summary.csv","mimeType":"text/csv","path":"./_file/data/yearly_monthly_crime_summary.bea7561c.csv","lastModified":1734626734623,"size":5932});
 
-define({id: "37506864", outputs: ["LineChart","BarChart"], body: async () => {
-const [{LineChart}, {BarChart}] = await Promise.all([import("./_import/components/linechart.0e3a7335.js"), import("./_import/components/barchart.d1f38949.js")]);
+define({id: "7eb62b89", outputs: ["LineChart","BarChart","timeline"], body: async () => {
+const [{LineChart}, {BarChart}, {timeline}] = await Promise.all([import("./_import/components/linechart.f727fc5a.js"), import("./_import/components/barchart.244231d6.js"), import("./_import/components/timeline.12c598be.js")]);
 
-return {LineChart,BarChart};
+return {LineChart,BarChart,timeline};
 }});
 
-define({id: "92af0df6", inputs: ["FileAttachment"], outputs: ["data"], body: (FileAttachment) => {
+define({id: "a6e3c60f", inputs: ["FileAttachment"], outputs: ["data","events"], body: (FileAttachment) => {
 // Caricamento dati
 const data = FileAttachment("./data/yearly_monthly_crime_summary.csv").csv({ typed: true });
-return {data};
+const events = FileAttachment("./data/la_events.json").json();
+return {data,events};
 }});
 
-define({id: "d7737693", inputs: ["d3","data"], outputs: ["yearlyCrimes","monthlyAvg","overallAvg","maxYear","maxCrimeByMonth","colorScale","monthLabels"], body: (d3,data) => {
+define({id: "e537bdd2", inputs: ["d3","data"], outputs: ["yearlyCrimes","colorScale"], body: (d3,data) => {
 // Aggregazione dei dati annuali per il barchart
 const yearlyCrimes = d3.rollup(
   data,
@@ -115,96 +118,9 @@ const yearlyCrimes = d3.rollup(
   (d) => d.Year
 );
 
-// Calcolo della media mensile complessiva rispetto a tutti gli anni
-const monthlyAvg = d3.rollup(
-  data,
-  (v) => d3.mean(v, (d) => d.MonthlyCrimeCount),
-  (d) => d.Month
-);
-
-// Calcolo della media complessiva annuale
-const overallAvg = d3.mean(data, (d) => d.MonthlyCrimeCount);
-
-// Trova il massimo anno per crimini (es. 2022)
-const maxYear = d3.rollups(
-  data,
-  (v) => d3.sum(v, (d) => d.MonthlyCrimeCount),
-  (d) => d.Year
-).sort((a, b) => d3.descending(a[1], b[1]))[0][0];
-
-// Trova il massimo conteggio crimini per mese con l'anno corrispondente
-const maxCrimeByMonth = d3.rollups(
-  data,
-  (v) => {
-    const maxEntry = d3.max(v, (d) => d.MonthlyCrimeCount);
-    const maxRecord = v.find((d) => d.MonthlyCrimeCount === maxEntry);
-    return { year: maxRecord.Year, count: maxRecord.MonthlyCrimeCount };
-  },
-  (d) => d.Month
-);
-
-console.log(maxCrimeByMonth);
-
 // Creazione del gradiente di colori per i valori
 const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
-
-// Mapping mesi in abbreviazioni inglesi
-const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-return {yearlyCrimes,monthlyAvg,overallAvg,maxYear,maxCrimeByMonth,colorScale,monthLabels};
-}});
-
-define({id: "f522109e", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[0][1].year
-))
-}});
-
-define({id: "2c90919e", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[0][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "3b2276d5", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[1][1].year
-))
-}});
-
-define({id: "63079c9a", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[1][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "133f4dea", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[2][1].year
-))
-}});
-
-define({id: "e2d774b9", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[2][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "9d9310c0", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[3][1].year
-))
-}});
-
-define({id: "5bc7e6db", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[3][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "265cb1f2", mode: "inline", inputs: ["resize","LineChart","data","yearlyCrimes","maxYear","monthLabels","monthlyAvg","overallAvg","colorScale","display"], body: async (resize,LineChart,data,yearlyCrimes,maxYear,monthLabels,monthlyAvg,overallAvg,colorScale,display) => {
-display(await(
-resize((width) => LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, overallAvg , colorScale, {width}))
-))
+return {yearlyCrimes,colorScale};
 }});
 
 define({id: "150d98c7", mode: "inline", inputs: ["resize","BarChart","yearlyCrimes","colorScale","display"], body: async (resize,BarChart,yearlyCrimes,colorScale,display) => {
@@ -213,99 +129,15 @@ resize((width) => BarChart(yearlyCrimes, colorScale, {width}))
 ))
 }});
 
-define({id: "3af5bcb8", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
+define({id: "34ea6c8c", mode: "inline", inputs: ["resize","LineChart","data","yearlyCrimes","colorScale","display"], body: async (resize,LineChart,data,yearlyCrimes,colorScale,display) => {
 display(await(
-maxCrimeByMonth[4][1].year
+resize((width) => LineChart(data, yearlyCrimes, colorScale, {width}))
 ))
 }});
 
-define({id: "75443edb", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
+define({id: "6cd72486", mode: "inline", inputs: ["resize","timeline","events","data","display"], body: async (resize,timeline,events,data,display) => {
 display(await(
-maxCrimeByMonth[4][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "f152a62d", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[5][1].year
-))
-}});
-
-define({id: "7fcca26a", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[5][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "e284aac0", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[6][1].year
-))
-}});
-
-define({id: "08b8f795", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[6][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "f17b4b7b", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[7][1].year
-))
-}});
-
-define({id: "ebaa1718", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[7][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "4163e32d", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[8][1].year
-))
-}});
-
-define({id: "01abdf26", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[8][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "7536c325", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[9][1].year
-))
-}});
-
-define({id: "74771ff1", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[9][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "3e1c544f", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[10][1].year
-))
-}});
-
-define({id: "6bf547d3", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[10][1].count.toLocaleString('it-IT')
-))
-}});
-
-define({id: "ba69a4b0", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[11][1].year
-))
-}});
-
-define({id: "3ceac006", mode: "inline", inputs: ["maxCrimeByMonth","display"], body: async (maxCrimeByMonth,display) => {
-display(await(
-maxCrimeByMonth[11][1].count.toLocaleString('it-IT')
+resize((width) => timeline(events, data, {width}))
 ))
 }});
 
@@ -317,14 +149,14 @@ maxCrimeByMonth[11][1].count.toLocaleString('it-IT')
 <nav id="observablehq-sidebar">
   <ol>
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link"><a href="./">LosAngelesCrime</a></li>
+    <li class="observablehq-link"><a href="./">Los Angeles&#x27;s Crime</a></li>
   </ol>
   <section class="observablehq-section-active">
-    <summary>Examples</summary>
+    <summary></summary>
     <ol>
-    <li class="observablehq-link"><a href="./example-dashboard">Dashboard</a></li>
-    <li class="observablehq-link"><a href="./example-report">Report</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./ProblemOverview">Problem overview</a></li>
+    <li class="observablehq-link"><a href="./DistrictCrimeOverview">LAPD District</a></li>
+    <li class="observablehq-link"><a href="./Victims">Victims demographic groups</a></li>
     <li class="observablehq-link"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
     </ol>
   </section>
@@ -337,69 +169,23 @@ maxCrimeByMonth[11][1].count.toLocaleString('it-IT')
 </aside>
 <main id="observablehq-main" class="observablehq">
 <h1 id="problem-overview" tabindex="-1"><a class="observablehq-header-anchor" href="#problem-overview">Problem overview</a></h1>
-<div class="observablehq observablehq--block"><!--:37506864:--></div>
-<div class="observablehq observablehq--block"><!--:92af0df6:--></div>
-<div class="observablehq observablehq--block"><!--:d7737693:--></div>
-<div class="grid grid-cols-4">
+<div class="observablehq observablehq--block"><!--:7eb62b89:--></div>
+<div class="observablehq observablehq--block"><!--:a6e3c60f:--></div>
+<div class="observablehq observablehq--block"><!--:e537bdd2:--></div>
+<div class="grid grid-cols-1">
   <div class="card">
-    <h2>January ❄️ [<observablehq-loading></observablehq-loading><!--:f522109e:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:2c90919e:--></span>
-  </div>
-  <div class="card">
-    <h2>February 💘 [<observablehq-loading></observablehq-loading><!--:3b2276d5:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:63079c9a:--></span>
-  </div>
-  <div class="card">
-    <h2>March 🌱 [<observablehq-loading></observablehq-loading><!--:133f4dea:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:e2d774b9:--></span>
-  </div>
-  <div class="card">
-    <h2>April 🌷 [<observablehq-loading></observablehq-loading><!--:9d9310c0:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:5bc7e6db:--></span>
+    <observablehq-loading></observablehq-loading><!--:150d98c7:-->
+    <observablehq-loading></observablehq-loading><!--:34ea6c8c:-->
   </div>
 </div>
 <div class="grid grid-cols-1">
   <div class="card">
-    <observablehq-loading></observablehq-loading><!--:265cb1f2:-->
-    <observablehq-loading></observablehq-loading><!--:150d98c7:-->
+    <observablehq-loading></observablehq-loading><!--:6cd72486:-->
   </div>
 </div>
-<div class="grid grid-cols-2">
-  <div class="card">
-    <h2>May 🌺 [<observablehq-loading></observablehq-loading><!--:3af5bcb8:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:75443edb:--></span>
-  </div>
-  <div class="card">
-    <h2>June 🏖️ [<observablehq-loading></observablehq-loading><!--:f152a62d:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:7fcca26a:--></span>
-  </div>
-  <div class="card">
-    <h2>July 🍉 [<observablehq-loading></observablehq-loading><!--:e284aac0:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:08b8f795:--></span>
-  </div>
-  <div class="card">
-    <h2>August ☀️ [<observablehq-loading></observablehq-loading><!--:f17b4b7b:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:ebaa1718:--></span>
-  </div>
-  <div class="card">
-    <h2>September 🍂 [<observablehq-loading></observablehq-loading><!--:4163e32d:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:01abdf26:--></span>
-  </div>
-  <div class="card">
-    <h2>October 🎃 [<observablehq-loading></observablehq-loading><!--:7536c325:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:74771ff1:--></span>
-  </div>
-  <div class="card">
-    <h2>November 🦃 [<observablehq-loading></observablehq-loading><!--:3e1c544f:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:6bf547d3:--></span>
-  </div>
-  <div class="card">
-    <h2>December 🎄 [<observablehq-loading></observablehq-loading><!--:ba69a4b0:-->]</h2>
-    <span class="big"><observablehq-loading></observablehq-loading><!--:3ceac006:--></span>
-  </div>
-</div></main>
+</main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./example-report"><span>Report</span></a><a rel="next" href="./dataPreparation"><span>Data cleaning and Preparation</span></a></nav>
+<nav><a rel="prev" href="./"><span>Los Angeles&#x27;s Crime</span></a><a rel="next" href="./DistrictCrimeOverview"><span>LAPD District</span></a></nav>
 <div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
 </footer>
 </div>

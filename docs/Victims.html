@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Victims demographic groups | Los Angeles&#x27;s Crime</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="modulepreload" href="./_node/d3-sankey@0.12.3/index.01c7f8ef.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
+<link rel="modulepreload" href="./_node/d3-array@2.12.1/index.62e7d53a.js">
+<link rel="modulepreload" href="./_node/d3-shape@1.3.7/index.83d6a97d.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/d44feff9.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/5830b12a.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/84d7b8e9.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/2c0cdfa2.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/626bedc4.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/00c41b5d.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/b5f7cdc6.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/b22c5864.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/6f15f633.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/ef1ec490.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e1ff060.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/5851d7ef.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/dcd02767.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/f1db2593.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/034b7bcb.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/4bb53638.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/bbafde58.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/aa5b35a8.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/32c7fec2.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/567840a0.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/cf9b720b.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/5dcd62f4.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/f8e03c56.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/5bc129e1.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/19c92b44.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/f31b5398.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/8debb4ba.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/4b0cc581.js">
+<link rel="modulepreload" href="./_node/internmap@1.0.1/index.3c90a66d.js">
+<link rel="modulepreload" href="./_node/d3-path@1.0.9/index.469bd717.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/5eed35fd.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/e67acb27.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/8ac9039b.js">
+<link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.55fa937c.js";
+import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
+
+registerFile("./data/links.json", {"name":"./data/links.json","mimeType":"application/json","path":"./_file/data/links.43f3f8fc.json","lastModified":1734626734621,"size":11328});
+registerFile("./data/nodes.json", {"name":"./data/nodes.json","mimeType":"application/json","path":"./_file/data/nodes.1d99d618.json","lastModified":1734626734620,"size":1367});
+
+define({id: "57ffaa18", inputs: ["FileAttachment"], outputs: ["sankey","sankeyLinkHorizontal","nodesData"], body: async (FileAttachment) => {
+const {sankey, sankeyLinkHorizontal} = await import("./_node/d3-sankey@0.12.3/index.01c7f8ef.js");
+
+// Load and process the data
+const nodesData = FileAttachment("./data/nodes.json").json();
+return {sankey,sankeyLinkHorizontal,nodesData};
+}});
+
+define({id: "c347c9d6", inputs: ["FileAttachment"], outputs: ["linksData"], body: (FileAttachment) => {
+const linksData = FileAttachment("./data/links.json").json();
+return {linksData};
+}});
+
+define({id: "ea590958", inputs: ["d3"], outputs: ["height","padding","colorScale"], body: (d3) => {
+// Constants for visualization
+//const width = 
+const height = 800;
+const padding = 20;
+
+const colorScale = {
+  Gender: d3.scaleOrdinal()
+    .domain(["M", "F"])
+    .range(["#2c7bb6", "#ffccff"]),
+  
+  Ethnicity: d3.scaleOrdinal()
+    .domain(["Hispanic", "White", "Black", "Other", "Asian", "Unknown"])
+    .range(["#7b3294", "#22a9cf", "#a6dba0", "#008837", "#e66101", "#999999"]),
+  
+  AgeRange: d3.scaleOrdinal()
+    .domain(["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "Unknown"])
+    .range(d3.schemeBlues[9].concat("#999999"))
+};
+return {height,padding,colorScale};
+}});
+
+define({id: "b78139c0", outputs: ["convertToAlluvial"], body: () => {
+const convertToAlluvial = (nodesD, linksD) => {
+  const alluvialData = {
+  nodes: nodesD.map(d => ({ 
+    id: d.id,
+    name: d.name,
+    category: d.category 
+  })),
+  links: linksD.map(link => ({
+    source: link.source,
+    target: link.target,
+    value: link.value,
+    sourceCategory: link.source_category,
+    targetCategory: link.target_category,
+    percentage: link.percentage
+  }))
+  };
+
+  return alluvialData;
+};
+return {convertToAlluvial};
+}});
+
+define({id: "609f8081", inputs: ["convertToAlluvial","nodesData","linksData"], outputs: ["alluvialData"], body: (convertToAlluvial,nodesData,linksData) => {
+const alluvialData = convertToAlluvial(nodesData, linksData);
+return {alluvialData};
+}});
+
+define({id: "419c89ef", inputs: ["d3","width","height","padding","sankey","alluvialData","sankeyLinkHorizontal","colorScale"], outputs: ["drawAlluvialDiagram","styles"], body: (d3,width,height,padding,sankey,alluvialData,sankeyLinkHorizontal,colorScale) => {
+const drawAlluvialDiagram = () => {
+  d3.select("#alluvial-container").selectAll("svg").remove();
+
+  const svg = d3.select("#alluvial-container")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", `translate(${padding},${padding})`);
+
+  // Configure Sankey generator with node alignment
+  const sankeyGenerator = sankey()
+    .nodeId(d => d.id)
+    .nodeWidth(15)
+    .nodePadding(10)
+    .nodeSort((a, b) => a.category.localeCompare(b.category))
+    .extent([[0, 0], [width - padding * 2, height - padding * 2]]);
+
+  sankeyGenerator(alluvialData);
+
+  // Create tooltip
+  const tooltip = d3.select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background", "rgba(0, 0, 0, 0.8)")
+    .style("color", "white")
+    .style("padding", "8px")
+    .style("border-radius", "4px")
+    .style("font-size", "12px");
+
+  let selectedNodeId = null; // Track the currently selected node
+  // Function to handle node click and highlight related links
+  const highlightLinks = (nodeId) => {
+    if (selectedNodeId === nodeId) {
+      // If the same node is clicked again, reset the highlighting
+      svg.selectAll("path").attr("stroke-opacity", 0.4);
+      svg.selectAll("rect").attr("opacity", 1);
+      selectedNodeId = null; // Reset the selected node
+    } else {
+      // Highlight the links related to the new node
+      svg.selectAll("path")
+        .attr("stroke-opacity", d => d.source.id === nodeId || d.target.id === nodeId ? 0.8 : 0.1);
+      svg.selectAll("rect")
+        .attr("opacity", d => d.id === nodeId ? 1 : 0.3);
+      selectedNodeId = nodeId; // Update the selected node
+    }
+  };
+
+  // Function to update the tooltip content
+  const updateTooltipContent = (d) => {
+    tooltip.html(`
+        ${d.source.name} → ${d.target.name}<br/>
+        Count: ${d.value}<br/>
+        Percentage: ${d.percentage.toFixed(1)}%
+      `);
+  };
+
+  // Draw links
+  svg.append("g")
+    .selectAll("path")
+    .data(alluvialData.links)
+    .join("path")
+    .attr("d", sankeyLinkHorizontal())
+    .attr("fill", "none")
+    .attr("stroke-width", d => Math.max(1, d.width))
+    .attr("stroke", d => d3.rgb(colorScale[d.sourceCategory.split('_')[0]](d.source.name)).darker(0.3))
+    .attr("stroke-opacity", 0.5)
+    .on("mouseover", (event, d) => {
+      tooltip.transition()
+        .duration(200)
+        .style("opacity", .9);
+      updateTooltipContent(d)
+      tooltip.style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 28) + "px");
+    })
+    .on("mouseout", () => {
+      tooltip.transition().duration(200).style("opacity", 0);
+    });
+
+  // Draw nodes
+  svg.append("g")
+    .selectAll("rect")
+    .data(alluvialData.nodes)
+    .join("rect")
+    .attr("x", d => d.x0)
+    .attr("y", d => d.y0)
+    .attr("height", d => d.y1 - d.y0)
+    .attr("width", d => d.x1 - d.x0)
+    .attr("fill", d => colorScale[d.category.split('_')[0]](d.name))
+    .attr("stroke", "#000")
+    .on("click", (event, d) => {
+      highlightLinks(d.id);
+    });
+
+  // Add labels
+  svg.append("g")
+    .selectAll("text")
+    .data(alluvialData.nodes)
+    .join("text")
+    .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr("y", d => (d.y1 + d.y0) / 2)
+    .attr("dy", "0.35em")
+    .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+    .text(d => `${d.name} (${((d.value)/100000).toFixed(2)})`)
+    .style("font-size", "10px")
+    .attr("fill", "#fff");
+
+  return svg.node();
+};
+
+// Style definitions
+const styles = `
+.tooltip {
+  pointer-events: none;
+  z-index: 100;
+}
+`;
+
+// Add styles to document
+d3.select("head")
+  .append("style")
+  .html(styles);
+
+  // Draw the diagram
+drawAlluvialDiagram();
+return {drawAlluvialDiagram,styles};
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Los Angeles&#x27;s Crime</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary></summary>
+    <ol>
+    <li class="observablehq-link"><a href="./ProblemOverview">Problem overview</a></li>
+    <li class="observablehq-link"><a href="./DistrictCrimeOverview">LAPD District</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./Victims">Victims demographic groups</a></li>
+    <li class="observablehq-link"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="victims-demographic-group" tabindex="-1"><a class="observablehq-header-anchor" href="#victims-demographic-group">Victims Demographic Group</a></h1>
+<div class="observablehq observablehq--block"><!--:57ffaa18:--></div>
+<div class="observablehq observablehq--block"><!--:c347c9d6:--></div>
+<div class="observablehq observablehq--block"><!--:ea590958:--></div>
+<div class="observablehq observablehq--block"><!--:b78139c0:--></div>
+<div class="observablehq observablehq--block"><!--:609f8081:--></div>
+<div class="observablehq observablehq--block"><!--:419c89ef:--></div>
+<div class="grid grid-cols-1">
+  <div class="card">
+  <h2>Gender victims over age ranges and ethnicity [2010–2023]</h2>
+  <h3><em>Clickable nodes and tooltip on links</em></h3> 
+  <br>
+  <p><em>Unit of measure: victims per 100,000 inhabitants</em></p>
+  <div id="alluvial-container"></div>
+  </div>
+</div></main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./DistrictCrimeOverview"><span>LAPD District</span></a><a rel="next" href="./dataPreparation"><span>Data cleaning and Preparation</span></a></nav>
+<div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
+</footer>
+</div>
+</body>
+</html>

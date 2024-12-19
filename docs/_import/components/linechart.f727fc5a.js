@@ -1,7 +1,27 @@
 import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
 import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
-export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, overallAvg , colorScale, {width} = {}) {
+export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
+
+    // Calcolo della media mensile complessiva rispetto a tutti gli anni
+    const monthlyAvg = d3.rollup(
+        data,
+        (v) => d3.mean(v, (d) => d.MonthlyCrimeCount),
+        (d) => d.Month
+    );
+    
+    // Calcolo della media complessiva annuale
+    const overallAvg = d3.mean(data, (d) => d.MonthlyCrimeCount);
+    
+    // Mapping mesi in abbreviazioni inglesi
+    const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    // Trova il massimo anno per crimini (es. 2022)
+    const maxYear = d3.rollups(
+        data,
+        (v) => d3.sum(v, (d) => d.MonthlyCrimeCount),
+        (d) => d.Year
+    ).sort((a, b) => d3.descending(a[1], b[1]))[0][0];
 
     // Prepare label data with collision adjustments
     const labelData = avoidCollisions(
@@ -22,8 +42,7 @@ export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, 
 
 
     return Plot.plot({
-        title: "Monthly Crime Trends over the Years [2010-2023]",
-        height: 750,
+        height: 650,
         width: width,
         marginBottom: 50,
         marginLeft: 60,
@@ -41,7 +60,7 @@ export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, 
                 ? colorScale(yearlyCrimes.get(d.Year))
                 : "lightgray"
             ,
-            strokeWidth: (d) => (d.Year === maxYear ? 3.5 : 1),
+            strokeWidth: (d) => (d.Year === maxYear || d.Year === 2020 ? 2.5 : 1),
             strokeOpacity: (d) =>
                 d.Year === maxYear || d.Year === 2020
                 ? 1
@@ -79,11 +98,10 @@ export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, 
                 }
             ),
             // Labels for lines above average or special cases with refined collision avoidance
-
             Plot.text(labelData, {
                 x: "Month",
                 y: "y",
-                text: (d) => d.Year,
+                text: (d) => d.Year.toString(),
                 fill: (d) => (d.Year === maxYear ? "red" : colorScale(yearlyCrimes.get(d.Year))),
                 textAnchor: "start",
                 dx: 5,

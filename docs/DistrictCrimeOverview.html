@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>LAPD Crime Districts Overview | Los Angeles&#x27;s Crime</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="modulepreload" href="./_import/components/inputs/yearSelector.8f3e891b.js">
+<link rel="modulepreload" href="./_import/components/inputs/dropdown.61ad3252.js">
+<link rel="modulepreload" href="./_import/components/choropleth.6c70db4e.js">
+<link rel="modulepreload" href="./_import/components/scatter.2cb8a487.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.d397b6a8.js">
+<link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/063eb405.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
+<link rel="modulepreload" href="./_node/d3-array@3.2.4/index.f89e3560.js">
+<link rel="modulepreload" href="./_node/d3-axis@3.0.0/index.34ded868.js">
+<link rel="modulepreload" href="./_node/d3-brush@3.0.0/index.1c3fc471.js">
+<link rel="modulepreload" href="./_node/d3-chord@3.0.1/index.9b04aad8.js">
+<link rel="modulepreload" href="./_node/d3-color@3.1.0/index.e8c126ff.js">
+<link rel="modulepreload" href="./_node/d3-contour@4.0.2/index.0d0783e1.js">
+<link rel="modulepreload" href="./_node/d3-delaunay@6.0.4/index.1771ba9f.js">
+<link rel="modulepreload" href="./_node/d3-dispatch@3.0.1/index.be49ca5f.js">
+<link rel="modulepreload" href="./_node/d3-drag@3.0.0/index.8e5f73cc.js">
+<link rel="modulepreload" href="./_node/d3-dsv@3.0.1/index.a1fe4c7b.js">
+<link rel="modulepreload" href="./_node/d3-ease@3.0.1/index.09153f73.js">
+<link rel="modulepreload" href="./_node/d3-fetch@3.0.1/index.e91238ad.js">
+<link rel="modulepreload" href="./_node/d3-force@3.0.0/index.952bd793.js">
+<link rel="modulepreload" href="./_node/d3-format@3.1.0/index.75f84505.js">
+<link rel="modulepreload" href="./_node/d3-geo@3.1.1/index.75f0ca91.js">
+<link rel="modulepreload" href="./_node/d3-hierarchy@3.1.2/index.0a013d9a.js">
+<link rel="modulepreload" href="./_node/d3-interpolate@3.0.1/index.7ed7c7fe.js">
+<link rel="modulepreload" href="./_node/d3-path@3.1.0/index.c2b3c473.js">
+<link rel="modulepreload" href="./_node/d3-polygon@3.0.1/index.b64a6d51.js">
+<link rel="modulepreload" href="./_node/d3-quadtree@3.0.1/index.e9fed2eb.js">
+<link rel="modulepreload" href="./_node/d3-random@3.0.1/index.fd2cc361.js">
+<link rel="modulepreload" href="./_node/d3-scale@4.0.2/index.61617510.js">
+<link rel="modulepreload" href="./_node/d3-scale-chromatic@3.1.0/index.7961cbed.js">
+<link rel="modulepreload" href="./_node/d3-selection@3.0.0/index.13204b25.js">
+<link rel="modulepreload" href="./_node/d3-shape@3.2.0/index.b551bc1c.js">
+<link rel="modulepreload" href="./_node/d3-time@3.1.0/index.8fcc123e.js">
+<link rel="modulepreload" href="./_node/d3-time-format@4.1.0/index.20c5f3ca.js">
+<link rel="modulepreload" href="./_node/d3-timer@3.0.1/index.0ee6092b.js">
+<link rel="modulepreload" href="./_node/d3-transition@3.0.1/index.d140d658.js">
+<link rel="modulepreload" href="./_node/d3-zoom@3.0.0/index.0e732a91.js">
+<link rel="modulepreload" href="./_node/internmap@2.0.3/index.4106013c.js">
+<link rel="modulepreload" href="./_node/delaunator@5.0.1/index.70ae1478.js">
+<link rel="modulepreload" href="./_node/robust-predicates@3.0.2/index.bdc459cc.js">
+<link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.55fa937c.js";
+import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
+
+registerFile("./data/LAPD_Division_5922489107755548254.geojson", {"name":"./data/LAPD_Division_5922489107755548254.geojson","mimeType":"application/geo+json","path":"./_file/data/LAPD_Division_5922489107755548254.bda8ccd5.geojson","lastModified":1734342471535,"size":705759});
+registerFile("./data/LAPD_Division_IDs.json", {"name":"./data/LAPD_Division_IDs.json","mimeType":"application/json","path":"./_file/data/LAPD_Division_IDs.6ba6ea27.json","lastModified":1734613208124,"size":778});
+registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.669ea11e.csv","lastModified":1734626734628,"size":15893});
+registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.aff43753.csv","lastModified":1734626734652,"size":432425});
+
+define({id: "3088a5e8", outputs: ["viewSlider","dropdown","choroplethMap","scatterPlot","MIN_YEAR","MAX_YEAR"], body: async () => {
+const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.61ad3252.js"), import("./_import/components/choropleth.6c70db4e.js"), import("./_import/components/scatter.2cb8a487.js")]);
+// Import and CONSTANTS
+
+const MIN_YEAR = 2010;
+const MAX_YEAR = 2023;
+return {viewSlider,dropdown,choroplethMap,scatterPlot,MIN_YEAR,MAX_YEAR};
+}});
+
+define({id: "40390f7e", inputs: ["FileAttachment"], outputs: ["data","lapd_division_ids","lapd_division_map","data_scatter"], body: (FileAttachment) => {
+const data = FileAttachment("./data/district_crime_analysis.csv").csv({ typed: true });
+const lapd_division_ids = FileAttachment("./data/LAPD_Division_IDs.json").json();
+const lapd_division_map = FileAttachment("./data/LAPD_Division_5922489107755548254.geojson").json();
+
+const data_scatter = FileAttachment("./data/hourly_crime_analysis.csv").csv({ typed: true });
+return {data,lapd_division_ids,lapd_division_map,data_scatter};
+}});
+
+define({id: "bfd0837d", inputs: ["lapd_division_ids"], outputs: ["divisionNames"], body: (lapd_division_ids) => {
+// Extract division names for the dropdown options
+const divisionNames = lapd_division_ids.map(division => division.name);
+divisionNames.push("All Districts");
+return {divisionNames};
+}});
+
+define({id: "fe45e5e9", inputs: ["view","viewSlider","MIN_YEAR","MAX_YEAR"], outputs: ["selectedYear"], body: (view,viewSlider,MIN_YEAR,MAX_YEAR) => {
+// Crea un range slider per selezionare l'anno
+const selectedYear = view(viewSlider(MIN_YEAR, MAX_YEAR));
+return {selectedYear};
+}});
+
+define({id: "4d47a141", inputs: ["view","dropdown","divisionNames"], outputs: ["divisionSelector"], body: (view,dropdown,divisionNames) => {
+// Division selector using names
+const divisionSelector = view(dropdown(divisionNames, "🗾 LAPD District"));
+return {divisionSelector};
+}});
+
+define({id: "515214f6", mode: "inline", inputs: ["resize","choroplethMap","lapd_division_map","lapd_division_ids","data","selectedYear","divisionSelector","display"], body: async (resize,choroplethMap,lapd_division_map,lapd_division_ids,data,selectedYear,divisionSelector,display) => {
+display(await(
+resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))
+))
+}});
+
+define({id: "c96fef3a", mode: "inline", inputs: ["resize","scatterPlot","data_scatter","selectedYear","divisionSelector","display"], body: async (resize,scatterPlot,data_scatter,selectedYear,divisionSelector,display) => {
+display(await(
+resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {width, height: 600}))
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Los Angeles&#x27;s Crime</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary></summary>
+    <ol>
+    <li class="observablehq-link"><a href="./ProblemOverview">Problem overview</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./DistrictCrimeOverview">LAPD District</a></li>
+    <li class="observablehq-link"><a href="./Victims">Victims demographic groups</a></li>
+    <li class="observablehq-link"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="lapd-crime-districts-overview" tabindex="-1"><a class="observablehq-header-anchor" href="#lapd-crime-districts-overview">LAPD Crime Districts Overview</a></h1>
+<div class="observablehq observablehq--block"><!--:3088a5e8:--></div>
+<div class="observablehq observablehq--block"><!--:40390f7e:--></div>
+<div class="observablehq observablehq--block"><!--:bfd0837d:--></div>
+<p><i>Year selector for the maps below</i></p>
+<div class="grid grid-cols-2">
+  <div class="card">
+<div class="observablehq observablehq--block"><!--:fe45e5e9:--></div>
+  </div>
+  <div class="card">
+<div class="observablehq observablehq--block"><!--:4d47a141:--></div>
+  </div>
+</div>
+<div class="grid grid-cols-2">
+  <div class="card"><observablehq-loading></observablehq-loading><!--:515214f6:--></div>
+  <div class="card"><observablehq-loading></observablehq-loading><!--:c96fef3a:--></div>
+</div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./ProblemOverview"><span>Problem overview</span></a><a rel="next" href="./Victims"><span>Victims demographic groups</span></a></nav>
+<div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
+</footer>
+</div>
+</body>
+</html>
