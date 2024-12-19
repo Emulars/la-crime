@@ -81,7 +81,7 @@ hourly_summary = analyze_hourly(data)
 def prepare_victim_demographics(df):
     """
     Prepare victim demographic data for alluvial visualization with strict ordering
-    and sorting: Ethnicity and Gender by size (descending), AgeRange by range (ascending).
+    and sorting: Gender, Ethnicity, and AgeRange by size or range.
     """
     def age_range(age):
         if pd.isna(age) or age == 0:
@@ -112,36 +112,36 @@ def prepare_victim_demographics(df):
         return start
 
     # Sort categories
-    sorted_ethnicities = ethnicity_counts.index.tolist()
     sorted_genders = data['Gender'].value_counts().index.tolist()
+    sorted_ethnicities = ethnicity_counts.index.tolist()
     sorted_age_ranges = sorted(data['AgeRange'].unique(), key=age_range_sort_key)
 
     # Create category positions for sorted categories
     category_positions = {
-        'Ethnicity': 0,
-        'Gender': 1,
+        'Gender': 0,
+        'Ethnicity': 1,
         'AgeRange': 2
     }
 
     # Create nodes dataframe with explicit positioning
     nodes_list = []
 
-    # Ethnicity nodes (first column)
-    for ethnicity in sorted_ethnicities:
-        nodes_list.append({
-            'id': f"Ethnicity_{ethnicity}",
-            'name': ethnicity,
-            'category': 'Ethnicity',
-            'column': category_positions['Ethnicity']
-        })
-
-    # Gender nodes (second column)
+    # Gender nodes (first column)
     for gender in sorted_genders:
         nodes_list.append({
             'id': f"Gender_{gender}",
             'name': gender,
             'category': 'Gender',
             'column': category_positions['Gender']
+        })
+
+    # Ethnicity nodes (second column)
+    for ethnicity in sorted_ethnicities:
+        nodes_list.append({
+            'id': f"Ethnicity_{ethnicity}",
+            'name': ethnicity,
+            'category': 'Ethnicity',
+            'column': category_positions['Ethnicity']
         })
 
     # AgeRange nodes (third column)
@@ -158,25 +158,25 @@ def prepare_victim_demographics(df):
     # Create links with proper node references
     links_list = []
 
-    # Ethnicity to Gender links
-    ethnicity_gender = data.groupby(['Ethnicity', 'Gender']).size().reset_index(name='value')
-    for _, row in ethnicity_gender.iterrows():
-        links_list.append({
-            'source': f"Ethnicity_{row['Ethnicity']}",
-            'target': f"Gender_{row['Gender']}",
-            'value': row['value'],
-            'source_category': 'Ethnicity',
-            'target_category': 'Gender'
-        })
-
-    # Gender to AgeRange links
-    gender_age = data.groupby(['Gender', 'AgeRange']).size().reset_index(name='value')
-    for _, row in gender_age.iterrows():
+    # Gender to Ethnicity links
+    gender_ethnicity = data.groupby(['Gender', 'Ethnicity']).size().reset_index(name='value')
+    for _, row in gender_ethnicity.iterrows():
         links_list.append({
             'source': f"Gender_{row['Gender']}",
-            'target': f"AgeRange_{row['AgeRange']}",
+            'target': f"Ethnicity_{row['Ethnicity']}",
             'value': row['value'],
             'source_category': 'Gender',
+            'target_category': 'Ethnicity'
+        })
+
+    # Ethnicity to AgeRange links
+    ethnicity_age = data.groupby(['Ethnicity', 'AgeRange']).size().reset_index(name='value')
+    for _, row in ethnicity_age.iterrows():
+        links_list.append({
+            'source': f"Ethnicity_{row['Ethnicity']}",
+            'target': f"AgeRange_{row['AgeRange']}",
+            'value': row['value'],
+            'source_category': 'Ethnicity',
             'target_category': 'AgeRange'
         })
 
@@ -187,6 +187,7 @@ def prepare_victim_demographics(df):
     links['percentage'] = (links['value'] / total_victims * 100).round(2)
 
     return nodes, links
+
 
 nodes_df, links_df = prepare_victim_demographics(data)
 

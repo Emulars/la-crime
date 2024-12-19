@@ -42,7 +42,6 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
 
 
     return Plot.plot({
-        title: "Monthly Crime Trends over the Years [2010-2023]",
         height: 650,
         width: width,
         marginBottom: 50,
@@ -102,7 +101,7 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
             Plot.text(labelData, {
                 x: "Month",
                 y: "y",
-                text: (d) => d.Year,
+                text: (d) => d.Year.toString(),
                 fill: (d) => (d.Year === maxYear ? "red" : colorScale(yearlyCrimes.get(d.Year))),
                 textAnchor: "start",
                 dx: 5,

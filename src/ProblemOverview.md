@@ -30,8 +30,8 @@ const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...y
 
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => LineChart(data, yearlyCrimes, colorScale, {width}))}
     ${resize((width) => BarChart(yearlyCrimes, colorScale, {width}))}
+    ${resize((width) => LineChart(data, yearlyCrimes, colorScale, {width}))}
   </div>
 </div>
 
