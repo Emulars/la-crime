@@ -10,9 +10,8 @@ export default {
     {
       name: "",
       pages: [
-        // {name: "Dashboard", path: "/example-dashboard"},
-        // {name: "Report", path: "/example-report"},
         {name: "Problem overview", path: "/ProblemOverview"},
+        {name: "LAPD District", path: "/DistrictCrimeOverview"},
         {name: "Victims demographic groups", path: "/Victims"},
         {name: "Data cleaning and Preparation", path: "/dataPreparation"}
       ]

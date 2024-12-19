@@ -1,0 +1,23 @@
+[
+    {"id": 1, "name": "Mission"},
+    {"id": 2, "name": "Devonshire"},
+    {"id": 3, "name": "Foothill"},
+    {"id": 4, "name": "Topanga"},
+    {"id": 5, "name": "West Valley"},
+    {"id": 6, "name": "N Hollywood"},
+    {"id": 7, "name": "Van Nuys"}, 
+    {"id": 8, "name": "Northeast"},
+    {"id": 9, "name": "Hollywood"},
+    {"id": 10, "name": "West LA"},
+    {"id": 11, "name": "Hollenbeck"},
+    {"id": 12, "name": "Rampart"},
+    {"id": 13, "name": "Wilshire"},
+    {"id": 14, "name": "Olympic"},
+    {"id": 15, "name": "Southwest"},
+    {"id": 16, "name": "Newton"},
+    {"id": 17, "name": "Pacific"},
+    {"id": 18, "name": "77th Street"},
+    {"id": 19, "name": "Southeast"},
+    {"id": 20, "name": "Harbor"},
+    {"id": 21, "name": "Central"}
+]
