@@ -1,9 +1,10 @@
 [
-    {"name": "Legalization of medical cannabis", "year": 2014, "month" : "January", "y": 60},
+    {"name": "Increase in economic inequality and poverty", "year": 2014, "month" : "January", "y": 60},
     {"name": "Introduction of rehabilitation programs for minor offenses instead of prison sentences", "year": 2015, "month" : "November", "y": 85},
-    {"name": "Approval of Proposition 57", "year": 2016, "month" : "November", "y": 85},
-    {"name": "Legalization of recreational cannabis", "year": 2018, "month" : "January", "y": 90},
+    {"name": "Approval of Proposition 57", "year": 2016, "month" : "November", "y": 70},
+    {"name": "First effects of the reforms approved in previous years", "year": 2018, "month" : "January", "y": 85},
     {"name": "Restrictive laws against homelessness", "year": 2019, "month" : "September", "y": 80},
-    {"name": "COVID-19", "year": 2020, "month" : "March", "y": 70},
-    {"name": "Black Lives Matter and George Floyd death", "year": 2020, "month" : "May", "y": 90}
+    {"name": "COVID-19", "year": 2020, "month" : "March", "y": 60},
+    {"name": "Intensification of wars between Gangs", "year": 2022, "month" : "Febraury", "y": 70},
+    {"name": "End of COVID-19 restriction", "year": 2023, "month" : "March", "y": 65}
 ]

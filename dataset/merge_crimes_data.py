@@ -36,7 +36,7 @@ def merge_csv_files(file1, file2, output_file):
 # Example usage
 if __name__ == "__main__":
     file1 = "Crime-Data-from-2010-to-2019-csv.tsv"  # Replace with the path to your first CSV file
-    file2 = "Crime-Data-from-2020-to-Present-Cleaned-tsv.tsv"  # Replace with the path to your second CSV file
+    file2 = "Crime-Data-from-2020-to-Present-Cleaned.tsv"  # Replace with the path to your second CSV file
     output_file = "crime-data-2010-2024.tsv"  # Replace with the desired output file name
 
     merge_csv_files(file1, file2, output_file)

@@ -28,8 +28,8 @@ const colorScale = {
     .range(["#2c7bb6", "#ffccff"]),
   
   Ethnicity: d3.scaleOrdinal()
-    .domain(["Hispanic", "White", "Black", "Other", "Other Asian", "Unknown", "Korean", "Filipino"])
-    .range(["#7b3294", "#22a9cf", "#a6dba0", "#008837", "#e66101", "#999999","#997599","#01329A"]),
+    .domain(["Hispanic", "White", "Black", "Other", "Asian", "Unknown"])
+    .range(["#7b3294", "#22a9cf", "#a6dba0", "#008837", "#e66101", "#999999"]),
   
   AgeRange: d3.scaleOrdinal()
     .domain(["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "Unknown"])
@@ -168,7 +168,7 @@ const drawAlluvialDiagram = () => {
     .attr("y", d => (d.y1 + d.y0) / 2)
     .attr("dy", "0.35em")
     .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-    .text(d => `${d.name} (${d.value})`)
+    .text(d => `${d.name} (${((d.value)/100000).toFixed(2)})`)
     .style("font-size", "10px")
     .attr("fill", "#fff");
 
@@ -194,8 +194,10 @@ drawAlluvialDiagram();
 
 <div class="grid grid-cols-1">
   <div class="card">
-  <h2>Alluvial Diagram of .... (2010–2023)</h2>
-  <p><em>Clickable nodes and tooltip on links</em></p>
+  <h2>Gender victims over age ranges and ethnicity [2010–2023]</h2>
+  <h3><em>Clickable nodes and tooltip on links</em></h3> 
+  </br>
+  <p><em>Unit of measure: victims per 100,000 inhabitants</em></p>
   <div id="alluvial-container"></div>
   </div>
 </div>
