@@ -79,7 +79,6 @@ export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, 
                 }
             ),
             // Labels for lines above average or special cases with refined collision avoidance
-
             Plot.text(labelData, {
                 x: "Month",
                 y: "y",

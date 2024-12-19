@@ -37,43 +37,27 @@ const overallAvg = d3.mean(data, (d) => d.MonthlyCrimeCount);
 // Mapping mesi in abbreviazioni inglesi
 const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-// Trova il massimo conteggio crimini per mese con l'anno corrispondente
-const maxCrimeByMonth = Array.from(d3.rollups(
+// Trova il massimo anno per crimini (es. 2022)
+const maxYear = d3.rollups(
   data,
-  (v) => {
-    const maxEntry = d3.max(v, (d) => d.MonthlyCrimeCount);
-    const maxRecord = v.find((d) => d.MonthlyCrimeCount === maxEntry);
-    return { year: maxRecord.Year, count: maxRecord.MonthlyCrimeCount };
-  },
-  (d) => monthLabels[d.Month-1]
-), ([month, { year, count }]) => ({ month, year, count }));
+  (v) => d3.sum(v, (d) => d.MonthlyCrimeCount),
+  (d) => d.Year
+).sort((a, b) => d3.descending(a[1], b[1]))[0][0];
 
 // Creazione del gradiente di colori per i valori
 const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
-
-
 ```
 
 <div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => LineChart(data, yearlyCrimes, null, monthLabels, monthlyAvg, overallAvg, colorScale, {width}))}
+    ${resize((width) => LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, overallAvg, colorScale, {width}))}
     ${resize((width) => BarChart(yearlyCrimes, colorScale, {width}))}
   </div>
 </div>
 
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-1">
   <div class="card">
-    ${resize((width) => timeline(events, {width}))}
-  </div>
-  
-  <div class="card">
-    ${Inputs.table(maxCrimeByMonth, {
-      columns: ["month", "year", "count"],
-      header: {
-        "month": "Month",
-        "year": "Year",
-        "count": "Crime Count"
-      }
-    })}
+    ${resize((width) => timeline(events, data, {width}))}
   </div>
 </div>
+
