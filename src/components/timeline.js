@@ -22,7 +22,7 @@ export function timeline(events, crimeData, {width, height} = {}) {
   };
 
   // Define y-axis domain
-  const yDomain = [50000, 80000];
+  const yDomain = [40000, 70000];
 
   // Normalize event y values
   const normalizeY = (value, domain) => {
@@ -44,9 +44,9 @@ export function timeline(events, crimeData, {width, height} = {}) {
 
   // Group crime data by quadrimester
   const groupedCrimeData = crimeData.reduce((acc, row) => {
-    const quadrimester = Math.ceil(row.Month / 4);
+    const quadrimester = Math.ceil(row.Month / 3);
     const key = `${row.Year}-Q${quadrimester}`;
-    acc[key] = acc[key] || { year: row.Year, quadrimester, totalCrime: 0, date: new Date(row.Year, (quadrimester - 1) * 4) };
+    acc[key] = acc[key] || { year: row.Year, quadrimester, totalCrime: 0, date: new Date(row.Year, (quadrimester - 1) * 3) };
     acc[key].totalCrime += row.MonthlyCrimeCount;
     return acc;
   }, {});
