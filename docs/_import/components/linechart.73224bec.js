@@ -46,31 +46,47 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
         width: width,
         marginBottom: 50,
         marginLeft: 60,
-        x: { domain: d3.range(1, 13), label: "Month", tickFormat: (d) => monthLabels[d - 1] },
-        y: { label: "Number of Crimes", grid: true },
+        x: { 
+            domain: d3.range(1, 13), 
+            label: "Month", 
+            tickFormat: (d) => monthLabels[d - 1] 
+        },
+        y: { 
+            label: "Number of Crimes", 
+            grid: true, 
+            // Rendere il tick dell'origine in grassetto
+            ticks: 5,
+            tickFormat: (d) => d === 0 ? `**${d}**` : d // Grassetto per origine
+        },
         marks: [
-            // Linee con Gray-Out per linee sotto la media e linea speciale per maxYear
+            // Linee tratteggiate manuali per l'origine dell'asse Y
+            Plot.ruleY([14000], { //d3.min(data, d => d.MonthlyCrimeCount) 
+                stroke: "lightgrey", 
+                strokeDasharray: "4 4", 
+                strokeWidth: 1 
+            }),
+            
+            // Linee dei dati
             Plot.line(data, {
-            x: "Month",
-            y: "MonthlyCrimeCount",
-            z: "Year",
-            stroke: (d) =>
-                (d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) >
-                    overallAvg) || (d.Year === 2020)
-                ? colorScale(yearlyCrimes.get(d.Year))
-                : "lightgray"
-            ,
-            strokeWidth: (d) => (d.Year === maxYear || d.Year === 2020 ? 2.5 : 1),
-            strokeOpacity: (d) =>
-                d.Year === maxYear || d.Year === 2020
-                ? 1
-                : d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) <
-                    overallAvg
-                ? 0.3
-                : 0.5, // Trasparenza per linee sotto la media
+                x: "Month",
+                y: "MonthlyCrimeCount",
+                z: "Year",
+                stroke: (d) =>
+                    (d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) >
+                        overallAvg) || (d.Year === 2020)
+                    ? colorScale(yearlyCrimes.get(d.Year))
+                    : "lightgray",
+                strokeWidth: (d) => (d.Year === maxYear || d.Year === 2020 ? 2.5 : 1),
+                strokeOpacity: (d) =>
+                    d.Year === maxYear || d.Year === 2020
+                    ? 1
+                    : d3.mean(data.filter((e) => e.Year === d.Year), (e) => e.MonthlyCrimeCount) <
+                        overallAvg
+                    ? 0.3
+                    : 0.5
             }),
     
-            // Linea tratteggiata che rappresenta la media mensile complessiva
+            // Linea tratteggiata per la media mensile complessiva
             Plot.line([...monthlyAvg], {
                 x: (d) => d[0],
                 y: (d) => d[1],
@@ -79,25 +95,26 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
                 strokeWidth: 2,
                 tip: true
             }),
-            // Label "Mean" vicino alla linea della media
+            
+            // Etichetta della media
             Plot.text(
                 [{ 
                     x: 12, 
                     y: overallAvg, 
                     text: "AVG" 
                 }], 
-                // Posizione e testo della label
                 {
                     x: "x",
                     y: "y",
                     text: "text",
                     fill: "white",
-                    textAnchor: "start", // Allineamento a sinistra
-                    dx: 5, // Piccolo offset orizzontale
+                    textAnchor: "start",
+                    dx: 5,
                     fontWeight: "bold"
                 }
             ),
-            // Labels for lines above average or special cases with refined collision avoidance
+            
+            // Etichette per linee sopra la media o casi speciali
             Plot.text(labelData, {
                 x: "Month",
                 y: "y",

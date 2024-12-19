@@ -1,7 +1,7 @@
 import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
+import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
-export function timeline(events, crimeData, {width, height} = {}) {
-  
+export function timeline(events, crimeData, { width, height } = {}) {
   // Function to convert month names to numeric values
   const monthToNumber = (month) => {
     const months = {
@@ -16,7 +16,7 @@ export function timeline(events, crimeData, {width, height} = {}) {
       "September": 9,
       "October": 10,
       "November": 11,
-      "December": 12
+      "December": 12,
     };
     return months[month] || 0;
   };
@@ -32,15 +32,13 @@ export function timeline(events, crimeData, {width, height} = {}) {
   };
 
   // Transform events to include a "date" field and normalize y values
-  const transformedEvents = events.map(event => {
+  const transformedEvents = events.map((event) => {
     return {
       ...event,
       date: new Date(event.year, monthToNumber(event.month) - 1),
-      y: normalizeY(event.y, yDomain)
+      y: normalizeY(event.y, yDomain),
     };
   });
-
-  console.log(transformedEvents);
 
   // Group crime data by quadrimester
   const groupedCrimeData = crimeData.reduce((acc, row) => {
@@ -51,13 +49,16 @@ export function timeline(events, crimeData, {width, height} = {}) {
     return acc;
   }, {});
 
-  const quadrimesterCrimeData = Object.values(groupedCrimeData).map(d => {
+  const quadrimesterCrimeData = Object.values(groupedCrimeData).map((d) => {
     return {
       date: d.date,
       totalCrime: d.totalCrime,
-      label: `${d.year}-Q${d.quadrimester}`
+      label: `${d.year}-Q${d.quadrimester}`,
     };
   });
+
+  // Calculate overall average
+  const averageCrime = d3.mean(quadrimesterCrimeData, (d) => d.totalCrime);
 
   return Plot.plot({
     title: "Major events and crime trends in Los Angeles",
@@ -65,11 +66,11 @@ export function timeline(events, crimeData, {width, height} = {}) {
     height,
     marginTop: 30,
     marginLeft: 30,
-    x: {nice: true, label: "Date", tickFormat: "%b %Y", type: "time"},
-    y: {label: "Total Crimes", grid: true, domain: yDomain},
+    x: { nice: true, label: "Date", tickFormat: "%b %Y", type: "time" },
+    y: { label: "Total Crimes", grid: true, domain: yDomain },
     marks: [
       // Event markers
-      Plot.ruleX(transformedEvents, {x: "date", y1: yDomain[0], y2: "y", markerEnd: "dot", strokeWidth: 2.5, strokeOpacity: 0.2}),
+      Plot.ruleX(transformedEvents, { x: "date", y1: yDomain[0], y2: "y", markerEnd: "dot", strokeWidth: 2.5, strokeOpacity: 0.2 }),
       Plot.text(transformedEvents, {
         x: "date",
         y: "y",
@@ -77,12 +78,27 @@ export function timeline(events, crimeData, {width, height} = {}) {
         lineAnchor: "bottom",
         dy: -10,
         lineWidth: 10,
-        fontSize: 12
+        fontSize: 12,
       }),
 
       // Quadrimester crime line chart
-      Plot.line(quadrimesterCrimeData, {x: "date", y: "totalCrime", stroke: "steelblue", strokeWidth: 2}),
-      Plot.dot(quadrimesterCrimeData, {x: "date", y: "totalCrime", fill: "steelblue", tip: true, title: d => `${d.label}, Total Crimes: ${d.totalCrime}`})
-    ]
+      Plot.line(quadrimesterCrimeData, { x: "date", y: "totalCrime", stroke: "steelblue", strokeWidth: 2 }),
+      Plot.dot(quadrimesterCrimeData, { x: "date", y: "totalCrime", fill: "steelblue", tip: true, title: (d) => `${d.label}, Total Crimes: ${d.totalCrime}` }),
+
+      // Average crime line
+      Plot.ruleY([averageCrime], { stroke: "lightgrey", strokeDasharray: "4 4", strokeWidth: 2 }),
+
+      // Label for the average line
+      Plot.text([{ x: quadrimesterCrimeData[quadrimesterCrimeData.length - 1].date, y: averageCrime, text: "AVG" }], {
+        x: "x",
+        y: "y",
+        text: "text",
+        textAnchor: "end",
+        dx: 45,
+        fill: "lightgrey",
+        fontWeight: "bold",
+      }),
+    ],
   });
 }
+
