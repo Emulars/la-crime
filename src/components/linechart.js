@@ -1,7 +1,27 @@
 import * as Plot from "npm:@observablehq/plot";
 import * as d3 from "d3";
 
-export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, overallAvg , colorScale, {width} = {}) {
+export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
+
+    // Calcolo della media mensile complessiva rispetto a tutti gli anni
+    const monthlyAvg = d3.rollup(
+        data,
+        (v) => d3.mean(v, (d) => d.MonthlyCrimeCount),
+        (d) => d.Month
+    );
+    
+    // Calcolo della media complessiva annuale
+    const overallAvg = d3.mean(data, (d) => d.MonthlyCrimeCount);
+    
+    // Mapping mesi in abbreviazioni inglesi
+    const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    // Trova il massimo anno per crimini (es. 2022)
+    const maxYear = d3.rollups(
+        data,
+        (v) => d3.sum(v, (d) => d.MonthlyCrimeCount),
+        (d) => d.Year
+    ).sort((a, b) => d3.descending(a[1], b[1]))[0][0];
 
     // Prepare label data with collision adjustments
     const labelData = avoidCollisions(
@@ -41,7 +61,7 @@ export function LineChart(data, yearlyCrimes, maxYear, monthLabels, monthlyAvg, 
                 ? colorScale(yearlyCrimes.get(d.Year))
                 : "lightgray"
             ,
-            strokeWidth: (d) => (d.Year === maxYear ? 3.5 : 1),
+            strokeWidth: (d) => (d.Year === maxYear || d.Year === 2020 ? 2.5 : 1),
             strokeOpacity: (d) =>
                 d.Year === maxYear || d.Year === 2020
                 ? 1

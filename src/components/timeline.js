@@ -1,7 +1,7 @@
-import { text } from "d3";
 import * as Plot from "npm:@observablehq/plot";
 
 export function timeline(events, crimeData, {width, height} = {}) {
+  
   // Function to convert month names to numeric values
   const monthToNumber = (month) => {
     const months = {
@@ -21,13 +21,26 @@ export function timeline(events, crimeData, {width, height} = {}) {
     return months[month] || 0;
   };
 
-  // Transform events to include a "date" field
+  // Define y-axis domain
+  const yDomain = [50000, 80000];
+
+  // Normalize event y values
+  const normalizeY = (value, domain) => {
+    const [min, max] = domain;
+    const range = (max || 80000) - min; // Assuming 80000 as the approximate upper bound if max is undefined
+    return min + (value / 100) * range;
+  };
+
+  // Transform events to include a "date" field and normalize y values
   const transformedEvents = events.map(event => {
     return {
       ...event,
-      date: new Date(event.year, monthToNumber(event.month) - 1)
+      date: new Date(event.year, monthToNumber(event.month) - 1),
+      y: normalizeY(event.y, yDomain)
     };
   });
+
+  console.log(transformedEvents);
 
   // Group crime data by quadrimester
   const groupedCrimeData = crimeData.reduce((acc, row) => {
@@ -53,24 +66,23 @@ export function timeline(events, crimeData, {width, height} = {}) {
     marginTop: 30,
     marginLeft: 30,
     x: {nice: true, label: "Date", tickFormat: "%b %Y", type: "time"},
-    y: {label: "Total Crimes", grid: true},
+    y: {label: "Total Crimes", grid: true, domain: yDomain},
     marks: [
       // Event markers
-      Plot.ruleX(transformedEvents, {x: "date", y: "y", markerEnd: "dot", strokeWidth: 2.5, strokeOpacity: 0.2}),
+      Plot.ruleX(transformedEvents, {x: "date", y1: yDomain[0], y2: "y", markerEnd: "dot", strokeWidth: 2.5, strokeOpacity: 0.2}),
       Plot.text(transformedEvents, {
         x: "date",
         y: "y",
         text: "name",
         lineAnchor: "bottom",
-        textAnchor: "end",
         dy: -10,
         lineWidth: 10,
-        fontSize: 12,
+        fontSize: 12
       }),
 
       // Quadrimester crime line chart
       Plot.line(quadrimesterCrimeData, {x: "date", y: "totalCrime", stroke: "steelblue", strokeWidth: 2}),
-      Plot.dot(quadrimesterCrimeData, {x: "date", y: "totalCrime", fill: "steelblue", tip: true, title: d => `${d.label}, \nTotal Crimes: ${d.totalCrime}`})
+      Plot.dot(quadrimesterCrimeData, {x: "date", y: "totalCrime", fill: "steelblue", tip: true, title: d => `${d.label}, Total Crimes: ${d.totalCrime}`})
     ]
   });
 }
