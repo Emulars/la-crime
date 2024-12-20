@@ -66,14 +66,30 @@ district_summary = analyze_district(data)
 # 3. Avg crimes by hour range per district, and weapon analysis
 def analyze_hourly(df):
     results = []
+    
+    # Process each district
     for (year, district), group in df.groupby(['Year', 'District']):
         hourly_counts = group.groupby('Hour').size().reindex(range(24), fill_value=0)
         hourly_weapon_usage = group[group['Weapon Type'] != 'NONE'].groupby('Hour').size().reindex(range(24), fill_value=0)
         hourly_weapon_percentage = (hourly_weapon_usage / hourly_counts.replace(0, np.nan) * 100).fillna(0)
-        hourly_most_used_weapon = group[group['Weapon Type'] != 'NONE'].groupby('Hour')['Weapon Type'].apply(lambda x: Counter(x).most_common(1)[0][0] if len(x) > 0 else None).reindex(range(24), fill_value=None)
+        hourly_most_used_weapon = group[group['Weapon Type'] != 'NONE'].groupby('Hour')['Weapon Type'].apply(
+            lambda x: Counter(x).most_common(1)[0][0] if len(x) > 0 else None
+        ).reindex(range(24), fill_value=None)
         results.append([year, district] + hourly_counts.tolist() + hourly_weapon_percentage.tolist() + hourly_most_used_weapon.tolist())
+    
+    # Process "All Districts" for each year
+    for year, year_group in df.groupby('Year'):
+        all_districts_hourly_counts = year_group.groupby('Hour').size().reindex(range(24), fill_value=0)
+        all_districts_weapon_usage = year_group[year_group['Weapon Type'] != 'NONE'].groupby('Hour').size().reindex(range(24), fill_value=0)
+        all_districts_weapon_percentage = (all_districts_weapon_usage / all_districts_hourly_counts.replace(0, np.nan) * 100).fillna(0)
+        all_districts_most_used_weapon = year_group[year_group['Weapon Type'] != 'NONE'].groupby('Hour')['Weapon Type'].apply(
+            lambda x: Counter(x).most_common(1)[0][0] if len(x) > 0 else None
+        ).reindex(range(24), fill_value=None)
+        results.append([year, 'All Districts'] + all_districts_hourly_counts.tolist() + all_districts_weapon_percentage.tolist() + all_districts_most_used_weapon.tolist())
+    
     columns = ['Year', 'District'] + [f'Hour_{i}' for i in range(24)] + [f'Hour_{i}_WeaponPercentage' for i in range(24)] + [f'Hour_{i}_MostUsedWeapon' for i in range(24)]
     return pd.DataFrame(results, columns=columns)
+
 
 hourly_summary = analyze_hourly(data)
 
