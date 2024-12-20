@@ -10,6 +10,7 @@ import {viewSlider} from "./components/inputs/yearSelector.js";
 import {dropdown} from "./components/inputs/dropdown.js";
 import {choroplethMap} from "./components/choropleth.js";
 import {scatterPlot} from "./components/scatter.js";
+import {lineChartCrimeIndex} from "./components/lineChartCrimeIndex.js";
 
 const MIN_YEAR = 2010;
 const MAX_YEAR = 2023;
@@ -53,6 +54,11 @@ divisionNames.push("All Districts");
 <div class="grid grid-cols-2">
   <div class="card">${resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))}</div>
   <div class="card">${resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {width, height: 600}))}</div>
+</div>
+
+<p><i>(Bozza) - Districts' crime index trend over the years</i></p>
+<div class="grid grid-cols-1">
+  <div class="card">${resize((width) => lineChartCrimeIndex(data, {width, height: 600}))}</div>
 </div>
 
 <div class="card">

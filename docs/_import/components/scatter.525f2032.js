@@ -1,7 +1,15 @@
 import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
-export function scatterPlot(data, year, district, { width, height} = {}) {
-    // Filter data for the selected year and district
+export function scatterPlot(data, year, district, { width, height } = {}) {
+    // Define constants for y-scale domains
+    const districtCrimesMax = d3.max(data.filter(d => d.District !== "All Districts"), d => {
+        return Math.max(...Array.from({ length: 24 }, (_, i) => d[`Hour_${i}`]));
+    });
+
+    const allDistrictsCrimesMax = d3.max(data.filter(d => d.District === "All Districts"), d => {
+        return Math.max(...Array.from({ length: 24 }, (_, i) => d[`Hour_${i}`]));
+    });
+
     const filteredData = data.find(d => d.Year === year && d.District === district);
     if (!filteredData) {
         throw new Error(`No data found for year ${year} and district ${district}`);
@@ -20,7 +28,7 @@ export function scatterPlot(data, year, district, { width, height} = {}) {
         .style("font-family", "sans-serif");
 
     // Define margins and scales
-    const margin = { top: 20, right: 30, bottom: 50, left: 50 };
+    const margin = { top: 40, right: 30, bottom: 50, left: 50 }; // Increased top margin for title spacing
     const plotWidth = width - margin.left - margin.right;
     const plotHeight = height - margin.top - margin.bottom;
 
@@ -29,7 +37,7 @@ export function scatterPlot(data, year, district, { width, height} = {}) {
         .range([0, plotWidth]);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(crimes)])
+        .domain([0, district === "All Districts" ? allDistrictsCrimesMax : districtCrimesMax])
         .range([plotHeight, 0]);
 
     // Add axes
@@ -57,7 +65,23 @@ export function scatterPlot(data, year, district, { width, height} = {}) {
         .attr("cx", d => xScale(d))
         .attr("cy", d => yScale(crimes[d]))
         .attr("r", 5)
-        .attr("fill", "#69b3a2");
+        .attr("fill", "red") // Changed dot color to red
+        .on("mouseover", (event, d) => {
+            // Show tooltip
+            d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("position", "absolute")
+                .style("background-color", "rgba(0, 0, 0, 0.8)")
+                .style("color", "#fff")
+                .style("padding", "5px")
+                .style("border-radius", "5px")
+                .style("top", `${event.pageY + 10}px`)
+                .style("left", `${event.pageX + 10}px`)
+                .text(`Hour: ${d}, Crimes: ${crimes[d]}`);
+        })
+        .on("mouseout", () => {
+            d3.select(".tooltip").remove();
+        });
 
     // Add circles for weapon percentage > 50%
     pointGroup.selectAll(".highlight")
@@ -76,7 +100,8 @@ export function scatterPlot(data, year, district, { width, height} = {}) {
         .attr("x", plotWidth / 2)
         .attr("y", plotHeight + margin.bottom - 10)
         .attr("text-anchor", "middle")
-        .style("font-size", "14px")
+        .style("font-size", "10px")
+        .style("fill", "#fff")
         .text("Hour of the Day");
 
     plotGroup.append("text")
@@ -84,17 +109,19 @@ export function scatterPlot(data, year, district, { width, height} = {}) {
         .attr("x", -plotHeight / 2)
         .attr("y", -margin.left + 15)
         .attr("text-anchor", "middle")
-        .style("font-size", "14px")
+        .style("font-size", "10px")
+        .style("fill", "#fff")
         .text("Number of Crimes");
 
     // Add title
     svg.append("text")
-        .attr("x", width / 2)
-        .attr("y", margin.top)
+        .attr("x", margin.left + plotWidth / 2)
+        .attr("y", margin.top / 2) // Adjusted for better spacing
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
+        .style("font-size", "12px")
         .style("font-weight", "bold")
-        .text(`Crimes by Hour for ${district} in ${year}`);
+        .style("fill", "#fff")
+        .text(`Average Crimes by Hour for ${district} in ${year}`);
 
     return svg.node();
 }

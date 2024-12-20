@@ -17,8 +17,9 @@
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
 <link rel="modulepreload" href="./_import/components/inputs/yearSelector.8f3e891b.js">
 <link rel="modulepreload" href="./_import/components/inputs/dropdown.61ad3252.js">
-<link rel="modulepreload" href="./_import/components/choropleth.6c70db4e.js">
-<link rel="modulepreload" href="./_import/components/scatter.2cb8a487.js">
+<link rel="modulepreload" href="./_import/components/choropleth.652b3adb.js">
+<link rel="modulepreload" href="./_import/components/scatter.525f2032.js">
+<link rel="modulepreload" href="./_import/components/lineChartCrimeIndex.6302b50d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.d397b6a8.js">
 <link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
@@ -65,16 +66,16 @@ import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
 registerFile("./data/LAPD_Division_5922489107755548254.geojson", {"name":"./data/LAPD_Division_5922489107755548254.geojson","mimeType":"application/geo+json","path":"./_file/data/LAPD_Division_5922489107755548254.bda8ccd5.geojson","lastModified":1734342471535,"size":705759});
 registerFile("./data/LAPD_Division_IDs.json", {"name":"./data/LAPD_Division_IDs.json","mimeType":"application/json","path":"./_file/data/LAPD_Division_IDs.6ba6ea27.json","lastModified":1734613208124,"size":778});
-registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.669ea11e.csv","lastModified":1734626734628,"size":15893});
-registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.aff43753.csv","lastModified":1734626734652,"size":432425});
+registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.669ea11e.csv","lastModified":1734685011773,"size":15893});
+registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.5d2c449a.csv","lastModified":1734685011786,"size":453600});
 
-define({id: "3088a5e8", outputs: ["viewSlider","dropdown","choroplethMap","scatterPlot","MIN_YEAR","MAX_YEAR"], body: async () => {
-const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.61ad3252.js"), import("./_import/components/choropleth.6c70db4e.js"), import("./_import/components/scatter.2cb8a487.js")]);
+define({id: "4a3d4ec1", outputs: ["viewSlider","dropdown","choroplethMap","scatterPlot","lineChartCrimeIndex","MIN_YEAR","MAX_YEAR"], body: async () => {
+const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}, {lineChartCrimeIndex}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.61ad3252.js"), import("./_import/components/choropleth.652b3adb.js"), import("./_import/components/scatter.525f2032.js"), import("./_import/components/lineChartCrimeIndex.6302b50d.js")]);
 // Import and CONSTANTS
 
 const MIN_YEAR = 2010;
 const MAX_YEAR = 2023;
-return {viewSlider,dropdown,choroplethMap,scatterPlot,MIN_YEAR,MAX_YEAR};
+return {viewSlider,dropdown,choroplethMap,scatterPlot,lineChartCrimeIndex,MIN_YEAR,MAX_YEAR};
 }});
 
 define({id: "40390f7e", inputs: ["FileAttachment"], outputs: ["data","lapd_division_ids","lapd_division_map","data_scatter"], body: (FileAttachment) => {
@@ -117,6 +118,12 @@ resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {wid
 ))
 }});
 
+define({id: "3e6f50b0", mode: "inline", inputs: ["resize","lineChartCrimeIndex","data","display"], body: async (resize,lineChartCrimeIndex,data,display) => {
+display(await(
+resize((width) => lineChartCrimeIndex(data, {width, height: 600}))
+))
+}});
+
 </script>
 </head>
 <body>
@@ -145,7 +152,7 @@ resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {wid
 </aside>
 <main id="observablehq-main" class="observablehq">
 <h1 id="lapd-crime-districts-overview" tabindex="-1"><a class="observablehq-header-anchor" href="#lapd-crime-districts-overview">LAPD Crime Districts Overview</a></h1>
-<div class="observablehq observablehq--block"><!--:3088a5e8:--></div>
+<div class="observablehq observablehq--block"><!--:4a3d4ec1:--></div>
 <div class="observablehq observablehq--block"><!--:40390f7e:--></div>
 <div class="observablehq observablehq--block"><!--:bfd0837d:--></div>
 <p><i>Year selector for the maps below</i></p>
@@ -160,6 +167,29 @@ resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {wid
 <div class="grid grid-cols-2">
   <div class="card"><observablehq-loading></observablehq-loading><!--:515214f6:--></div>
   <div class="card"><observablehq-loading></observablehq-loading><!--:c96fef3a:--></div>
+</div>
+<p><i>(Bozza) - Districts' crime index trend over the years</i></p>
+<div class="grid grid-cols-1">
+  <div class="card"><observablehq-loading></observablehq-loading><!--:3e6f50b0:--></div>
+</div>
+<div class="card">
+  <h3>Crime Index Computation</h3>
+  <p>The crime index is a composite measure designed to represent the relative danger level of different districts. It combines two key components:</p>
+  <ul>
+    <li><strong>Weighted Crime Index:</strong> This considers the severity and frequency of each crime type, computed as the weighted sum of crimes divided by the maximum weighted crime value in the dataset.</li>
+    <li><strong>Crime Density:</strong> The total number of crimes in a district divided by its area in square kilometers.</li>
+  </ul>
+  <p>The final index is calculated using the formula:</p>
+  <pre>  danger_index = (alpha * weighted_crime_index) + (beta * crime_density)
+  </pre>
+  <p>Where:</p>
+  <ul>
+    <li><code>alpha</code> and <code>beta</code> are coefficients that adjust the importance of each component. Currently, <code>alpha</code> is set to 0.6 and <code>beta</code> is set to 0.4.</li>
+    <li><code>crime_severity</code> is a dictionary mapping crime types to their severity values.</li>
+    <li><code>crime_count</code> is a dictionary mapping crime types to their frequencies in the district.</li>
+    <li><code>area</code> is the district area in square kilometers.</li>
+  </ul>
+  <p>The computed indices are normalized across districts to facilitate comparison.</p>
 </div>
 </main>
 <footer id="observablehq-footer">

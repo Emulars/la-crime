@@ -7,7 +7,7 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
     const globalMaxIndex = d3.max(allDistrictIndexes);
 
     // Define color scale using global min and max
-    const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([globalMinIndex, globalMaxIndex]);
+    const colorScale = d3.scaleSequential(d3.interpolateOranges).domain([globalMinIndex, globalMaxIndex]);
 
     // Filter data for the selected year
     const data = Alldata.filter(d => d.Year === year);
@@ -53,11 +53,11 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
         })
         .attr("stroke", d => {
             const crimeData = crimesByDivision.get(d.id);
-            return district_name !== "All Districts" && crimeData?.divisionName === district_name ? "#FF0000" : "#444";
+            return district_name !== "All Districts" && crimeData?.divisionName === district_name ? "#F01FD7" : "#444";
         })
         .attr("stroke-width", d => {
             const crimeData = crimesByDivision.get(d.id);
-            return district_name !== "All Districts" && crimeData?.divisionName === district_name ? 2 : 0.8;
+            return district_name !== "All Districts" && crimeData?.divisionName === district_name ? 3 : 0.8;
         })
         .attr("stroke-linejoin", "round") // Rounded corners for smoother appearance
         .style("filter", d => {
