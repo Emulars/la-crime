@@ -1,6 +1,7 @@
 ---
 title: Victims demographic groups
 toc: true
+theme: ["dashboard", "slate", "alt"]
 ---
 
 # Victims Demographic Group

@@ -31,7 +31,7 @@ export function BarChart(yearlyCrimes, colorScale, {width} = {}) {
             Plot.ruleY([0], {stroke: "lightgrey", strokeWidth: 1, title: "Average"}),
             Plot.text([`AVG: ${averageCrimes.toLocaleString("en-EN").split(".")[0]}`], {
                 x: "2024", // Posizionamento al centro
-                y: 2000, // Posizionamento sotto l'asse
+                y: -4000, // Posizionamento sotto l'asse
                 textAnchor: "middle",
                 //dy: "5em", // Offset verticale per migliorare il posizionamento
                 fill: "white",
