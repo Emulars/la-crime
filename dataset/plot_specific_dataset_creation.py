@@ -24,7 +24,7 @@ import numpy as np
 def danger_index(alpha, beta, crime_severity, crime_count, area):
     weighted_crime_index = sum([crime_severity[crime] * crime_count[crime] for crime in crime_severity]) / max([crime_severity[crime] * crime_count[crime] for crime in crime_severity])
     crime_density = sum(crime_count.values()) / area
-    return (alpha * weighted_crime_index) + (beta * crime_density)
+    return ((alpha * weighted_crime_index) + (beta * crime_density))
 
 # Load dataset
 data = pd.read_csv("crime-data-2010-2024.tsv", sep="\t")
