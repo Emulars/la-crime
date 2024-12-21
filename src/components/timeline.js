@@ -61,7 +61,8 @@ export function timeline(events, crimeData, { width, height } = {}) {
   const averageCrime = d3.mean(quadrimesterCrimeData, (d) => d.totalCrime);
 
   return Plot.plot({
-    title: "Major events and crime trends in Los Angeles",
+    title: "Major Milestones in Crime and Policy: A Los Angeles Timeline (2010–2024)",
+    subtitle: "A chronicle of social, legislative, and global events that influenced LA’s crime trajectory",
     width,
     height,
     marginTop: 30,

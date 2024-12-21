@@ -25,34 +25,31 @@ One of the most significant additions was the creation of a "Crime Relevance" co
 
 ### Crime Index Calculation
 
-The *Crime Index* for each district is a composite metric designed to quantify the relative risk and severity of criminal activities in a standardized manner. It combines two key components: the *Weighted Crime Index* and the *Crime Density*, weighted by configurable parameters \( \alpha \) and \( \beta \). The formula is expressed as:
+The *Crime Index* for each district is a composite metric designed to quantify the relative risk and severity of criminal activities in a standardized manner. It combines two key components: the *Weighted Crime Index* and the *Crime Density*, weighted by configurable parameters \( α \) and \( β \). The formula is expressed as:
 
-\[
-Danger\ Index\ _{District} = \alpha \cdot Weighted\ Crime\ Index\ _{District} + \beta \cdot Crime\ Density\ _{District}
-\]
+DangerIndexDistrict = α • WeightedCrimeIndexDistrict + β • CrimeDensityDistrict
 
-- **\(\alpha\)** and **\(\beta\)** are weights that determine the relative importance of crime severity and crime density, respectively. For this project, the initial values were set to \( \alpha = 0.6 \) and \( \beta = 0.4 \), prioritizing the gravity of crimes.
+
+- **\(α\)** and **\(β\)** are weights that determine the relative importance of crime severity and crime density, respectively. For this project, the initial values were set to \( α = 0.6 \) and \( β = 0.4 \), prioritizing the gravity of crimes.
 
 #### Weighted Crime Index
 The *Weighted Crime Index* quantifies crime severity within a district by summing the weighted counts of various crime types. The formula normalizes this value across districts:
 
-\[
-Weighted\ Crime\ Index\ _{District} = \frac{\sum (Crime\ Severity \times Crime\ Count)}{Max\ Weighted\ Crimes\ in\ Any\ District}
-\]
+WeightedCrimeIndexDistrict = Σ(CrimeSeverity • CrimeCount) \ MaxWeightedCrimesInAnyDistrict
 
 Each crime type is assigned a severity weight based on its societal impact. For instance:
 - Homicide: 5
-- Aggravated Assault: 4
-- Auto Theft: 3
+- Assault: 4
+- Theft: 3
 - Burglary: 2
 - Minor Crimes: 1
 
 #### Crime Density
 The *Crime Density* reflects the concentration of criminal activity per unit area and is calculated as:
 
-\[
-Crime\ Density\ _{District} = \frac{Total\ Crimes\ in\ District}{Area\ of\ District\ (km^2)}
-\]
+
+CrimeDensityDistrict = TotalCrimesInDistrict/AreaOfDistrict (km^2)
+
 
 This component accounts for the geographic size of districts, ensuring fair comparison regardless of spatial differences. By combining severity and density, the *Crime Index* provides a balanced measure of both the magnitude and spread of crime in Los Angeles.
 
