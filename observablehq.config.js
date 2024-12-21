@@ -10,10 +10,10 @@ export default {
     {
       name: "",
       pages: [
-        {name: "Problem overview", path: "/ProblemOverview"},
         {name: "LAPD District", path: "/DistrictCrimeOverview"},
         {name: "Victims demographic groups", path: "/Victims"},
-        {name: "Data cleaning and Preparation", path: "/dataPreparation"}
+        {name: "Data cleaning and Preparation", path: "/dataPreparation"},
+        {name: "Team", path: "/team"}
       ]
     }
   ],
@@ -23,11 +23,10 @@ export default {
 
   // The path to the source root.
   root: "src",
-  theme: ["dashboard","slate", "alt", "wide"],
+  theme: ["slate", "alt"],
   toc : true,
   footer: ({path}) => `<a href="https://github.com/Emulars/la-crime">Source Code</a>`,
   
-
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
   // header: "", // what to show in the header (HTML)

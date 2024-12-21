@@ -8,65 +8,71 @@ toc: true
 
 <div class="hero">
   <h1>Los Angeles Crime</h1>
-  <h2>Welcome to your new app! Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
-  <a href="https://observablehq.com/framework/getting-started">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a>
-</div>
-
-<div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "Your awesomeness over time 🚀",
-      subtitle: "Up and to the right!",
-      width,
-      y: {grid: true, label: "Awesomeness"},
-      marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(aapl, {x: "Date", y: "Close", tip: true})
-      ]
-    }))
-  }</div>
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "How big are penguins, anyway? 🐧",
-      width,
-      grid: true,
-      x: {label: "Body mass (g)"},
-      y: {label: "Flipper length (mm)"},
-      color: {legend: true},
-      marks: [
-        Plot.linearRegressionY(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species"}),
-        Plot.dot(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species", tip: true})
-      ]
-    }))
-  }</div>
+  <h2>How economic shifts, legislative reforms, and unprecedented events have shaped LA’s crime landscape over the last decade.</h2>
 </div>
 
 ---
 
-## Next steps
+## Rising Tide of Crime: 
 
-Here are some ideas of things you could try…
+### A Deep Dive into Los Angeles Crime Trends (2010–2023)
 
-<div class="grid grid-cols-4">
+```js
+import { LineChart } from "./components/linechart.js";
+import { BarChart } from "./components/barchart.js";
+import {timeline} from "./components/timeline.js";
+```
+
+```js
+// Caricamento dati
+const data = FileAttachment("data/yearly_monthly_crime_summary.csv").csv({ typed: true });
+const events = FileAttachment("./data/la_events.json").json();
+```
+
+```js
+// Aggregazione dei dati annuali per il barchart
+const yearlyCrimes = d3.rollup(
+  data,
+  (v) => d3.sum(v, (d) => d.MonthlyCrimeCount),
+  (d) => d.Year
+);
+
+// Creazione del gradiente di colori per i valori
+const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
+```
+
+<div class="grid grid-cols-1">
+Los Angeles has long been a mirror for nationwide debates on policing, social services, and economic justice. This article marks the first of three parts, taking us through the data on citywide crimes between 2010 and 2023. Upcoming pages will focus on the geographical distribution and timing of crimes, as well as deeper social dimensions, including victim demographics.<br>
+In this initial overview, we reveal broad trends, seeing how some years defy the norm, how the city’s monthly rhythms shift crime patterns, and which pivotal events may have nudged these numbers up or down. Whether driven by economic stresses, policy changes, or global crises, these statistics hold valuable lessons on the forces that shape city life.<br><br>
+Here, each year’s deviation from the long‐term citywide average (about 213,374 crimes) jumps out in bold. 2013 and 2014 fall sharply below the mean, offering hints that some combination of improved economic conditions or targeted policing strategies temporarily subdued criminal behavior. By contrast, 2016, 2017, and 2018 show pronounced spikes, each well above the average, an uptick that some commentators link to easing of certain penalties and the resulting shifts in law enforcement tactics.<br>
+Interestingly, 2020 records a moderate dip, likely owing to COVID‐19 restrictions and stay‐at‐home orders; yet 2022 and 2023 see renewed climbs, suggesting that once lockdowns eased and normal life resumed, underlying issues such as rising poverty and social tensions reasserted their influence.
+</div>
+
+<div class="grid grid-cols-1">
   <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript#resize(render)"><code>resize</code></a>.
+    ${resize((width) => BarChart(yearlyCrimes, colorScale, {width}))}
+    ${resize((width) => LineChart(data, yearlyCrimes, colorScale, {width}))}
   </div>
-  <div class="card">
-    Create a <a href="https://observablehq.com/framework/project-structure">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>src</code> folder.
-  </div>
-  <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
-  </div>
-  <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders">data loader</a> that queries a local database or API, generating a data snapshot on build.
-  </div>
-  <div class="card">
-    Import a <a href="https://observablehq.com/framework/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.
-  </div>
-  <div class="card">
-    Ask for help, or share your work or ideas, on our <a href="https://github.com/observablehq/framework/discussions">GitHub discussions</a>.
-  </div>
-  <div class="card">
-    Visit <a href="https://github.com/observablehq/framework">Framework on GitHub</a> and give us a star. Or file an issue if you’ve found a bug!
-  </div>
+</div>
+
+<div class="grid grid-cols-1">
+The lines in this visualization showcase the cyclical nature of crime across the calendar year. Many years register a steep dip in February, possibly reflecting increased police presence after the holiday season or simply the lull before spring activity ramps up. Summers, especially in years like 2022, tend to surge past the 20,000‐crime mark, aligning with higher foot traffic, tourism, and broader economic pressures.<br><br>
+Notably, 2020 stands out with a sharper decline during early spring, coinciding with strict lockdowns that kept many people at home. As restrictions loosened, some forms of crime rebounded, emphasizing how external conditions can heavily shape the rhythm of criminal activity.
+</div>
+
+<div class="grid grid-cols-1">
+  <div class="card">${resize((width) => timeline(events, data, {width}))}</div>
+</div>
+
+<div class="grid grid-cols-1">
+Policy reforms, such as Proposition 57 and new rehabilitation programs, both reflect and contribute to shifting crime rates. Early legislative measures introduced around 2016–2017 coincided with a bump in recorded incidents, as the city negotiated new approaches to sentencing and parole.<br><br>
+When COVID‐19 hit in 2020, crime numbers initially dropped, a correlation easily spotted on the chart. However, a series of other stressors soon emerged: rising homelessness, intensifying gang conflicts, and debates over police funding. By 2022, these factors contributed to heightened volatility, before tapering slightly as COVID‐19 restrictions ended in 2023.
+</div>
+
+## Looking Ahead
+
+<div class="grid grid-cols-1">
+Los Angeles’ crime story from 2010 to 2023 shows a tapestry of policy reforms, social programs, and disruptive events shaping the city’s safety landscape. Many fluctuations align with local legislation or major incidents, from rehabilitation initiatives to a global pandemic; indicating how deeply external forces can mold criminal activity.<br><br>
+But this is only the beginning. In our next installment, we’ll zoom in on how crime varies by neighborhood, examining the stark contrasts across diverse areas of LA, and the significance of day‐night patterns. From there, our final page broadens the lens to explore the social challenges behind the numbers, comparing victim demographics by ethnicity, gender, and age; analyzing how broader socio‐political climates influenced who was most at risk.<br><br>
+Throughout the 2010s and early 2020s, news headlines were filled with discussions of rising housing costs, changing policing strategies, and debates over systemic inequality. Each facet has woven itself into LA’s crime narrative. By reading this data in tandem with real‐world events, we gain a clearer view of not just the statistics, but the human stories they represent—stories that continue to unfold as the city carves its path forward.
 </div>

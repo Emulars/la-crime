@@ -1,5 +1,6 @@
 ---
 title: LAPD Crime Districts Overview
+theme: ["dashboard", "slate", "alt"]
 ---
 
 # LAPD Crime Districts Overview
@@ -64,20 +65,28 @@ divisionNames.push("All Districts");
 <div class="card">
   <h3>Crime Index Computation</h3>
   <p>The crime index is a composite measure designed to represent the relative danger level of different districts. It combines two key components:</p>
-  <ul>
-    <li><strong>Weighted Crime Index:</strong> This considers the severity and frequency of each crime type, computed as the weighted sum of crimes divided by the maximum weighted crime value in the dataset.</li>
-    <li><strong>Crime Density:</strong> The total number of crimes in a district divided by its area in square kilometers.</li>
-  </ul>
-  <p>The final index is calculated using the formula:</p>
-  <pre>
-  danger_index = (alpha * weighted_crime_index) + (beta * crime_density)
-  </pre>
-  <p>Where:</p>
-  <ul>
-    <li><code>alpha</code> and <code>beta</code> are coefficients that adjust the importance of each component. Currently, <code>alpha</code> is set to 0.6 and <code>beta</code> is set to 0.4.</li>
-    <li><code>crime_severity</code> is a dictionary mapping crime types to their severity values.</li>
-    <li><code>crime_count</code> is a dictionary mapping crime types to their frequencies in the district.</li>
-    <li><code>area</code> is the district area in square kilometers.</li>
-  </ul>
-  <p>The computed indices are normalized across districts to facilitate comparison.</p>
+  <div class="grid grid-cols-2">
+    <div class="card">
+      <h4>Weighted Crime Index</h4>
+      <p>This considers the severity and frequency of each crime type, computed as the weighted sum of crimes divided by the maximum weighted crime value in the dataset.</p>
+    </div>
+    <div class="card">
+      <h4>Crime Density</h4>
+      <p>The total number of crimes in a district divided by its area in square kilometers.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h4>Computation Formula</h4>
+    <pre>
+    danger_index = (alpha * weighted_crime_index) + (beta * crime_density)
+    </pre>
+    <p>Where:</p>
+    <ul>
+      <li><code>alpha</code> and <code>beta</code> are coefficients that adjust the importance of each component. Currently, <code>alpha</code> is set to 0.6 and <code>beta</code> is set to 0.4.</li>
+      <li><code>crime_severity</code> mapping crime types to their severity values.</li>
+      <li><code>crime_count</code> mapping crime types to their frequencies in the district.</li>
+      <li><code>area</code> is the district area in square kilometers.</li>
+    </ul>
+    <p>The computed indices are normalized across districts to facilitate comparison.</p>
+  </div>
 </div>
