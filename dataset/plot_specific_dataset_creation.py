@@ -94,11 +94,13 @@ def analyze_hourly(df):
 hourly_summary = analyze_hourly(data)
 
 # 4. Victim stats by gender, ethnicity, and age range
+
 def prepare_victim_demographics(df):
     """
     Prepare victim demographic data for alluvial visualization with strict ordering
     and sorting: Gender, Ethnicity, and AgeRange by size or range.
     """
+
     def age_range(age):
         if pd.isna(age) or age == 0:
             return 'Unknown'
@@ -204,8 +206,60 @@ def prepare_victim_demographics(df):
 
     return nodes, links
 
-
 nodes_df, links_df = prepare_victim_demographics(data)
+
+# 5. Victim stats by gender and age range for grouped bar chart
+def prepare_victim_age_gender(df):
+    """
+    Prepare victim demographic data for grouped bar chart with additional tooltip information,
+    ensuring the consistency between Crime type and Crime subtype.
+    """
+    def age_range(age):
+        if pd.isna(age) or age == 0:
+            return 'Unknown'
+        return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
+
+    # Standardize column names (strip spaces)
+    df.columns = df.columns.str.strip()
+
+    data = df.copy()
+
+    # Filter for only Male (M) and Female (F) victims
+    data = data[data['Gender'].isin(['M', 'F'])]
+
+    data['AgeRange'] = data['Age'].apply(age_range)
+    data = data[data['AgeRange'] != 'Unknown']
+
+    # Group data and calculate counts by Gender and Age Range
+    grouped_data = (
+        data.groupby(["AgeRange", "Gender", "Crime type"])
+        .agg(
+            Total_Crimes=("Crime subtype", "size"),  # Count crimes grouped by subtype
+            Most_Common_SubCrime=("Crime subtype", lambda x: x.mode()[0] if not x.mode().empty else "None")  # Consistent subtype
+        )
+        .reset_index()
+    )
+
+    # Get the most common crime type and subtype for each AgeRange-Gender group
+    final_data = (
+        grouped_data.groupby(["AgeRange", "Gender"])
+        .apply(lambda x: x.loc[x["Total_Crimes"].idxmax()])
+        .reset_index(drop=True)
+    )
+
+    # Pivot to prepare for grouped bar chart
+    pivot_data = final_data.pivot(index="AgeRange", columns="Gender", values=["Total_Crimes", "Crime type", "Most_Common_SubCrime"])
+    pivot_data.columns = ['_'.join(col).strip() for col in pivot_data.columns.values]
+    pivot_data = pivot_data.reset_index()
+
+    return pivot_data
+
+
+
+pivot_data = prepare_victim_age_gender(data)
+
+
+
 
 # Save to JSON for D3
 nodes_df.to_json('../src/data/nodes.json', orient='records')
@@ -215,6 +269,7 @@ links_df.to_json('../src/data/links.json', orient='records')
 crime_summary.to_csv("../src/data/yearly_monthly_crime_summary.csv", index=False)
 district_summary.to_csv("../src/data/district_crime_analysis.csv", index=False)
 hourly_summary.to_csv("../src/data/hourly_crime_analysis.csv", index=False)
+pivot_data.to_csv("../src/data/grouped_bar_chart_data.csv", index=False)
 
 
 
