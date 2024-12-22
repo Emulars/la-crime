@@ -77,7 +77,7 @@ export function scatterPlot(data, year, district, { width = 800, height = 500 } 
         x: {
             domain: [0, 23],
             label: "Hours",
-            tickFormat: (d) => `${d}:00`,
+            tickFormat: (d) => `${d}`,
             ticks: 24, // Show all hours
         },
         y: {

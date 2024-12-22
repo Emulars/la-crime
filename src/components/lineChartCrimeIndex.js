@@ -39,12 +39,24 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
     const chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Add axes
+    // Add x-axis
     chartGroup.append("g")
         .attr("transform", `translate(0, ${chartHeight})`)
         .call(xAxis);
 
+    // Add y-axis
     chartGroup.append("g").call(yAxis);
+
+    // ──── Y AXIS LABEL ─────────────────────────────────────────────────────────────
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")            // Rotate to make it vertical
+        .attr("x", -chartHeight / 2)                 // Center along y-axis
+        .attr("y", -margin.left + 15)                // Slightly to the right of the axis
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")                       // Adjust color as needed
+        .attr("font-size", "12px")
+        .text("District's Crime Index");                      // Your label text
+    // ──────────────────────────────────────────────────────────────────────────────
 
     // Create line generator
     const line = d3.line()
@@ -108,7 +120,7 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
             .text(district)
             .attr("font-size", "12px")
             .attr("alignment-baseline", "middle")
-            .attr("fill", enabledDistricts.has(district) ? "white" : "gray") // Adjust initial text color
+            .attr("fill", enabledDistricts.has(district) ? "white" : "gray")
             .style("cursor", "pointer")
             .attr("class", `legend-text legend-text-${encodedDistrict}`)
             .on("click", () => toggleDistrict(district));
