@@ -4,10 +4,11 @@ toc: true
 theme: ["dashboard", "slate", "alt"]
 ---
 
-# Victims Demographic Group
-
+# Behind the Numbers: Who Are the Victims?
+## Exploring how age, gender, and ethnicity intersect to reveal the human impact of crime in Los Angeles (2010–2023)
 ```js
 import { sankey, sankeyLinkHorizontal } from "d3-sankey";
+import { groupedBar } from "./components/grouped_barchart.js";
 
 // Load and process the data
 const nodesData = FileAttachment("data/nodes.json").json();
@@ -18,8 +19,11 @@ const linksData = FileAttachment("data/links.json").json();
 ```
 
 ```js
+const data = FileAttachment("data/grouped_bar_chart_data.csv").csv();
+```
+
+```js
 // Constants for visualization
-//const width = 
 const height = 800;
 const padding = 20;
 
@@ -194,11 +198,46 @@ drawAlluvialDiagram();
 ```
 
 <div class="grid grid-cols-1">
+Los Angeles is not merely a map of districts and statistics: behind every crime there’s a face, an age, a story. To truly understand how crime shapes urban life, it’s essential to explore who suffers and under what circumstances. The following visualizations shine a spotlight on a frequently overlooked theme: the disparity in victim distribution by gender, ethnicity, and age group.
+<br>
+Data shows that men (M) have slightly higher victimization rates than women (F). However, when zooming in on specific subgroups, some disparities immediately stand out. Young Hispanic males aged 20–29, for instance, show significantly higher incidence rates compared to the general population. This spike is likely the result of a complex mix of factors, including economic instability, gang violence exposure, and greater participation in social activities in high-risk areas.
+<br>
+Women, on the other hand, present a different picture. While their overall victimization level is lower, females aged 20–29 record higher numbers of violent crimes tied to family conflicts and domestic violence. This specificity raises key questions about power dynamics within the home and the need to strengthen support centers and protection programs.
+<br>
+As age increases, the data shows a drop in crimes affecting both men and women. However, those over 60 remain more vulnerable to fraud and financial crimes—evidence of how “invisible crime,” from online scams to identity theft, can target people with fixed or retirement incomes, or those less familiar with emerging forms of deception.
+<br>
+Taken together, these patterns offer valuable insights for rethinking prevention priorities. While socioeconomic and job-inclusion interventions may prove crucial for young adults, women of childbearing age require robust support against gender-based violence. Finally, seniors would benefit from financial literacy and digital assistance, helping curb their vulnerability in an increasingly “tech-driven” criminal landscape.
   <div class="card">
-  <h2>Gender victims over age ranges and ethnicity [2010–2023]</h2>
-  <h3><em>Clickable nodes and tooltip on links</em></h3> 
+  <h2>Victim Demographics: A Telling Flow of Crime’s Impact</h2>
+  <h3><em>How gender, ethnicity, and age converge in shaping victimization rates <br> Clickable nodes and tooltip on links</em></h3> 
   </br>
   <p><em>Unit of measure: victims per 100,000 inhabitants</em></p>
   <div id="alluvial-container"></div>
   </div>
+</div>
+
+<div class="grid grid-cols-1">
+By comparing age brackets in the charts, one quickly sees the significance of the social context in which crimes occur. The intersections of age, gender, and ethnicity confirm how targeted interventions, such as programs addressing domestic violence or rehabilitation for youth in disadvantaged areas, can significantly reduce exposure to specific offenses.
+</div>
+
+<div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => groupedBar(data, {width}))}
+  </div>
+</div>
+
+<div class="grid grid-cols-1">
+look at the bar chart reveals that both men and women see the highest crime volumes between ages 20 and 29, though women in this range are more frequently tied to domestic violence and relationship-based assaults. Meanwhile, men stand out in property crimes, car thefts and break-ins, typical of high-density urban environments. Over time, as age goes up, the scenario shifts: fraud and financial crimes become more prevalent, often facilitated by a weaker grasp of digital tools.
+</div>
+
+# The Human Face of Safety in Los Angeles
+
+<div class="grid grid-cols-1">
+As confirmed by LAPD data published on the “Open Data” portal, and echoed in local news coverage, crime in Los Angeles is a layered phenomenon shaped by multiple variables: demographic differences, economic disparities, and the effectiveness of prevention and victim support policies. In 2022, for instance, the Los Angeles Times reported an uptick in violent crimes compared to pre-pandemic levels, pointing out how post-lockdown reopenings revived latent tensions and introduced new challenges (including a rise in homelessness).
+<br>
+In such a complex setting, understanding “who” bears the brunt of criminal acts is just as crucial as “how much” and “where.” Seeing how age, gender, and ethnicity map onto different victimization patterns paves the way for reflections on legislative reforms and social programs. From specialized task forces for domestic abuse to financial literacy for older adults and integrated interventions in the most vulnerable districts, institutional and community efforts can make all the difference.
+<br>
+These numbers aren’t simply figures on a graph; they are the stories of people living, working, and seeking safety in one of the world’s most dynamic cities. As analysts and social workers caution, a one-size-fits-all approach seldom works in such a multifaceted context. Instead, a mosaic of tailored actions is needed to tackle specific vulnerabilities, from combating gender violence to preventing youth gang recidivism and protecting the elderly from online scams.
+<br>
+Future developments partly hinge on political will to invest in economic inclusion projects, expand law enforcement training, and support neighborhoods that are most at risk. Moving forward, every effort to protect the most vulnerable, provide adequate resources, and strengthen community trust can bring Los Angeles one step closer to becoming a safer and more equitable city.
 </div>

@@ -211,48 +211,67 @@ nodes_df, links_df = prepare_victim_demographics(data)
 # 5. Victim stats by gender and age range for grouped bar chart
 def prepare_victim_age_gender(df):
     """
-    Prepare victim demographic data for grouped bar chart with additional tooltip information,
-    ensuring the consistency between Crime type and Crime subtype.
+    Prepara i dati per l'utilizzo in un grouped bar chart con Observable Plot,
+    includendo le informazioni relative al Crime Type e Crime Subtype più frequenti.
     """
     def age_range(age):
         if pd.isna(age) or age == 0:
             return 'Unknown'
         return f"{(age // 10) * 10}-{(age // 10) * 10 + 9}"
 
-    # Standardize column names (strip spaces)
+    # Standardizza i nomi delle colonne
     df.columns = df.columns.str.strip()
 
-    data = df.copy()
+    # Filtra per genere 'M' (Maschi) e 'F' (Femmine)
+    data = df[df['Gender'].isin(['M', 'F'])]
 
-    # Filter for only Male (M) and Female (F) victims
-    data = data[data['Gender'].isin(['M', 'F'])]
-
+    # Crea il range di età
     data['AgeRange'] = data['Age'].apply(age_range)
     data = data[data['AgeRange'] != 'Unknown']
 
-    # Group data and calculate counts by Gender and Age Range
+    # Raggruppa i dati e calcola il conteggio totale di crimini
     grouped_data = (
-        data.groupby(["AgeRange", "Gender", "Crime type"])
-        .agg(
-            Total_Crimes=("Crime subtype", "size"),  # Count crimes grouped by subtype
-            Most_Common_SubCrime=("Crime subtype", lambda x: x.mode()[0] if not x.mode().empty else "None")  # Consistent subtype
+        data.groupby(['AgeRange', 'Gender'])
+        .size()
+        .reset_index(name='Total_Crimes')
+    )
+
+    # Trova il tipo di crimine e sottocategoria più frequenti coerentemente
+    def most_common_crime(sub_df):
+        # Raggruppa per Crime type per trovare il Crime subtype più frequente
+        crime_counts = (
+            sub_df.groupby('Crime type')['Crime subtype']
+            .value_counts()
+            .reset_index(name='count')
         )
+        # Ordina per conteggio e seleziona il primo
+        most_common = crime_counts.loc[crime_counts.groupby('Crime type')['count'].idxmax()]
+        most_common = most_common.loc[most_common['count'].idxmax()]  # Tipo/Subtipo globale
+        return pd.Series({
+            'Most_Common_Crime_Type': most_common['Crime type'],
+            'Most_Common_Crime_Subtype': most_common['Crime subtype']
+        })
+
+    crime_info = (
+        data.groupby(['AgeRange', 'Gender'])
+        .apply(most_common_crime)
         .reset_index()
     )
 
-    # Get the most common crime type and subtype for each AgeRange-Gender group
-    final_data = (
-        grouped_data.groupby(["AgeRange", "Gender"])
-        .apply(lambda x: x.loc[x["Total_Crimes"].idxmax()])
-        .reset_index(drop=True)
-    )
+    # Combina le informazioni dei crimini con i dati raggruppati
+    merged_data = grouped_data.merge(crime_info, on=['AgeRange', 'Gender'])
 
-    # Pivot to prepare for grouped bar chart
-    pivot_data = final_data.pivot(index="AgeRange", columns="Gender", values=["Total_Crimes", "Crime type", "Most_Common_SubCrime"])
-    pivot_data.columns = ['_'.join(col).strip() for col in pivot_data.columns.values]
-    pivot_data = pivot_data.reset_index()
+    # Prepara i dati per Observable
+    observable_data = merged_data.rename(columns={
+        'AgeRange': 'x',
+        'Gender': 'group',
+        'Total_Crimes': 'y',
+        'Most_Common_Crime_Type': 'most_common_crime_type',
+        'Most_Common_Crime_Subtype': 'most_common_crime_subtype'
+    })
 
-    return pivot_data
+    return observable_data
+
 
 
 

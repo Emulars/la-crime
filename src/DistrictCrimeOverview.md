@@ -88,7 +88,7 @@ By examining these lines together, we see how each district’s story is intertw
   <div class="card">${resize((width) => lineChartCrimeIndex(data, {width, height: 600}))}</div>
 </div>
 
-## Conclusion and next steps
+## From Districts to Demographics: Bridging Crime and Its Human Impact
 
 <div class="grid grid-cols-1">
 From morning thefts in Hollywood to the sharp climb in Rampart’s crime index, each district paints a distinct picture of Los Angeles. The data underscores which districts combine both higher crime density and more severe offenses, leading to a higher overall index. At the same time, it showcases areas that have improved over the years, demonstrating that policy initiatives, community involvement, and demographic shifts can alter a district’s narrative for better or worse.<br>
