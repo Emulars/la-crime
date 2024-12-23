@@ -34,8 +34,22 @@ const divisionNames = lapd_division_ids.map(division => division.name);
 ```
 
 <div class="grid grid-cols-1">
-Los Angeles is many different cities rolled into one. From Hollywood’s star-studded streets to the bustling neighborhoods of Central and Rampart, the tapestry of L.A. crime has woven itself into each district’s identity. But which crimes are most rampant in Hollywood? How do the hours of the day affect overall safety? And which districts have seen the steepest climb or drop in crime over time?<br><br>
-As you read, keep in mind that the Crime Index used throughout these visualizations is a composite measure that combines a Weighted Crime Index (capturing both severity and frequency of crimes) and Crime Density (crimes per square kilometer). This method ensures a fair comparison across vastly different neighborhoods and geographies.
+Los Angeles is not just one city but a multitude of communities coexisting side by side. From the star-studded streets of Hollywood to the bustling neighborhoods of Central and Rampart, L.A.’s crime mosaic spans every district. Which crimes are prevalent in Hollywood? Which hours of the day pose greater safety risks? And which districts have undergone the steepest rises or drops in crime over the years?<br>
+</div>
+<i>Methodological Note</i>
+<div class="grid grid-cols-1">
+The Crime Index used in these visualizations is a composite measure that integrates two key components:<br>
+1) Weighted Crime Index, which assigns greater weight to more violent and serious crimes.
+<br>
+2) Crime Density, i.e., the number of crimes per square kilometer.
+<br>
+<br>
+By blending these two, we aim for a balanced comparison between neighborhoods that differ in size and population.
+</div>
+
+<div class="grid grid-cols-1">
+Los Angeles is ever-changing, and its crime patterns shift accordingly across different neighborhoods. Statistics show that each district has its own criminal “DNA,” with distinct crime types, peak hours, and historical trajectories that can vary significantly
+<br>
 </div>
 
 ## “Mapping L.A.’s Crime Hotspots”
@@ -104,6 +118,10 @@ By examining these lines together, we see how each district’s story is intertw
     </br>
     ${resize((width) => lineChartCrimeIndex(data, {width, height: 600}))}
   </div>
+</div>
+
+<div class="grid grid-cols-1">
+One key insight is how local factors drive these trends. A district with fewer total crimes can still score high if those crimes are more severe, reflecting the weighting in the Crime Index. Moreover, changes in policing strategies or demographic shifts can bring sudden inflections in the graph. Observe how Central and Rampart sometimes converge or diverge in the timeline, hinting at broader forces, such as new housing developments, gentrification, or targeted law enforcement campaigns, that reshape the crime landscape. Ultimately, these lines underscore the reality that Los Angeles is in constant flux, with each district writing its own chapter in the city’s ongoing story of crime and community.
 </div>
 
 ## A Closer Look at Who Lives in Each District

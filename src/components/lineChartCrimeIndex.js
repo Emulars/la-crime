@@ -1,11 +1,12 @@
 import * as d3 from "d3";
 
 // Utility to encode district names into valid class names
+// Utility to encode district names into valid class names
 function encodeDistrictName(name) {
     return name.replace(/\s+/g, '-'); // Replace spaces with dashes
 }
 
-export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = { top: 20, right: 150, bottom: 50, left: 50 } } = {}) {
+export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = { top: 30, right: 50, bottom: 30, left: 45 } } = {}) {
     // Create SVG
     const svg = d3.create("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
@@ -31,10 +32,11 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
     const colorScale = d3.scaleOrdinal()
         .domain([...groupedData.keys()])
         .range([
-            "#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", 
-            "#911eb4", "#46f0f0", "#f032e6", "#bcf60c", "#fabebe",
-            "#008080", "#e6beff", "#9a6324", "#fffac8", "#800000",
-            "#aaffc3", "#808000", "#ffd8b1", "#000075", "#808080"
+            "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", 
+            "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", 
+            "#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", 
+            "#ffffcc", "#e5d8bd", "#fddaec", "#f2f2f2", "#a6cee3", 
+            "#b2df8a"
         ]);
 
     // Create axes
@@ -53,16 +55,15 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
     // Add y-axis
     chartGroup.append("g").call(yAxis);
 
-    // ──── Y AXIS LABEL ─────────────────────────────────────────────────────────────
+    // Y-axis label
     chartGroup.append("text")
-        .attr("transform", "rotate(-90)")            // Rotate to make it vertical
-        .attr("x", -chartHeight / 2)                 // Center along y-axis
-        .attr("y", -margin.left + 15)                // Slightly to the right of the axis
+        .attr("transform", "rotate(-90)")
+        .attr("x", -chartHeight / 2)
+        .attr("y", -margin.left + 15)
         .attr("text-anchor", "middle")
-        .attr("fill", "white")                       // Adjust color as needed
+        .attr("fill", "white")
         .attr("font-size", "12px")
-        .text("District's Crime Index");                      // Your label text
-    // ──────────────────────────────────────────────────────────────────────────────
+        .text("District's Crime Index");
 
     // Create line generator
     const line = d3.line()
@@ -72,6 +73,9 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
     // Add lines for each district
     const linesGroup = chartGroup.append("g");
     const districtPaths = new Map();
+
+    const enabledDistricts = new Set(["Central", "Hollenbeck", "Rampart", "West LA", "Wilshire", "Hollywood", "Olympic"]);
+    const visibleDistricts = new Set([...enabledDistricts]);
 
     groupedData.forEach((districtData, district) => {
         const encodedDistrict = encodeDistrictName(district);
@@ -83,16 +87,32 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
             .attr("stroke-width", 2)
             .attr("d", line)
             .attr("data-district", district)
-            .attr("class", `line line-${encodedDistrict}`);
+            .attr("class", `line line-${encodedDistrict}`)
+            .style("opacity", enabledDistricts.has(district) ? 1 : 0);
 
         districtPaths.set(district, path);
     });
 
+    // Add labels at the end of each line
+    groupedData.forEach((districtData, district) => {
+        const encodedDistrict = encodeDistrictName(district);
+        const lastPoint = districtData[districtData.length - 1]; // Get the last data point
+
+        chartGroup.append("text")
+            .attr("x", xScale(lastPoint.Year) + 5) // Position slightly to the right of the line end
+            .attr("y", yScale(lastPoint.DistrictIndex))
+            .attr("fill", colorScale(district))
+            .attr("font-size", "12px")
+            .attr("alignment-baseline", "middle")
+            .text(district)
+            .attr("class", `label label-${encodedDistrict}`)
+            .style("opacity", enabledDistricts.has(district) ? 1 : 0);
+    });
+
     // Add legend
     const legendGroup = svg.append("g")
-        .attr("transform", `translate(${width - margin.right + 20}, ${margin.top})`);
+        .attr("transform", `translate(${width - margin.right - 350}, ${margin.top})`);
 
-    // Add "Toggle Districts" text above the legend
     legendGroup.append("text")
         .attr("x", 0)
         .attr("y", -10)
@@ -101,16 +121,14 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
         .attr("font-weight", "bold")
         .attr("fill", "white");
 
-    const enabledDistricts = new Set(["Central", "Hollenbeck", "Rampart", "West LA", "Wilshire"]);
-    const visibleDistricts = new Set(); // Track currently visible districts
-
     [...groupedData.keys()].forEach((district, i) => {
         const encodedDistrict = encodeDistrictName(district);
-        const yOffset = i * 20;
+        const xOffset = (i % 4) * 100; // Arrange items in rows of 3
+        const yOffset = Math.floor(i / 4) * 20;
 
         // Add legend rectangle
         legendGroup.append("rect")
-            .attr("x", 0)
+            .attr("x", xOffset)
             .attr("y", yOffset)
             .attr("width", 10)
             .attr("height", 10)
@@ -121,8 +139,8 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
 
         // Add legend text
         legendGroup.append("text")
-            .attr("x", 15)
-            .attr("y", yOffset + 10)
+            .attr("x", xOffset + 15)
+            .attr("y", yOffset + 7)
             .text(district)
             .attr("font-size", "12px")
             .attr("alignment-baseline", "middle")
@@ -130,13 +148,6 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
             .style("cursor", "pointer")
             .attr("class", `legend-text legend-text-${encodedDistrict}`)
             .on("click", () => toggleDistrict(district));
-
-        // Set initial visibility of the district line
-        if (enabledDistricts.has(district)) {
-            visibleDistricts.add(district);
-        } else {
-            districtPaths.get(district).style("opacity", 0);
-        }
     });
 
     // Toggle visibility of district lines
@@ -147,17 +158,22 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
         if (isSelected) {
             // Hide the district
             visibleDistricts.delete(district);
-            districtPaths.get(district).style("opacity", 0); // Hide the line
-            svg.select(`.legend-${encodedDistrict}`).attr("fill", "white"); // White box
-            svg.select(`.legend-text-${encodedDistrict}`).attr("fill", "gray"); // Gray text
+            districtPaths.get(district).style("opacity", 0);
+            svg.select(`.label-${encodedDistrict}`).style("opacity", 0); // Hide label
+            svg.select(`.legend-${encodedDistrict}`).attr("fill", "white");
+            svg.select(`.legend-text-${encodedDistrict}`).attr("fill", "gray");
         } else {
             // Show the district
             visibleDistricts.add(district);
-            districtPaths.get(district).style("opacity", 1); // Show the line
-            svg.select(`.legend-${encodedDistrict}`).attr("fill", colorScale(district)); // Original color box
-            svg.select(`.legend-text-${encodedDistrict}`).attr("fill", "white"); // White text
+            districtPaths.get(district).style("opacity", 1);
+            svg.select(`.label-${encodedDistrict}`).style("opacity", 1); // Show label
+            svg.select(`.legend-${encodedDistrict}`).attr("fill", colorScale(district));
+            svg.select(`.legend-text-${encodedDistrict}`).attr("fill", "white");
         }
     }
 
     return svg.node();
 }
+
+
+
