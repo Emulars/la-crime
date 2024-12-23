@@ -22,9 +22,23 @@ from datetime import datetime
 import numpy as np
 
 def danger_index(alpha, beta, crime_severity, crime_count, area):
-    weighted_crime_index = sum([crime_severity[crime] * crime_count[crime] for crime in crime_severity]) / max([crime_severity[crime] * crime_count[crime] for crime in crime_severity])
+    # Calcola l'indice pesato
+    weighted_crime_values = [crime_severity[crime] * crime_count[crime] for crime in crime_severity]
+    weighted_crime_index = sum(weighted_crime_values)
+    max_weighted_crime_index = max(weighted_crime_values)
+    normalized_weighted_crime_index = weighted_crime_index / max_weighted_crime_index if max_weighted_crime_index > 0 else 0
+
+    # Calcola la densità di crimini e normalizzala
     crime_density = sum(crime_count.values()) / area
-    return ((alpha * weighted_crime_index) + (beta * crime_density))
+    max_crime_density = sum(crime_count.values())  # Densità massima teorica (usando area = 1 come riferimento)
+    normalized_crime_density = crime_density / max_crime_density if max_crime_density > 0 else 0
+    
+    index = (alpha * normalized_weighted_crime_index) + (beta * normalized_crime_density)
+
+    return index
+
+
+
 
 # Load dataset
 data = pd.read_csv("crime-data-2010-2024.tsv", sep="\t")
@@ -51,7 +65,7 @@ def analyze_district(df):
         area = group['DistrictKm2'].iloc[0]
         crime_severity = dict(zip(group['Crime type'], group['Crime Value']))
         crime_count_dict = dict(Counter(group['Crime type']))
-        district_index = danger_index(0.6, 0.4, crime_severity, crime_count_dict, area)
+        district_index = danger_index(0.5, 0.5, crime_severity, crime_count_dict, area)
         district_indexes.append(district_index)
         results.append([year, district, total_crimes, most_frequent_crime, crime_count, district_index])
     # Normalize DistrictIndex
@@ -284,7 +298,7 @@ pivot_data = prepare_victim_age_gender(data)
 nodes_df.to_json('../src/data/nodes.json', orient='records')
 links_df.to_json('../src/data/links.json', orient='records') 
 
-# Save the datasets
+# # Save the datasets
 crime_summary.to_csv("../src/data/yearly_monthly_crime_summary.csv", index=False)
 district_summary.to_csv("../src/data/district_crime_analysis.csv", index=False)
 hourly_summary.to_csv("../src/data/hourly_crime_analysis.csv", index=False)

@@ -68,7 +68,9 @@ Notice how districts such as Olympic and Rampart show higher indices, suggesting
 </div>
 
 <div class="grid grid-cols-2">
-  <div class="card">${resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))}</div>
+  <div class="card">
+    ${resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))}
+  </div>
   <div class="card">${resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {width, height: 600}))}</div>
 </div>
 
