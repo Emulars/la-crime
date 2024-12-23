@@ -4,6 +4,6 @@ export function dropdown(elementList, label)
 {
     return Inputs.select(elementList, {
         label: label,
-        value: elementList[elementList.length - 1], // Default value (first division name)
+        value: elementList[0], // Default value (first division name)
       });
 }

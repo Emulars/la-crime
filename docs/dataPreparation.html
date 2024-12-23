@@ -7,16 +7,16 @@
 <title>Data Preparation and Cleaning: From Raw Crime Data to Analytical Insights | Los Angeles&#x27;s Crime</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="preload" as="style" href="./_observablehq/theme-slate,alt.e5c66b79.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
-<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt.e5c66b79.css">
+<link rel="modulepreload" href="./_observablehq/client.3209cb3c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import "./_observablehq/client.55fa937c.js";
+import "./_observablehq/client.3209cb3c.js";
 
 </script>
 </head>
@@ -31,10 +31,10 @@ import "./_observablehq/client.55fa937c.js";
   <section class="observablehq-section-active">
     <summary></summary>
     <ol>
-    <li class="observablehq-link"><a href="./ProblemOverview">Problem overview</a></li>
     <li class="observablehq-link"><a href="./DistrictCrimeOverview">LAPD District</a></li>
     <li class="observablehq-link"><a href="./Victims">Victims demographic groups</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
+    <li class="observablehq-link"><a href="./team">Team</a></li>
     </ol>
   </section>
 </nav>
@@ -48,7 +48,6 @@ import "./_observablehq/client.55fa937c.js";
 <li class="observablehq-secondary-link"><a href="#feature-selection-and-reduction">Feature Selection and Reduction</a></li>
 <li class="observablehq-secondary-link"><a href="#introduction-of-the-crime-relevance-column">Introduction of the Crime Relevance Column</a></li>
 <li class="observablehq-secondary-link"><a href="#tool-utilization-open-refine">Tool Utilization: OpenRefine</a></li>
-<li class="observablehq-secondary-link"><a href="#results-of-data-preparation">Results of Data Preparation</a></li>
 </ol>
 </nav>
 </aside>
@@ -66,41 +65,35 @@ import "./_observablehq/client.55fa937c.js";
 <h2 id="introduction-of-the-crime-relevance-column" tabindex="-1"><a class="observablehq-header-anchor" href="#introduction-of-the-crime-relevance-column">Introduction of the Crime Relevance Column</a></h2>
 <p>One of the most significant additions was the creation of a "Crime Relevance" column. This field assigned a weighted importance score (ranging from 1 to 5) to each crime type, considering factors such as severity, societal impact, and frequency. This allowed us to prioritize analyses based on the relevance and gravity of incidents. Similarly, district-level data was augmented with a calculated area column, expressing the geographical size of each police district in square kilometers. This provided essential context for spatial analyses, enabling a deeper understanding of crime density and distribution.</p>
 <h3 id="crime-index-calculation" tabindex="-1"><a class="observablehq-header-anchor" href="#crime-index-calculation">Crime Index Calculation</a></h3>
-<p>The <em>Crime Index</em> for each district is a composite metric designed to quantify the relative risk and severity of criminal activities in a standardized manner. It combines two key components: the <em>Weighted Crime Index</em> and the <em>Crime Density</em>, weighted by configurable parameters ( \alpha ) and ( \beta ). The formula is expressed as:</p>
-<p>[
-Danger\ Index\ _{District} = \alpha \cdot Weighted\ Crime\ Index\ _{District} + \beta \cdot Crime\ Density\ _{District}
-]</p>
+<p>The <em>Crime Index</em> for each district is a composite metric designed to quantify the relative risk and severity of criminal activities in a standardized manner. It combines two key components: the <em>Weighted Crime Index</em> and the <em>Crime Density</em>, weighted by configurable parameters ( α ) and ( β ). The formula is expressed as:</p>
+<p>DangerIndexDistrict = α • WeightedCrimeIndexDistrict + β • CrimeDensityDistrict</p>
 <ul>
-<li><strong>(\alpha)</strong> and <strong>(\beta)</strong> are weights that determine the relative importance of crime severity and crime density, respectively. For this project, the initial values were set to ( \alpha = 0.6 ) and ( \beta = 0.4 ), prioritizing the gravity of crimes.</li>
+<li><strong>(α)</strong> and <strong>(β)</strong> are weights that determine the relative importance of crime severity and crime density, respectively. For this project, the initial values were set to ( α = 0.6 ) and ( β = 0.4 ), prioritizing the gravity of crimes.</li>
 </ul>
 <h4 id="weighted-crime-index" tabindex="-1"><a class="observablehq-header-anchor" href="#weighted-crime-index">Weighted Crime Index</a></h4>
 <p>The <em>Weighted Crime Index</em> quantifies crime severity within a district by summing the weighted counts of various crime types. The formula normalizes this value across districts:</p>
-<p>[
-Weighted\ Crime\ Index\ _{District} = \frac{\sum (Crime\ Severity \times Crime\ Count)}{Max\ Weighted\ Crimes\ in\ Any\ District}
-]</p>
+<p>WeightedCrimeIndexDistrict = Σ(CrimeSeverity • CrimeCount) \ MaxWeightedCrimesInAnyDistrict</p>
 <p>Each crime type is assigned a severity weight based on its societal impact. For instance:</p>
 <ul>
 <li>Homicide: 5</li>
-<li>Aggravated Assault: 4</li>
-<li>Auto Theft: 3</li>
+<li>Assault: 4</li>
+<li>Theft: 3</li>
 <li>Burglary: 2</li>
 <li>Minor Crimes: 1</li>
 </ul>
 <h4 id="crime-density" tabindex="-1"><a class="observablehq-header-anchor" href="#crime-density">Crime Density</a></h4>
 <p>The <em>Crime Density</em> reflects the concentration of criminal activity per unit area and is calculated as:</p>
-<p>[
-Crime\ Density\ _{District} = \frac{Total\ Crimes\ in\ District}{Area\ of\ District\ (km^2)}
-]</p>
+<p>CrimeDensityDistrict = TotalCrimesInDistrict/AreaOfDistrict (km^2)</p>
 <p>This component accounts for the geographic size of districts, ensuring fair comparison regardless of spatial differences. By combining severity and density, the <em>Crime Index</em> provides a balanced measure of both the magnitude and spread of crime in Los Angeles.</p>
 <h2 id="tool-utilization-open-refine" tabindex="-1"><a class="observablehq-header-anchor" href="#tool-utilization-open-refine">Tool Utilization: OpenRefine</a></h2>
 <p>All of these transformations were performed using OpenRefine, a robust tool capable of handling the dataset's substantial size. OpenRefine's powerful features allowed us to address issues of inconsistency, perform sophisticated clustering operations, and manage the large-scale data with efficiency and precision.</p>
-<h2 id="results-of-data-preparation" tabindex="-1"><a class="observablehq-header-anchor" href="#results-of-data-preparation">Results of Data Preparation</a></h2>
-<p>The result of this extensive preprocessing effort is a streamlined and structured dataset, ready for analysis. From over thirty original columns, we now have a concise, coherent dataset with fourteen well-curated fields.</p>
-<h3 id="geodata-integration" tabindex="-1"><a class="observablehq-header-anchor" href="#geodata-integration">Geodata Integration</a></h3>
+<h3 id="datasets-sources" tabindex="-1"><a class="observablehq-header-anchor" href="#datasets-sources">Datasets sources</a></h3>
+<p><a href="https://catalog.data.gov/dataset/crime-data-from-2010-to-2019" target="_blank" rel="noopener noreferrer">LAPD Crime Data from 2010 to 2019</a></p>
+<p><a href="https://catalog.data.gov/dataset/crime-data-from-2020-to-present" target="_blank" rel="noopener noreferrer">LAPD Crime Data from 20120 to Present</a></p>
 <p><a href="https://geohub.lacity.org/datasets/lahub::lapd-divisions/explore?location=34.018933%252C-118.410104%252C9.68" target="_blank" rel="noopener noreferrer">LAPD Geographic Area</a></p>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./Victims"><span>Victims demographic groups</span></a></nav>
+<nav><a rel="prev" href="./Victims"><span>Victims demographic groups</span></a><a rel="next" href="./team"><span>Team</span></a></nav>
 <div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
 </footer>
 </div>

@@ -1,4 +1,4 @@
-import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
+import * as Plot from "../../_npm/@observablehq/plot@0.6.16/6fc5a277.js";
 import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
 export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
@@ -42,6 +42,8 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
 
 
     return Plot.plot({
+        title: "A Year in Crime: Monthly Trends (2010–2023)",
+        subtitle: "Tracing each month’s highs and lows: the factors behind them",
         height: 650,
         width: width,
         marginBottom: 50,

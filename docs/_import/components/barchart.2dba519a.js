@@ -1,4 +1,4 @@
-import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
+import * as Plot from "../../_npm/@observablehq/plot@0.6.16/6fc5a277.js";
 import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
 export function BarChart(yearlyCrimes, colorScale, {width} = {}) {
@@ -8,8 +8,8 @@ export function BarChart(yearlyCrimes, colorScale, {width} = {}) {
 
     // Bar Chart: Creazione
     return Plot.plot({
-        title: "Increasing of the crime trends over the years [2010-2023]",
-        subtitle: "Deviation from the average crimes (" + averageCrimes.toFixed(0) + ")",
+        title: "Above or Below the Norm? LA Crime Deviations from the Average (2010–2023)",
+        subtitle: "Where do the biggest divergences occur, and what might explain them?",
         height: 200,
         width: width,
         marginTop: 20,
@@ -28,7 +28,15 @@ export function BarChart(yearlyCrimes, colorScale, {width} = {}) {
                 tip: true
             }),
             // Linea della media
-            Plot.ruleY([0], {stroke: "lightgrey", strokeWidth: 1, strokeDasharray: "4 4", title: "Average"})
+            Plot.ruleY([0], {stroke: "lightgrey", strokeWidth: 1, title: "Average"}),
+            Plot.text([`AVG: ${averageCrimes.toLocaleString("en-EN").split(".")[0]}`], {
+                x: "2024", // Posizionamento al centro
+                y: -4000, // Posizionamento sotto l'asse
+                textAnchor: "middle",
+                //dy: "5em", // Offset verticale per migliorare il posizionamento
+                fill: "white",
+                fontSize: 12
+            })
         ]
     });
 }

@@ -7,16 +7,19 @@
 <title>Los Angeles Crime Analysis | Los Angeles&#x27;s Crime</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="preload" as="style" href="./_observablehq/theme-slate,alt.e5c66b79.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
-<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt.e5c66b79.css">
+<link rel="modulepreload" href="./_observablehq/client.3209cb3c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
-<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
-<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
-<link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
-<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/a62ae5ce.js">
+<link rel="modulepreload" href="./_import/components/linechart.863d3bd6.js">
+<link rel="modulepreload" href="./_import/components/barchart.2dba519a.js">
+<link rel="modulepreload" href="./_import/components/timeline.1a1f4221.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/3f7f119a.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/6fc5a277.js">
+<link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
 <link rel="modulepreload" href="./_npm/d3-axis@3.0.0/d44feff9.js">
 <link rel="modulepreload" href="./_npm/d3-brush@3.0.0/5830b12a.js">
@@ -26,7 +29,6 @@
 <link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/00c41b5d.js">
 <link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/b5f7cdc6.js">
 <link rel="modulepreload" href="./_npm/d3-drag@3.0.0/b22c5864.js">
-<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_npm/d3-ease@3.0.1/6f15f633.js">
 <link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/ef1ec490.js">
 <link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e1ff060.js">
@@ -47,46 +49,95 @@
 <link rel="modulepreload" href="./_npm/d3-timer@3.0.1/f31b5398.js">
 <link rel="modulepreload" href="./_npm/d3-transition@3.0.1/8debb4ba.js">
 <link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/4b0cc581.js">
-<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/1ee6c50d.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/a62ae5ce.js">
+<link rel="modulepreload" href="./_node/d3-array@3.2.4/index.f89e3560.js">
+<link rel="modulepreload" href="./_node/d3-axis@3.0.0/index.34ded868.js">
+<link rel="modulepreload" href="./_node/d3-brush@3.0.0/index.1c3fc471.js">
+<link rel="modulepreload" href="./_node/d3-chord@3.0.1/index.9b04aad8.js">
+<link rel="modulepreload" href="./_node/d3-color@3.1.0/index.e8c126ff.js">
+<link rel="modulepreload" href="./_node/d3-contour@4.0.2/index.0d0783e1.js">
+<link rel="modulepreload" href="./_node/d3-delaunay@6.0.4/index.1771ba9f.js">
+<link rel="modulepreload" href="./_node/d3-dispatch@3.0.1/index.be49ca5f.js">
+<link rel="modulepreload" href="./_node/d3-drag@3.0.0/index.8e5f73cc.js">
+<link rel="modulepreload" href="./_node/d3-dsv@3.0.1/index.a1fe4c7b.js">
+<link rel="modulepreload" href="./_node/d3-ease@3.0.1/index.09153f73.js">
+<link rel="modulepreload" href="./_node/d3-fetch@3.0.1/index.e91238ad.js">
+<link rel="modulepreload" href="./_node/d3-force@3.0.0/index.952bd793.js">
+<link rel="modulepreload" href="./_node/d3-format@3.1.0/index.75f84505.js">
+<link rel="modulepreload" href="./_node/d3-geo@3.1.1/index.75f0ca91.js">
+<link rel="modulepreload" href="./_node/d3-hierarchy@3.1.2/index.0a013d9a.js">
+<link rel="modulepreload" href="./_node/d3-interpolate@3.0.1/index.7ed7c7fe.js">
+<link rel="modulepreload" href="./_node/d3-path@3.1.0/index.c2b3c473.js">
+<link rel="modulepreload" href="./_node/d3-polygon@3.0.1/index.b64a6d51.js">
+<link rel="modulepreload" href="./_node/d3-quadtree@3.0.1/index.e9fed2eb.js">
+<link rel="modulepreload" href="./_node/d3-random@3.0.1/index.fd2cc361.js">
+<link rel="modulepreload" href="./_node/d3-scale@4.0.2/index.61617510.js">
+<link rel="modulepreload" href="./_node/d3-scale-chromatic@3.1.0/index.7961cbed.js">
+<link rel="modulepreload" href="./_node/d3-selection@3.0.0/index.13204b25.js">
+<link rel="modulepreload" href="./_node/d3-shape@3.2.0/index.b551bc1c.js">
+<link rel="modulepreload" href="./_node/d3-time@3.1.0/index.8fcc123e.js">
+<link rel="modulepreload" href="./_node/d3-time-format@4.1.0/index.20c5f3ca.js">
+<link rel="modulepreload" href="./_node/d3-timer@3.0.1/index.0ee6092b.js">
+<link rel="modulepreload" href="./_node/d3-transition@3.0.1/index.d140d658.js">
+<link rel="modulepreload" href="./_node/d3-zoom@3.0.0/index.0e732a91.js">
 <link rel="modulepreload" href="./_npm/internmap@2.0.3/5eed35fd.js">
 <link rel="modulepreload" href="./_npm/delaunator@5.0.1/e67acb27.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/1ee6c50d.js">
+<link rel="modulepreload" href="./_node/internmap@2.0.3/index.4106013c.js">
+<link rel="modulepreload" href="./_node/delaunator@5.0.1/index.70ae1478.js">
 <link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/8ac9039b.js">
+<link rel="modulepreload" href="./_node/robust-predicates@3.0.2/index.bdc459cc.js">
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.55fa937c.js";
+import {define} from "./_observablehq/client.3209cb3c.js";
+import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
-define({id: "7935742a", mode: "inline", inputs: ["resize","Plot","aapl","display"], body: async (resize,Plot,aapl,display) => {
+registerFile("./data/la_events.json", {"name":"./data/la_events.json","mimeType":"application/json","path":"./_file/data/la_events.7202b264.json","lastModified":1734613047545,"size":827});
+registerFile("./data/yearly_monthly_crime_summary.csv", {"name":"./data/yearly_monthly_crime_summary.csv","mimeType":"text/csv","path":"./_file/data/yearly_monthly_crime_summary.bea7561c.csv","lastModified":1734953288512,"size":5932});
+
+define({id: "7eb62b89", outputs: ["LineChart","BarChart","timeline"], body: async () => {
+const [{LineChart}, {BarChart}, {timeline}] = await Promise.all([import("./_import/components/linechart.863d3bd6.js"), import("./_import/components/barchart.2dba519a.js"), import("./_import/components/timeline.1a1f4221.js")]);
+
+return {LineChart,BarChart,timeline};
+}});
+
+define({id: "a6e3c60f", inputs: ["FileAttachment"], outputs: ["data","events"], body: (FileAttachment) => {
+// Caricamento dati
+const data = FileAttachment("./data/yearly_monthly_crime_summary.csv").csv({ typed: true });
+const events = FileAttachment("./data/la_events.json").json();
+return {data,events};
+}});
+
+define({id: "e537bdd2", inputs: ["d3","data"], outputs: ["yearlyCrimes","colorScale"], body: (d3,data) => {
+// Aggregazione dei dati annuali per il barchart
+const yearlyCrimes = d3.rollup(
+  data,
+  (v) => d3.sum(v, (d) => d.MonthlyCrimeCount),
+  (d) => d.Year
+);
+
+// Creazione del gradiente di colori per i valori
+const colorScale = d3.scaleSequential(d3.interpolateReds).domain(d3.extent([...yearlyCrimes.values()]));
+return {yearlyCrimes,colorScale};
+}});
+
+define({id: "150d98c7", mode: "inline", inputs: ["resize","BarChart","yearlyCrimes","colorScale","display"], body: async (resize,BarChart,yearlyCrimes,colorScale,display) => {
 display(await(
-    resize((width) => Plot.plot({
-      title: "Your awesomeness over time 🚀",
-      subtitle: "Up and to the right!",
-      width,
-      y: {grid: true, label: "Awesomeness"},
-      marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(aapl, {x: "Date", y: "Close", tip: true})
-      ]
-    }))
-  
+resize((width) => BarChart(yearlyCrimes, colorScale, {width}))
 ))
 }});
 
-define({id: "699041c1", mode: "inline", inputs: ["resize","Plot","penguins","display"], body: async (resize,Plot,penguins,display) => {
+define({id: "34ea6c8c", mode: "inline", inputs: ["resize","LineChart","data","yearlyCrimes","colorScale","display"], body: async (resize,LineChart,data,yearlyCrimes,colorScale,display) => {
 display(await(
-    resize((width) => Plot.plot({
-      title: "How big are penguins, anyway? 🐧",
-      width,
-      grid: true,
-      x: {label: "Body mass (g)"},
-      y: {label: "Flipper length (mm)"},
-      color: {legend: true},
-      marks: [
-        Plot.linearRegressionY(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species"}),
-        Plot.dot(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species", tip: true})
-      ]
-    }))
-  
+resize((width) => LineChart(data, yearlyCrimes, colorScale, {width}))
+))
+}});
+
+define({id: "6cd72486", mode: "inline", inputs: ["resize","timeline","events","data","display"], body: async (resize,timeline,events,data,display) => {
+display(await(
+resize((width) => timeline(events, data, {width}))
 ))
 }});
 
@@ -103,10 +154,10 @@ display(await(
   <section>
     <summary></summary>
     <ol>
-    <li class="observablehq-link"><a href="./ProblemOverview">Problem overview</a></li>
     <li class="observablehq-link"><a href="./DistrictCrimeOverview">LAPD District</a></li>
     <li class="observablehq-link"><a href="./Victims">Victims demographic groups</a></li>
     <li class="observablehq-link"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
+    <li class="observablehq-link"><a href="./team">Team</a></li>
     </ol>
   </section>
 </nav>
@@ -116,51 +167,55 @@ display(await(
 <nav>
 <div>Contents</div>
 <ol>
-<li class="observablehq-secondary-link"><a href="#next-steps">Next steps</a></li>
+<li class="observablehq-secondary-link"><a href="#rising-tide-of-crime">Rising Tide of Crime:</a></li>
+<li class="observablehq-secondary-link"><a href="#looking-ahead">Looking Ahead</a></li>
 </ol>
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
 <!-- CSS Style file reference -->
-<link rel="stylesheet" href="./_file/style.a6630056.css">
+<link rel="stylesheet" href="./_file/style.b96b6db5.css">
 <div class="hero">
   <h1>Los Angeles Crime</h1>
-  <h2>Welcome to your new app! Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
-  <a href="https://observablehq.com/framework/getting-started" target="_blank" rel="noopener noreferrer">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a>
-</div>
-<div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
-  <div class="card"><observablehq-loading></observablehq-loading><!--:7935742a:--></div>
-  <div class="card"><observablehq-loading></observablehq-loading><!--:699041c1:--></div>
+  <h2>How economic shifts, legislative reforms, and unprecedented events have shaped LA’s crime landscape over the last decade.</h2>
 </div>
 <hr>
-<h2 id="next-steps" tabindex="-1"><a class="observablehq-header-anchor" href="#next-steps">Next steps</a></h2>
-<p>Here are some ideas of things you could try…</p>
-<div class="grid grid-cols-4">
+<h2 id="rising-tide-of-crime" tabindex="-1"><a class="observablehq-header-anchor" href="#rising-tide-of-crime">Rising Tide of Crime:</a></h2>
+<h3 id="a-deep-dive-into-los-angeles-crime-trends-2010-2023" tabindex="-1"><a class="observablehq-header-anchor" href="#a-deep-dive-into-los-angeles-crime-trends-2010-2023">A Deep Dive into Los Angeles Crime Trends (2010–2023)</a></h3>
+<div class="observablehq observablehq--block"><!--:7eb62b89:--></div>
+<div class="observablehq observablehq--block"><!--:a6e3c60f:--></div>
+<div class="observablehq observablehq--block"><!--:e537bdd2:--></div>
+<div class="grid grid-cols-1">
+Los Angeles has long been a mirror for nationwide debates on policing, social services, and economic justice. This article marks the first of three parts, taking us through the data on citywide crimes between 2010 and 2023. Upcoming pages will focus on the geographical distribution and timing of crimes, as well as deeper social dimensions, including victim demographics.<br>
+In this initial overview, we reveal broad trends, seeing how some years defy the norm, how the city’s monthly rhythms shift crime patterns, and which pivotal events may have nudged these numbers up or down. Whether driven by economic stresses, policy changes, or global crises, these statistics hold valuable lessons on the forces that shape city life.<br><br>
+Here, each year’s deviation from the long‐term citywide average (about 213,374 crimes) jumps out in bold. 2013 and 2014 fall sharply below the mean, offering hints that some combination of improved economic conditions or targeted policing strategies temporarily subdued criminal behavior. By contrast, 2016, 2017, and 2018 show pronounced spikes, each well above the average, an uptick that some commentators link to easing of certain penalties and the resulting shifts in law enforcement tactics.<br>
+Interestingly, 2020 records a moderate dip, likely owing to COVID‐19 restrictions and stay‐at‐home orders; yet 2022 and 2023 see renewed climbs, suggesting that once lockdowns eased and normal life resumed, underlying issues such as rising poverty and social tensions reasserted their influence.
+</div>
+<div class="grid grid-cols-1">
   <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot" target="_blank" rel="noopener noreferrer"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files" target="_blank" rel="noopener noreferrer"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript#resize(render)" target="_blank" rel="noopener noreferrer"><code>resize</code></a>.
-  </div>
-  <div class="card">
-    Create a <a href="https://observablehq.com/framework/project-structure" target="_blank" rel="noopener noreferrer">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>src</code> folder.
-  </div>
-  <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select" target="_blank" rel="noopener noreferrer"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
-  </div>
-  <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders" target="_blank" rel="noopener noreferrer">data loader</a> that queries a local database or API, generating a data snapshot on build.
-  </div>
-  <div class="card">
-    Import a <a href="https://observablehq.com/framework/imports" target="_blank" rel="noopener noreferrer">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet" target="_blank" rel="noopener noreferrer">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot" target="_blank" rel="noopener noreferrer">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex" target="_blank" rel="noopener noreferrer">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb" target="_blank" rel="noopener noreferrer">DuckDB</a>.
-  </div>
-  <div class="card">
-    Ask for help, or share your work or ideas, on our <a href="https://github.com/observablehq/framework/discussions" target="_blank" rel="noopener noreferrer">GitHub discussions</a>.
-  </div>
-  <div class="card">
-    Visit <a href="https://github.com/observablehq/framework" target="_blank" rel="noopener noreferrer">Framework on GitHub</a> and give us a star. Or file an issue if you’ve found a bug!
+    <observablehq-loading></observablehq-loading><!--:150d98c7:-->
+    <observablehq-loading></observablehq-loading><!--:34ea6c8c:-->
   </div>
 </div>
-</main>
+<div class="grid grid-cols-1">
+The lines in this visualization showcase the cyclical nature of crime across the calendar year. Many years register a steep dip in February, possibly reflecting increased police presence after the holiday season or simply the lull before spring activity ramps up. Summers, especially in years like 2022, tend to surge past the 20,000‐crime mark, aligning with higher foot traffic, tourism, and broader economic pressures.<br><br>
+Notably, 2020 stands out with a sharper decline during early spring, coinciding with strict lockdowns that kept many people at home. As restrictions loosened, some forms of crime rebounded, emphasizing how external conditions can heavily shape the rhythm of criminal activity.
+</div>
+<div class="grid grid-cols-1">
+  <div class="card"><observablehq-loading></observablehq-loading><!--:6cd72486:--></div>
+</div>
+<div class="grid grid-cols-1">
+Policy reforms, such as Proposition 57 and new rehabilitation programs, both reflect and contribute to shifting crime rates. Early legislative measures introduced around 2016–2017 coincided with a bump in recorded incidents, as the city negotiated new approaches to sentencing and parole.<br><br>
+When COVID‐19 hit in 2020, crime numbers initially dropped, a correlation easily spotted on the chart. However, a series of other stressors soon emerged: rising homelessness, intensifying gang conflicts, and debates over police funding. By 2022, these factors contributed to heightened volatility, before tapering slightly as COVID‐19 restrictions ended in 2023.
+</div>
+<h2 id="looking-ahead" tabindex="-1"><a class="observablehq-header-anchor" href="#looking-ahead">Looking Ahead</a></h2>
+<div class="grid grid-cols-1">
+Los Angeles’ crime story from 2010 to 2023 shows a tapestry of policy reforms, social programs, and disruptive events shaping the city’s safety landscape. Many fluctuations align with local legislation or major incidents, from rehabilitation initiatives to a global pandemic; indicating how deeply external forces can mold criminal activity.<br><br>
+But this is only the beginning. In our next installment, we’ll zoom in on how crime varies by neighborhood, examining the stark contrasts across diverse areas of LA, and the significance of day‐night patterns. From there, our final page broadens the lens to explore the social challenges behind the numbers, comparing victim demographics by ethnicity, gender, and age; analyzing how broader socio‐political climates influenced who was most at risk.<br><br>
+Throughout the 2010s and early 2020s, news headlines were filled with discussions of rising housing costs, changing policing strategies, and debates over systemic inequality. Each facet has woven itself into LA’s crime narrative. By reading this data in tandem with real‐world events, we gain a clearer view of not just the statistics, but the human stories they represent—stories that continue to unfold as the city carves its path forward.
+</div></main>
 <footer id="observablehq-footer">
-<nav><a rel="next" href="./ProblemOverview"><span>Problem overview</span></a></nav>
+<nav><a rel="next" href="./DistrictCrimeOverview"><span>LAPD District</span></a></nav>
 <div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
 </footer>
 </div>

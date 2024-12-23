@@ -153,7 +153,7 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
     legendGroup.append("text")
         .attr("x", 0)
         .attr("y", -10)
-        .text("District Index")
+        .text("District's Crime Index")
         .style("font-size", "12px")
         .style("fill", "#fff")
         .style("font-weight", "bold");

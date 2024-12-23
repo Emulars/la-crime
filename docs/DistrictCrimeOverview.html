@@ -7,21 +7,22 @@
 <title>LAPD Crime Districts Overview | Los Angeles&#x27;s Crime</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide.67ad1980.css">
 <link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide,wide.67ad1980.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide.67ad1980.css">
 <link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
-<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
+<link rel="modulepreload" href="./_observablehq/client.3209cb3c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
 <link rel="modulepreload" href="./_import/components/inputs/yearSelector.8f3e891b.js">
-<link rel="modulepreload" href="./_import/components/inputs/dropdown.61ad3252.js">
-<link rel="modulepreload" href="./_import/components/choropleth.652b3adb.js">
-<link rel="modulepreload" href="./_import/components/scatter.525f2032.js">
-<link rel="modulepreload" href="./_import/components/lineChartCrimeIndex.6302b50d.js">
+<link rel="modulepreload" href="./_import/components/inputs/dropdown.01ed81c6.js">
+<link rel="modulepreload" href="./_import/components/choropleth.c8db77a2.js">
+<link rel="modulepreload" href="./_import/components/scatter.2b2415a0.js">
+<link rel="modulepreload" href="./_import/components/lineChartCrimeIndex.67e6014c.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.d397b6a8.js">
 <link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/6fc5a277.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/063eb405.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
@@ -55,22 +56,57 @@
 <link rel="modulepreload" href="./_node/d3-timer@3.0.1/index.0ee6092b.js">
 <link rel="modulepreload" href="./_node/d3-transition@3.0.1/index.d140d658.js">
 <link rel="modulepreload" href="./_node/d3-zoom@3.0.0/index.0e732a91.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/3f7f119a.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/a62ae5ce.js">
 <link rel="modulepreload" href="./_node/internmap@2.0.3/index.4106013c.js">
 <link rel="modulepreload" href="./_node/delaunator@5.0.1/index.70ae1478.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/d44feff9.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/5830b12a.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/84d7b8e9.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/2c0cdfa2.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/626bedc4.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/00c41b5d.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/b5f7cdc6.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/b22c5864.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/6f15f633.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/ef1ec490.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e1ff060.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/5851d7ef.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/dcd02767.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/f1db2593.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/034b7bcb.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/4bb53638.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/bbafde58.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/aa5b35a8.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/32c7fec2.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/567840a0.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/cf9b720b.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/5dcd62f4.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/f8e03c56.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/5bc129e1.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/19c92b44.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/f31b5398.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/8debb4ba.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/4b0cc581.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/1ee6c50d.js">
 <link rel="modulepreload" href="./_node/robust-predicates@3.0.2/index.bdc459cc.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/5eed35fd.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/e67acb27.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/8ac9039b.js">
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.55fa937c.js";
+import {define} from "./_observablehq/client.3209cb3c.js";
 import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
-registerFile("./data/LAPD_Division_5922489107755548254.geojson", {"name":"./data/LAPD_Division_5922489107755548254.geojson","mimeType":"application/geo+json","path":"./_file/data/LAPD_Division_5922489107755548254.bda8ccd5.geojson","lastModified":1734342471535,"size":705759});
-registerFile("./data/LAPD_Division_IDs.json", {"name":"./data/LAPD_Division_IDs.json","mimeType":"application/json","path":"./_file/data/LAPD_Division_IDs.6ba6ea27.json","lastModified":1734613208124,"size":778});
-registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.669ea11e.csv","lastModified":1734685011773,"size":15893});
-registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.5d2c449a.csv","lastModified":1734685011786,"size":453600});
+registerFile("./data/LAPD_Division_5922489107755548254.geojson", {"name":"./data/LAPD_Division_5922489107755548254.geojson","mimeType":"application/geo+json","path":"./_file/data/LAPD_Division_5922489107755548254.bda8ccd5.geojson","lastModified":1734426807274,"size":705759});
+registerFile("./data/LAPD_Division_IDs.json", {"name":"./data/LAPD_Division_IDs.json","mimeType":"application/json","path":"./_file/data/LAPD_Division_IDs.a179279a.json","lastModified":1734952127368,"size":819});
+registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.fb2e067c.csv","lastModified":1734953288514,"size":15753});
+registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.5d2c449a.csv","lastModified":1734953288527,"size":453600});
 
 define({id: "4a3d4ec1", outputs: ["viewSlider","dropdown","choroplethMap","scatterPlot","lineChartCrimeIndex","MIN_YEAR","MAX_YEAR"], body: async () => {
-const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}, {lineChartCrimeIndex}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.61ad3252.js"), import("./_import/components/choropleth.652b3adb.js"), import("./_import/components/scatter.525f2032.js"), import("./_import/components/lineChartCrimeIndex.6302b50d.js")]);
+const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}, {lineChartCrimeIndex}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.01ed81c6.js"), import("./_import/components/choropleth.c8db77a2.js"), import("./_import/components/scatter.2b2415a0.js"), import("./_import/components/lineChartCrimeIndex.67e6014c.js")]);
 // Import and CONSTANTS
 
 const MIN_YEAR = 2010;
@@ -87,10 +123,9 @@ const data_scatter = FileAttachment("./data/hourly_crime_analysis.csv").csv({ ty
 return {data,lapd_division_ids,lapd_division_map,data_scatter};
 }});
 
-define({id: "bfd0837d", inputs: ["lapd_division_ids"], outputs: ["divisionNames"], body: (lapd_division_ids) => {
+define({id: "9a0983aa", inputs: ["lapd_division_ids"], outputs: ["divisionNames"], body: (lapd_division_ids) => {
 // Extract division names for the dropdown options
 const divisionNames = lapd_division_ids.map(division => division.name);
-divisionNames.push("All Districts");
 return {divisionNames};
 }});
 
@@ -109,6 +144,18 @@ return {divisionSelector};
 define({id: "515214f6", mode: "inline", inputs: ["resize","choroplethMap","lapd_division_map","lapd_division_ids","data","selectedYear","divisionSelector","display"], body: async (resize,choroplethMap,lapd_division_map,lapd_division_ids,data,selectedYear,divisionSelector,display) => {
 display(await(
 resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))
+))
+}});
+
+define({id: "412119be", mode: "inline", inputs: ["selectedYear","display"], body: async (selectedYear,display) => {
+display(await(
+selectedYear
+))
+}});
+
+define({id: "a4d1f408", mode: "inline", inputs: ["divisionSelector","display"], body: async (divisionSelector,display) => {
+display(await(
+divisionSelector
 ))
 }});
 
@@ -137,10 +184,10 @@ resize((width) => lineChartCrimeIndex(data, {width, height: 600}))
   <section class="observablehq-section-active">
     <summary></summary>
     <ol>
-    <li class="observablehq-link"><a href="./ProblemOverview">Problem overview</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./DistrictCrimeOverview">LAPD District</a></li>
     <li class="observablehq-link"><a href="./Victims">Victims demographic groups</a></li>
     <li class="observablehq-link"><a href="./dataPreparation">Data cleaning and Preparation</a></li>
+    <li class="observablehq-link"><a href="./team">Team</a></li>
     </ol>
   </section>
 </nav>
@@ -148,14 +195,45 @@ resize((width) => lineChartCrimeIndex(data, {width, height: 600}))
 <div id="observablehq-center">
 <aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
 <nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#mapping-l-a-s-crime-hotspots">“Mapping L.A.’s Crime Hotspots”</a></li>
+<li class="observablehq-secondary-link"><a href="#crimes-by-the-clock-daytime-vs-nighttime-trends">“Crimes by the Clock: Daytime vs. Nighttime Trends”</a></li>
+<li class="observablehq-secondary-link"><a href="#from-2010-to-now-charting-a-decade-of-change">“From 2010 to Now: Charting a Decade of Change”</a></li>
+<li class="observablehq-secondary-link"><a href="#a-closer-look-at-who-lives-in-each-district">A Closer Look at Who Lives in Each District</a></li>
+</ol>
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
-<h1 id="lapd-crime-districts-overview" tabindex="-1"><a class="observablehq-header-anchor" href="#lapd-crime-districts-overview">LAPD Crime Districts Overview</a></h1>
+<!-- CSS Style file reference -->
+<link rel="stylesheet" href="./_file/style.b96b6db5.css">
+<h1 id="a-glimpse-into-the-districts-and-their-changing-faces" tabindex="-1"><a class="observablehq-header-anchor" href="#a-glimpse-into-the-districts-and-their-changing-faces">A Glimpse into the Districts and Their Changing Faces</a></h1>
 <div class="observablehq observablehq--block"><!--:4a3d4ec1:--></div>
 <div class="observablehq observablehq--block"><!--:40390f7e:--></div>
-<div class="observablehq observablehq--block"><!--:bfd0837d:--></div>
-<p><i>Year selector for the maps below</i></p>
+<div class="observablehq observablehq--block"><!--:9a0983aa:--></div>
+<div class="grid grid-cols-1">
+Los Angeles is not just one city but a multitude of communities coexisting side by side. From the star-studded streets of Hollywood to the bustling neighborhoods of Central and Rampart, L.A.’s crime mosaic spans every district. Which crimes are prevalent in Hollywood? Which hours of the day pose greater safety risks? And which districts have undergone the steepest rises or drops in crime over the years?<br>
+</div>
+<i>Methodological Note</i>
+<div class="grid grid-cols-1">
+The Crime Index used in these visualizations is a composite measure that integrates two key components:<br>
+1) Weighted Crime Index, which assigns greater weight to more violent and serious crimes.
+<br>
+2) Crime Density, i.e., the number of crimes per square kilometer.
+<br>
+<br>
+By blending these two, we aim for a balanced comparison between neighborhoods that differ in size and population.
+</div>
+<div class="grid grid-cols-1">
+Los Angeles is ever-changing, and its crime patterns shift accordingly across different neighborhoods. Statistics show that each district has its own criminal “DNA,” with distinct crime types, peak hours, and historical trajectories that can vary significantly
+<br>
+</div>
+<h2 id="mapping-l-a-s-crime-hotspots" tabindex="-1"><a class="observablehq-header-anchor" href="#mapping-l-a-s-crime-hotspots">“Mapping L.A.’s Crime Hotspots”</a></h2>
+<div class="grid grid-cols-1">
+The map before you illustrates each area’s Crime Index, a standardized indicator of “danger level”.<br> Under the hood, Weighted Crime Index factors in the severity of each crime type (e.g., violent crimes carry a higher weight than petty theft) and its frequency, while Crime Density measures how many crimes occur per square kilometer. A high danger_index, therefore, can reflect either a large volume of less-severe crimes, a smaller volume of very severe crimes—or both.<br>
+Notice how districts such as Olympic and Rampart show higher indices, suggesting a mix of highly severe crime types and high population density. This heatmap not only pinpoints trouble spots but also highlights that crime isn’t uniformly distributed across Los Angeles.<br>
+</div>
+<div class="grid grid-cols-1">For a more in detail look at the crime index computation and its components, check out the <a href="https://emulars.github.io/la-crime/dataPreparation#introduction-of-the-crime-relevance-column" target="_blank" rel="noopener noreferrer">Crime Index Calculation<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a></div>
 <div class="grid grid-cols-2">
   <div class="card">
 <div class="observablehq observablehq--block"><!--:fe45e5e9:--></div>
@@ -165,35 +243,47 @@ resize((width) => lineChartCrimeIndex(data, {width, height: 600}))
   </div>
 </div>
 <div class="grid grid-cols-2">
-  <div class="card"><observablehq-loading></observablehq-loading><!--:515214f6:--></div>
-  <div class="card"><observablehq-loading></observablehq-loading><!--:c96fef3a:--></div>
+  <div class="card">
+    <h2>Crime Hotspots Revealed:</h2>
+    <h3><em>A District-by-District Look at the City’s Crime Index</em></h3> 
+    <br>
+    <observablehq-loading></observablehq-loading><!--:515214f6:-->
+  </div>
+  <div class="card">
+    <h2>Clocking Crime:</h2>
+    <h3><em>A <observablehq-loading></observablehq-loading><!--:412119be:--> Hour-by-Hour Look at Offenses and Weapon Use in <observablehq-loading></observablehq-loading><!--:a4d1f408:--></em></h3> 
+    <br>
+    <observablehq-loading></observablehq-loading><!--:c96fef3a:-->
+  </div>
 </div>
-<p><i>(Bozza) - Districts' crime index trend over the years</i></p>
+<h2 id="crimes-by-the-clock-daytime-vs-nighttime-trends" tabindex="-1"><a class="observablehq-header-anchor" href="#crimes-by-the-clock-daytime-vs-nighttime-trends">“Crimes by the Clock: Daytime vs. Nighttime Trends”</a></h2>
 <div class="grid grid-cols-1">
-  <div class="card"><observablehq-loading></observablehq-loading><!--:3e6f50b0:--></div>
+Ever wondered if there’s truly a “witching hour” for crime? According to the chart that breaks down offenses by hour of the day, the answer may surprise you. While the highest peaks tend to cluster in the late afternoon (12–18) and early evening hours (18–6), the morning slot (6–12) still shows a significant volume of reported incidents—often around 8,000 to 9,000 crimes on average.<br>
+Interestingly, however, some of the frequent spikes—such as the one around noon—may not stem from a genuine surge in criminal activity. Instead, they can be attributed to officers changing shifts, as they often log all reported incidents together just before clocking out. This administrative practice can artificially inflate numbers at certain times of day, underscoring the importance of reading the data with an eye toward operational factors as well as actual crime trends.
 </div>
-<div class="card">
-  <h3>Crime Index Computation</h3>
-  <p>The crime index is a composite measure designed to represent the relative danger level of different districts. It combines two key components:</p>
-  <ul>
-    <li><strong>Weighted Crime Index:</strong> This considers the severity and frequency of each crime type, computed as the weighted sum of crimes divided by the maximum weighted crime value in the dataset.</li>
-    <li><strong>Crime Density:</strong> The total number of crimes in a district divided by its area in square kilometers.</li>
-  </ul>
-  <p>The final index is calculated using the formula:</p>
-  <pre>  danger_index = (alpha * weighted_crime_index) + (beta * crime_density)
-  </pre>
-  <p>Where:</p>
-  <ul>
-    <li><code>alpha</code> and <code>beta</code> are coefficients that adjust the importance of each component. Currently, <code>alpha</code> is set to 0.6 and <code>beta</code> is set to 0.4.</li>
-    <li><code>crime_severity</code> is a dictionary mapping crime types to their severity values.</li>
-    <li><code>crime_count</code> is a dictionary mapping crime types to their frequencies in the district.</li>
-    <li><code>area</code> is the district area in square kilometers.</li>
-  </ul>
-  <p>The computed indices are normalized across districts to facilitate comparison.</p>
+<h2 id="from-2010-to-now-charting-a-decade-of-change" tabindex="-1"><a class="observablehq-header-anchor" href="#from-2010-to-now-charting-a-decade-of-change">“From 2010 to Now: Charting a Decade of Change”</a></h2>
+<div class="grid grid-cols-1">
+No city stays the same for long, and that is especially true for Los Angeles. The line chart tracking the Crime Index over time is a testament to how certain areas have experienced slow and steady declines, while others have skyrocketed—due to shifts in local populations, policing strategies, and social factors.<br>
+By examining these lines together, we see how each district’s story is intertwined yet unique—revealing the city’s crime narrative on a grand scale. The interplay between Weighted Crime Index and Crime Density helps explain why even districts with fewer total crimes can still have a higher Danger Index if those offenses are more severe.
 </div>
+<div class="grid grid-cols-1">
+  <div class="card">
+    <h2>13 Years of Crime Trends:</h2>
+    <h3><em>Tracking Each District's Rising and Falling Index from 2010–2023</em></h3> 
+    <br>
+    <observablehq-loading></observablehq-loading><!--:3e6f50b0:-->
+  </div>
+</div>
+<div class="grid grid-cols-1">
+One key insight is how local factors drive these trends. A district with fewer total crimes can still score high if those crimes are more severe, reflecting the weighting in the Crime Index. Moreover, changes in policing strategies or demographic shifts can bring sudden inflections in the graph. Observe how Central and Rampart sometimes converge or diverge in the timeline, hinting at broader forces, such as new housing developments, gentrification, or targeted law enforcement campaigns, that reshape the crime landscape. Ultimately, these lines underscore the reality that Los Angeles is in constant flux, with each district writing its own chapter in the city’s ongoing story of crime and community.
+</div>
+<h2 id="a-closer-look-at-who-lives-in-each-district" tabindex="-1"><a class="observablehq-header-anchor" href="#a-closer-look-at-who-lives-in-each-district">A Closer Look at Who Lives in Each District</a></h2>
+<div class="grid grid-cols-1"> Los Angeles is known for its immense diversity, and each district’s demographic makeup can shed light on the nuances of crime data. For instance, Rampart, known for a higher Crime Index—also has one of the highest percentages of Hispanic residents (60%). Meanwhile, Central Division houses a more even mix of ethnic groups, with around 27% Black residents, 14% Asian, and a notable 38% Hispanic population. These demographic patterns may intersect with economic, cultural, or linguistic factors that influence both the types of crimes reported and how communities respond to policing.<br><br> This lens helps us see that a high Crime Index isn’t just a numeric label—it impacts a unique mosaic of communities. It also prompts important questions: Are policing policies tailored to the cultural and linguistic needs of predominantly non-English-speaking neighborhoods? Do outreach programs differ in areas where a large proportion of residents are recent immigrants? As you read on, keep in mind how population characteristics play a pivotal role in shaping a district’s social dynamics—and thus its crime profile. </div>
+<h3 id="references" tabindex="-1"><a class="observablehq-header-anchor" href="#references">References</a></h3>
+<p><a href="https://statisticalatlas.com/place/California/Los-Angeles/Race-and-Ethnicity" target="_blank" rel="noopener noreferrer">Race and Ethnicity in Los Angeles</a></p>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./ProblemOverview"><span>Problem overview</span></a><a rel="next" href="./Victims"><span>Victims demographic groups</span></a></nav>
+<nav><a rel="prev" href="./"><span>Los Angeles&#x27;s Crime</span></a><a rel="next" href="./Victims"><span>Victims demographic groups</span></a></nav>
 <div><a href="https://github.com/Emulars/la-crime" target="_blank" rel="noopener noreferrer">Source Code</a></div>
 </footer>
 </div>
