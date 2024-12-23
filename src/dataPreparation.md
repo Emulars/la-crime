@@ -58,9 +58,11 @@ This component accounts for the geographic size of districts, ensuring fair comp
 
 All of these transformations were performed using OpenRefine, a robust tool capable of handling the dataset's substantial size. OpenRefine's powerful features allowed us to address issues of inconsistency, perform sophisticated clustering operations, and manage the large-scale data with efficiency and precision.
 
-## Results of Data Preparation
+### Datasets sources
 
-The result of this extensive preprocessing effort is a streamlined and structured dataset, ready for analysis. From over thirty original columns, we now have a concise, coherent dataset with fourteen well-curated fields.
+[LAPD Crime Data from 2010 to 2019](https://catalog.data.gov/dataset/crime-data-from-2010-to-2019)
+
+[LAPD Crime Data from 20120 to Present](https://catalog.data.gov/dataset/crime-data-from-2020-to-present)
 
 ### Geodata Integration
 
