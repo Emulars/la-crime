@@ -68,8 +68,19 @@ Notice how districts such as Olympic and Rampart show higher indices, suggesting
 </div>
 
 <div class="grid grid-cols-2">
-  <div class="card">${resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))}</div>
-  <div class="card">${resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {width, height: 600}))}</div>
+  <div class="card">
+    <h2>Crime Hotspots Revealed:</h2>
+    <h3><em>A District-by-District Look at the City’s Crime Index</em></h3> 
+    </br>
+    ${resize((width) => choroplethMap(lapd_division_map, lapd_division_ids, data, selectedYear, divisionSelector, {width, height: 600}))}
+  </div>
+
+  <div class="card">
+    <h2>Clocking Crime:</h2>
+    <h3><em>A ${selectedYear} Hour-by-Hour Look at Offenses and Weapon Use in ${divisionSelector}</em></h3> 
+    </br>
+    ${resize((width) => scatterPlot(data_scatter, selectedYear, divisionSelector, {width, height: 600}))}
+  </div>
 </div>
 
 ## “Crimes by the Clock: Daytime vs. Nighttime Trends”
@@ -87,7 +98,12 @@ By examining these lines together, we see how each district’s story is intertw
 </div>
 
 <div class="grid grid-cols-1">
-  <div class="card">${resize((width) => lineChartCrimeIndex(data, {width, height: 600}))}</div>
+  <div class="card">
+    <h2>13 Years of Crime Trends:</h2>
+    <h3><em>Tracking Each District's Rising and Falling Index from 2010–2023</em></h3> 
+    </br>
+    ${resize((width) => lineChartCrimeIndex(data, {width, height: 600}))}
+  </div>
 </div>
 
 ## A Closer Look at Who Lives in Each District

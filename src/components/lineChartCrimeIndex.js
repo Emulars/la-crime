@@ -28,8 +28,14 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
         .domain([0, d3.max(data, d => d.DistrictIndex)])
         .range([chartHeight, 0]);
 
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
-        .domain([...groupedData.keys()]);
+    const colorScale = d3.scaleOrdinal()
+        .domain([...groupedData.keys()])
+        .range([
+            "#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", 
+            "#911eb4", "#46f0f0", "#f032e6", "#bcf60c", "#fabebe",
+            "#008080", "#e6beff", "#9a6324", "#fffac8", "#800000",
+            "#aaffc3", "#808000", "#ffd8b1", "#000075", "#808080"
+        ]);
 
     // Create axes
     const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));

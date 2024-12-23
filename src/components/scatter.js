@@ -93,13 +93,13 @@ export function scatterPlot(data, year, district, { width = 800, height = 500 } 
     });
 
     // Create a custom title element
-    const titleElement = document.createElement("div");
-    titleElement.style.fontSize = "18px";
-    titleElement.style.fontWeight = "bold";
-    titleElement.style.textAlign = "center";
-    titleElement.style.marginBottom = "10px";
-    titleElement.style.fontFamily = "Roboto";
-    titleElement.innerText = `Crimes by Hour in ${district} (${year})`;
+    // const titleElement = document.createElement("div");
+    // titleElement.style.fontSize = "18px";
+    // titleElement.style.fontWeight = "bold";
+    // titleElement.style.textAlign = "center";
+    // titleElement.style.marginBottom = "10px";
+    // titleElement.style.fontFamily = "Roboto";
+    // titleElement.innerText = `Crimes by Hour in ${district} (${year})`;
 
     // Create a custom red circle legend
     const customLegend = document.createElement("div");
@@ -117,7 +117,7 @@ export function scatterPlot(data, year, district, { width = 800, height = 500 } 
     const container = document.createElement("div");
     container.style.display = "flex";
     container.style.flexDirection = "column";
-    container.appendChild(titleElement); // Add the HTML title
+    // container.appendChild(titleElement); // Add the HTML title
     container.appendChild(customLegend); // Add the custom legend
     container.appendChild(plot); // Add the plot
 
