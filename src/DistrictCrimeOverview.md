@@ -31,7 +31,6 @@ const data_scatter = FileAttachment("data/hourly_crime_analysis.csv").csv({ type
 ```js
 // Extract division names for the dropdown options
 const divisionNames = lapd_division_ids.map(division => division.name);
-divisionNames.push("All Districts");
 ```
 
 <div class="grid grid-cols-1">
@@ -42,9 +41,12 @@ As you read, keep in mind that the Crime Index used throughout these visualizati
 ## “Mapping L.A.’s Crime Hotspots”
 
 <div class="grid grid-cols-1">
-The map before you illustrates each area’s Crime Index, a standardized indicator of “danger level” computed as:  <code> danger_index = (alpha * weighted_crime_index) + (beta * crime_density)</code> with α set to 0.6 and β set to 0.4. Under the hood, Weighted Crime Index factors in the severity of each crime type (e.g., violent crimes carry a higher weight than petty theft) and its frequency, while Crime Density measures how many crimes occur per square kilometer. A high danger_index, therefore, can reflect either a large volume of less-severe crimes, a smaller volume of very severe crimes—or both.<br>
-Notice how districts such as Olympic and Rampart show higher indices, suggesting a mix of highly severe crime types and high population density. This heatmap not only pinpoints trouble spots but also highlights that crime isn’t uniformly distributed across Los Angeles.
+The map before you illustrates each area’s Crime Index, a standardized indicator of “danger level”.<br> Under the hood, Weighted Crime Index factors in the severity of each crime type (e.g., violent crimes carry a higher weight than petty theft) and its frequency, while Crime Density measures how many crimes occur per square kilometer. A high danger_index, therefore, can reflect either a large volume of less-severe crimes, a smaller volume of very severe crimes—or both.<br>
+Notice how districts such as Olympic and Rampart show higher indices, suggesting a mix of highly severe crime types and high population density. This heatmap not only pinpoints trouble spots but also highlights that crime isn’t uniformly distributed across Los Angeles.<br>
 </div>
+
+<div class="grid grid-cols-1">For a more in detail look at the crime index computation and its components, check out the <a href="https://emulars.github.io/la-crime/dataPreparation#introduction-of-the-crime-relevance-column">Crime Index Calculation<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a></div>
+
 
 <div class="grid grid-cols-2">
   <div class="card">
@@ -88,9 +90,10 @@ By examining these lines together, we see how each district’s story is intertw
   <div class="card">${resize((width) => lineChartCrimeIndex(data, {width, height: 600}))}</div>
 </div>
 
-## From Districts to Demographics: Bridging Crime and Its Human Impact
+## A Closer Look at Who Lives in Each District
 
-<div class="grid grid-cols-1">
-From morning thefts in Hollywood to the sharp climb in Rampart’s crime index, each district paints a distinct picture of Los Angeles. The data underscores which districts combine both higher crime density and more severe offenses, leading to a higher overall index. At the same time, it showcases areas that have improved over the years, demonstrating that policy initiatives, community involvement, and demographic shifts can alter a district’s narrative for better or worse.<br>
-In the upcoming pages, we’ll dive deeper into specific victims demographic groups...
-</div>
+<div class="grid grid-cols-1"> Los Angeles is known for its immense diversity, and each district’s demographic makeup can shed light on the nuances of crime data. For instance, Rampart, known for a higher Crime Index—also has one of the highest percentages of Hispanic residents (60%). Meanwhile, Central Division houses a more even mix of ethnic groups, with around 27% Black residents, 14% Asian, and a notable 38% Hispanic population. These demographic patterns may intersect with economic, cultural, or linguistic factors that influence both the types of crimes reported and how communities respond to policing.<br><br> This lens helps us see that a high Crime Index isn’t just a numeric label—it impacts a unique mosaic of communities. It also prompts important questions: Are policing policies tailored to the cultural and linguistic needs of predominantly non-English-speaking neighborhoods? Do outreach programs differ in areas where a large proportion of residents are recent immigrants? As you read on, keep in mind how population characteristics play a pivotal role in shaping a district’s social dynamics—and thus its crime profile. </div>
+
+### References
+
+[Race and Ethnicity in Los Angeles](https://statisticalatlas.com/place/California/Los-Angeles/Race-and-Ethnicity)

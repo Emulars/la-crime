@@ -207,6 +207,8 @@ Women, on the other hand, present a different picture. While their overall victi
 As age increases, the data shows a drop in crimes affecting both men and women. However, those over 60 remain more vulnerable to fraud and financial crimes—evidence of how “invisible crime,” from online scams to identity theft, can target people with fixed or retirement incomes, or those less familiar with emerging forms of deception.
 <br>
 Taken together, these patterns offer valuable insights for rethinking prevention priorities. While socioeconomic and job-inclusion interventions may prove crucial for young adults, women of childbearing age require robust support against gender-based violence. Finally, seniors would benefit from financial literacy and digital assistance, helping curb their vulnerability in an increasingly “tech-driven” criminal landscape.
+</div>
+<div class="grid grid-cols-1">
   <div class="card">
   <h2>Victim Demographics: A Telling Flow of Crime’s Impact</h2>
   <h3><em>How gender, ethnicity, and age converge in shaping victimization rates <br> Clickable nodes and tooltip on links</em></h3> 

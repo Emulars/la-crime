@@ -64,6 +64,4 @@ All of these transformations were performed using OpenRefine, a robust tool capa
 
 [LAPD Crime Data from 20120 to Present](https://catalog.data.gov/dataset/crime-data-from-2020-to-present)
 
-### Geodata Integration
-
 [LAPD Geographic Area](https://geohub.lacity.org/datasets/lahub::lapd-divisions/explore?location=34.018933%2C-118.410104%2C9.68)
