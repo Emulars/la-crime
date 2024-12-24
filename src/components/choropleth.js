@@ -53,13 +53,17 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
         })
         .attr("stroke", d => {
             const crimeData = crimesByDivision.get(d.id);
-            return district_name !== "All Districts" && crimeData?.divisionName === district_name ? "#F01FD7" : "#444";
+            return district_name !== "All Districts" && crimeData?.divisionName === district_name ? "#000" : "#444";
         })
         .attr("stroke-width", d => {
             const crimeData = crimesByDivision.get(d.id);
             return district_name !== "All Districts" && crimeData?.divisionName === district_name ? 3 : 0.8;
         })
-        .attr("stroke-linejoin", "round") // Rounded corners for smoother appearance
+        .attr("stroke-linejoin", "round")
+        .style("opacity", d => {
+            const crimeData = crimesByDivision.get(d.id);
+            return district_name !== "All Districts" && crimeData?.divisionName !== district_name ? 0.3 : 1;
+        }) // Reduce opacity for non-selected districts
         .style("filter", d => {
             const crimeData = crimesByDivision.get(d.id);
             return district_name !== "All Districts" && crimeData?.divisionName === district_name
@@ -97,13 +101,13 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
             d3.select(event.target)
                 .attr("stroke-width", d => {
                     const crimeData = crimesByDivision.get(d.id);
-                    return district_name !== "All Districts" && crimeData?.divisionName === district_name ? 2 : 0.8;
-                }) // Revert to default or highlight thickness
+                    return district_name !== "All Districts" && crimeData?.divisionName === district_name ? 3 : 0.8;
+                })
                 .attr("stroke", d => {
                     const crimeData = crimesByDivision.get(d.id);
                     return district_name !== "All Districts" && crimeData?.divisionName === district_name ? "#000" : "#444";
-                }) // Revert to default border color
-                .style("filter", "drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.2))"); // Revert to subtle shadow
+                })
+                .style("filter", "drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.2))");
 
             d3.select(".tooltip").remove();
         });
