@@ -74,7 +74,7 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
     const linesGroup = chartGroup.append("g");
     const districtPaths = new Map();
 
-    const enabledDistricts = new Set(["Central", "Hollenbeck", "Rampart", "West LA", "Wilshire", "Hollywood", "Olympic"]);
+    const enabledDistricts = new Set(["Central", "Hollenbeck", "Rampart", "West LA","Hollywood", "Olympic"]);
     const visibleDistricts = new Set([...enabledDistricts]);
 
     groupedData.forEach((districtData, district) => {
