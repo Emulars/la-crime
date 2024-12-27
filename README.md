@@ -10,7 +10,11 @@ DataViz final project - Beneath the city lights
 ## Introduction
 
 Our project proposal concerns the enhancement of a past project on crime-related data
-cleaning and analysis regarding the city of Los Angeles. For the project, the dataset used was for the period 2010 to 2024, but as this amount of data is around 4GB, it was decided to reduce the years under analysis from 2020 to 2024. The dataset in question is available at the following link; this data is derived from transcripts of reports compiled directly by the police, and is therefore subject to errors of various kinds.
+cleaning and analysis regarding the city of Los Angeles. For the project, the dataset used was for the period 2010 to 2024, but as this amount of data is around 4GB, it was decided to reduce the years under analysis from 2020 to 2024. The dataset in question is available at the following links: 
+* [Crime Data 2010-2019](https://catalog.data.gov/dataset/crime-data-from-2010-to-2019),
+* [Crime Data 2020-Present](https://catalog.data.gov/dataset/crime-data-from-2020-to-present).
+  
+these data are derived from transcripts of reports compiled directly by the police, and are therefore subject to errors of various kinds.
 
 ## Dataset Overview
 
