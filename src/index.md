@@ -65,6 +65,7 @@ Notably, 2020 stands out with a sharper decline during early spring, coinciding 
 </div>
 
 <div class="grid grid-cols-1">
+The Proposition 57 allows parole consideration for nonviolent felons, changes policies on juvenile prosecution, and authorizes sentence credits for rehabilitation, good behavior, and education.
 Policy reforms, such as Proposition 57 and new rehabilitation programs, both reflect and contribute to shifting crime rates. Early legislative measures introduced around 2016–2017 coincided with a bump in recorded incidents, as the city negotiated new approaches to sentencing and parole.<br><br>
 When COVID‐19 hit in 2020, crime numbers initially dropped, a correlation easily spotted on the chart. However, a series of other stressors soon emerged: rising homelessness, intensifying gang conflicts, and debates over police funding. By 2022, these factors contributed to heightened volatility, before tapering slightly as COVID‐19 restrictions ended in 2023.
 </div>
@@ -73,6 +74,6 @@ When COVID‐19 hit in 2020, crime numbers initially dropped, a correlation easi
 
 <div class="grid grid-cols-1">
 Los Angeles’ crime story from 2010 to 2023 shows a tapestry of policy reforms, social programs, and disruptive events shaping the city’s safety landscape. Many fluctuations align with local legislation or major incidents, from rehabilitation initiatives to a global pandemic; indicating how deeply external forces can mold criminal activity.<br><br>
-But this is only the beginning. In our next installment, we’ll zoom in on how crime varies by neighborhood, examining the stark contrasts across diverse areas of LA, and the significance of day‐night patterns. From there, our final page broadens the lens to explore the social challenges behind the numbers, comparing victim demographics by ethnicity, gender, and age; analyzing how broader socio‐political climates influenced who was most at risk.<br><br>
+But this is only the beginning. In our next section, we’ll zoom in on how crime varies by neighborhood, examining the stark contrasts across diverse areas of LA, and the significance of day‐night patterns. From there, our final page broadens the lens to explore the social challenges behind the numbers, comparing victim demographics by ethnicity, gender, and age; analyzing how broader socio‐political climates influenced who was most at risk.<br><br>
 Throughout the 2010s and early 2020s, news headlines were filled with discussions of rising housing costs, changing policing strategies, and debates over systemic inequality. Each facet has woven itself into LA’s crime narrative. By reading this data in tandem with real‐world events, we gain a clearer view of not just the statistics, but the human stories they represent—stories that continue to unfold as the city carves its path forward.
 </div>

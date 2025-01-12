@@ -20,7 +20,9 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
                 divisionName: divisionData.find(div => div.name === d.District)?.name,
                 totalCrimes: d.TotalCrimes, 
                 mostFrequentCrime: d.MostFrequentCrime, 
-                districtIndex: d.DistrictIndex 
+                districtIndex: d.DistrictIndex,
+                districTotalCrime: d.TotalCrimes,
+                mostFrequentCrimeCount: d.CrimeCount 
             }
         ])
     );
@@ -94,7 +96,8 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
                 .html(`
                     <strong>${crimeData?.divisionName || "Unknown"}</strong><br>
                     District Index: ${crimeData?.districtIndex?.toFixed(2) || "No data"}<br>
-                    Most Frequent Crime: ${crimeData?.mostFrequentCrime || "No data"}
+                    Total Crimes: ${crimeData?.districTotalCrime || "No data"}<br>
+                    Most Frequent Crime: ${crimeData?.mostFrequentCrime || "No data"} (${crimeData?.mostFrequentCrimeCount || "No data"} cases)
                 `);
         })
         .on("mouseout", (event) => {

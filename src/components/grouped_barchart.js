@@ -23,6 +23,15 @@ export function groupedBar(data, { width} = {}) {
         title: (d) => `Crimes: ${d.y}\nCrime Type: ${d.most_common_crime_type}\nCrime Subtype: ${d.most_common_crime_subtype}`, // Tooltip personalizzato
       }),
       Plot.ruleY([0]) // Linea di base sull'asse Y
+      // Plot.text(data, {
+      //   x: "group",
+      //   y: "y",
+      //   text: d => Math.round(d.y), // Quantità di crimini
+      //   dy: 5, // Posiziona leggermente a destra per evitare sovrapposizione con il nome
+      //   textAnchor: "start", // Allinea il testo a sinistra
+      //   fill: "white", // Colore del testo delle emissioni
+      //   fontWeight: "bold"
+      // })
     ]
   });
 }

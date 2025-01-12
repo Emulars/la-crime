@@ -23,6 +23,9 @@ def merge_csv_files(file1, file2, output_file):
         # Remove rows with DateTime in the year 2024
         merged_df = merged_df[~merged_df['DateTime'].str.contains("^2024", na=False)]
 
+        # If in the DistrictKm2 column there is a value = 34.87 change it to 3.54
+        merged_df['DistrictKm2'] = merged_df['DistrictKm2'].replace(34.87, 3.54)
+
         # Drop duplicate rows
         merged_df = merged_df.drop_duplicates()
 

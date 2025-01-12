@@ -74,7 +74,7 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
     const linesGroup = chartGroup.append("g");
     const districtPaths = new Map();
 
-    const enabledDistricts = new Set(["Central", "Hollenbeck", "Rampart", "West LA","Hollywood", "Olympic"]);
+    const enabledDistricts = new Set(["Central", "Rampart", "West LA","Hollywood", "Olympic"]);
     const visibleDistricts = new Set([...enabledDistricts]);
 
     groupedData.forEach((districtData, district) => {
@@ -109,10 +109,58 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
             .style("opacity", enabledDistricts.has(district) ? 1 : 0);
     });
 
+    // Create tooltip div
+    const tooltip = d3.select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("background", "rgba(0, 0, 0, 0.7)")
+    .style("color", "white")
+    .style("padding", "5px 10px")
+    .style("border-radius", "5px")
+    .style("pointer-events", "none")
+    .style("opacity", 0);
+
+    // Add circles for data points and tooltip interaction
+    groupedData.forEach((districtData, district) => {
+    chartGroup.selectAll(`.dot-${encodeDistrictName(district)}`)
+        .data(districtData)
+        .enter()
+        .append("circle")
+        .attr("class", `dot dot-${encodeDistrictName(district)}`)
+        .attr("cx", d => xScale(d.Year))
+        .attr("cy", d => yScale(d.DistrictIndex))
+        .attr("r", 3)
+        .attr("fill", colorScale(district))
+        .style("opacity", enabledDistricts.has(district) ? 1 : 0)
+        .on("mouseover", function (event, d) {
+            tooltip
+                .style("opacity", 1)
+                .html(`District: ${d.District}<br>Year: ${d.Year}<br>Crime Index: ${d.DistrictIndex.toFixed(2)}`)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+        })
+        .on("mousemove", function (event) {
+            tooltip
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+        })
+        .on("mouseout", function () {
+            tooltip.style("opacity", 0);
+        });
+    });
+
+
+
     // Add legend
     const legendGroup = svg.append("g")
-        .attr("transform", `translate(${width - margin.right - 350}, ${margin.top})`);
+    .attr("transform", `translate(${margin.left + 20}, ${margin.top + 10})`) // Fixed top-left position
+    .attr("class", "legend-group")
+    .style("position", "absolute")
+    .style("top", "10px")
+    .style("left", "10px");
 
+    // Legend title
     legendGroup.append("text")
         .attr("x", 0)
         .attr("y", -10)
@@ -160,6 +208,7 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
             visibleDistricts.delete(district);
             districtPaths.get(district).style("opacity", 0);
             svg.select(`.label-${encodedDistrict}`).style("opacity", 0); // Hide label
+            svg.selectAll(`.dot-${encodedDistrict}`).style("opacity", 0); // Hide dots
             svg.select(`.legend-${encodedDistrict}`).attr("fill", "white");
             svg.select(`.legend-text-${encodedDistrict}`).attr("fill", "gray");
         } else {
@@ -167,6 +216,7 @@ export function lineChartCrimeIndex(data, { width = 800, height = 400, margin = 
             visibleDistricts.add(district);
             districtPaths.get(district).style("opacity", 1);
             svg.select(`.label-${encodedDistrict}`).style("opacity", 1); // Show label
+            svg.selectAll(`.dot-${encodedDistrict}`).style("opacity", 1); // Show dots
             svg.select(`.legend-${encodedDistrict}`).attr("fill", colorScale(district));
             svg.select(`.legend-text-${encodedDistrict}`).attr("fill", "white");
         }

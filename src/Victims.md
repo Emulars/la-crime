@@ -206,7 +206,9 @@ Women, on the other hand, present a different picture. While their overall victi
 <br>
 As age increases, the data shows a drop in crimes affecting both men and women. However, those over 60 remain more vulnerable to fraud and financial crimes—evidence of how “invisible crime,” from online scams to identity theft, can target people with fixed or retirement incomes, or those less familiar with emerging forms of deception.
 <br>
-Taken together, these patterns offer valuable insights for rethinking prevention priorities. While socioeconomic and job-inclusion interventions may prove crucial for young adults, women of childbearing age require robust support against gender-based violence. Finally, seniors would benefit from financial literacy and digital assistance, helping curb their vulnerability in an increasingly “tech-driven” criminal landscape.
+These patterns offer valuable insights for rethinking prevention priorities. While socioeconomic and job-inclusion interventions may prove crucial for young adults, women of childbearing age require robust support against gender-based violence. Finally, seniors would benefit from financial literacy and digital assistance, helping curb their vulnerability in an increasingly tech-driven criminal landscape.
+<br>
+By comparing age brackets in the charts, one quickly sees the significance of the social context in which crimes occur. The intersections of age, gender, and ethnicity confirm how targeted interventions, such as programs addressing domestic violence or rehabilitation for youth in disadvantaged areas, can significantly reduce exposure to specific offenses.
 </div>
 <div class="grid grid-cols-1">
   <div class="card">
@@ -219,7 +221,8 @@ Taken together, these patterns offer valuable insights for rethinking prevention
 </div>
 
 <div class="grid grid-cols-1">
-By comparing age brackets in the charts, one quickly sees the significance of the social context in which crimes occur. The intersections of age, gender, and ethnicity confirm how targeted interventions, such as programs addressing domestic violence or rehabilitation for youth in disadvantaged areas, can significantly reduce exposure to specific offenses.
+The alluvial chart above provides an in-depth view of how gender, ethnicity, and age interconnect in the victimization landscape of Los Angeles. By illustrating the flow between demographic groups and crime types, it becomes evident that certain subgroups are disproportionately affected.<br>
+Young Hispanic males in the 20–29 age bracket emerge as one of the most vulnerable groups, with higher incidences of violent crime. This vulnerability may be attributed to socioeconomic challenges and gang-related violence prevalent in certain neighborhoods. Women in the same age group, on the other hand, are more frequently victims of domestic violence and family-related assaults, highlighting the need for stronger support systems and protection programs.
 </div>
 
 <div class="grid grid-cols-1">
@@ -229,14 +232,12 @@ By comparing age brackets in the charts, one quickly sees the significance of th
 </div>
 
 <div class="grid grid-cols-1">
-look at the bar chart reveals that both men and women see the highest crime volumes between ages 20 and 29, though women in this range are more frequently tied to domestic violence and relationship-based assaults. Meanwhile, men stand out in property crimes, car thefts and break-ins, typical of high-density urban environments. Over time, as age goes up, the scenario shifts: fraud and financial crimes become more prevalent, often facilitated by a weaker grasp of digital tools.
+The bar chart further clarifies these trends by showing that the highest crime volumes for both men and women occur between the ages of 20 and 29. While women in this range are primarily affected by domestic violence, men are more frequently involved in property crimes, car thefts, and break-ins. Over time, as age increases, a shift occurs: fraud and financial crimes become the predominant concern, particularly among the elderly. This shift underscores the importance of enhancing financial literacy and digital awareness to protect older populations from modern scams.
 </div>
 
 # The Human Face of Safety in Los Angeles
 
 <div class="grid grid-cols-1">
-As confirmed by LAPD data published on the “Open Data” portal, and echoed in local news coverage, crime in Los Angeles is a layered phenomenon shaped by multiple variables: demographic differences, economic disparities, and the effectiveness of prevention and victim support policies. In 2022, for instance, the Los Angeles Times reported an uptick in violent crimes compared to pre-pandemic levels, pointing out how post-lockdown reopenings revived latent tensions and introduced new challenges (including a rise in homelessness).
-<br>
 In such a complex setting, understanding “who” bears the brunt of criminal acts is just as crucial as “how much” and “where.” Seeing how age, gender, and ethnicity map onto different victimization patterns paves the way for reflections on legislative reforms and social programs. From specialized task forces for domestic abuse to financial literacy for older adults and integrated interventions in the most vulnerable districts, institutional and community efforts can make all the difference.
 <br>
 These numbers aren’t simply figures on a graph; they are the stories of people living, working, and seeking safety in one of the world’s most dynamic cities. As analysts and social workers caution, a one-size-fits-all approach seldom works in such a multifaceted context. Instead, a mosaic of tailored actions is needed to tackle specific vulnerabilities, from combating gender violence to preventing youth gang recidivism and protecting the elderly from online scams.

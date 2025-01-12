@@ -10,14 +10,14 @@
 <link rel="preload" as="style" href="./_observablehq/theme-slate,alt.e5c66b79.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt.e5c66b79.css">
-<link rel="modulepreload" href="./_observablehq/client.3209cb3c.js">
+<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
-<link rel="modulepreload" href="./_import/components/linechart.863d3bd6.js">
+<link rel="modulepreload" href="./_import/components/linechart.499692ae.js">
 <link rel="modulepreload" href="./_import/components/barchart.2dba519a.js">
-<link rel="modulepreload" href="./_import/components/timeline.1a1f4221.js">
-<link rel="modulepreload" href="./_npm/d3@7.9.0/3f7f119a.js">
-<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/6fc5a277.js">
+<link rel="modulepreload" href="./_import/components/timeline.7f50244a.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
 <link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/e95f898e.js">
@@ -91,14 +91,14 @@
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.3209cb3c.js";
+import {define} from "./_observablehq/client.55fa937c.js";
 import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
-registerFile("./data/la_events.json", {"name":"./data/la_events.json","mimeType":"application/json","path":"./_file/data/la_events.7202b264.json","lastModified":1734613047545,"size":827});
-registerFile("./data/yearly_monthly_crime_summary.csv", {"name":"./data/yearly_monthly_crime_summary.csv","mimeType":"text/csv","path":"./_file/data/yearly_monthly_crime_summary.bea7561c.csv","lastModified":1734953288512,"size":5932});
+registerFile("./data/la_events.json", {"name":"./data/la_events.json","mimeType":"application/json","path":"./_file/data/la_events.7202b264.json","lastModified":1734615729964,"size":827});
+registerFile("./data/yearly_monthly_crime_summary.csv", {"name":"./data/yearly_monthly_crime_summary.csv","mimeType":"text/csv","path":"./_file/data/yearly_monthly_crime_summary.bea7561c.csv","lastModified":1736693556256,"size":5932});
 
 define({id: "7eb62b89", outputs: ["LineChart","BarChart","timeline"], body: async () => {
-const [{LineChart}, {BarChart}, {timeline}] = await Promise.all([import("./_import/components/linechart.863d3bd6.js"), import("./_import/components/barchart.2dba519a.js"), import("./_import/components/timeline.1a1f4221.js")]);
+const [{LineChart}, {BarChart}, {timeline}] = await Promise.all([import("./_import/components/linechart.499692ae.js"), import("./_import/components/barchart.2dba519a.js"), import("./_import/components/timeline.7f50244a.js")]);
 
 return {LineChart,BarChart,timeline};
 }});
@@ -205,13 +205,14 @@ Notably, 2020 stands out with a sharper decline during early spring, coinciding 
   <div class="card"><observablehq-loading></observablehq-loading><!--:6cd72486:--></div>
 </div>
 <div class="grid grid-cols-1">
+The Proposition 57 allows parole consideration for nonviolent felons, changes policies on juvenile prosecution, and authorizes sentence credits for rehabilitation, good behavior, and education.
 Policy reforms, such as Proposition 57 and new rehabilitation programs, both reflect and contribute to shifting crime rates. Early legislative measures introduced around 2016–2017 coincided with a bump in recorded incidents, as the city negotiated new approaches to sentencing and parole.<br><br>
 When COVID‐19 hit in 2020, crime numbers initially dropped, a correlation easily spotted on the chart. However, a series of other stressors soon emerged: rising homelessness, intensifying gang conflicts, and debates over police funding. By 2022, these factors contributed to heightened volatility, before tapering slightly as COVID‐19 restrictions ended in 2023.
 </div>
 <h2 id="looking-ahead" tabindex="-1"><a class="observablehq-header-anchor" href="#looking-ahead">Looking Ahead</a></h2>
 <div class="grid grid-cols-1">
 Los Angeles’ crime story from 2010 to 2023 shows a tapestry of policy reforms, social programs, and disruptive events shaping the city’s safety landscape. Many fluctuations align with local legislation or major incidents, from rehabilitation initiatives to a global pandemic; indicating how deeply external forces can mold criminal activity.<br><br>
-But this is only the beginning. In our next installment, we’ll zoom in on how crime varies by neighborhood, examining the stark contrasts across diverse areas of LA, and the significance of day‐night patterns. From there, our final page broadens the lens to explore the social challenges behind the numbers, comparing victim demographics by ethnicity, gender, and age; analyzing how broader socio‐political climates influenced who was most at risk.<br><br>
+But this is only the beginning. In our next section, we’ll zoom in on how crime varies by neighborhood, examining the stark contrasts across diverse areas of LA, and the significance of day‐night patterns. From there, our final page broadens the lens to explore the social challenges behind the numbers, comparing victim demographics by ethnicity, gender, and age; analyzing how broader socio‐political climates influenced who was most at risk.<br><br>
 Throughout the 2010s and early 2020s, news headlines were filled with discussions of rising housing costs, changing policing strategies, and debates over systemic inequality. Each facet has woven itself into LA’s crime narrative. By reading this data in tandem with real‐world events, we gain a clearer view of not just the statistics, but the human stories they represent—stories that continue to unfold as the city carves its path forward.
 </div></main>
 <footer id="observablehq-footer">

@@ -82,6 +82,12 @@ export function timeline(events, crimeData, { width, height } = {}) {
         fontSize: 12,
       }),
 
+      // Linee tratteggiate manuali per l'origine dell'asse Y
+      Plot.ruleY([40000], { 
+          stroke: "lightgrey", 
+          strokeWidth: 2.5
+      }),
+
       // Quadrimester crime line chart
       Plot.line(quadrimesterCrimeData, { x: "date", y: "totalCrime", stroke: "steelblue", strokeWidth: 2 }),
       Plot.dot(quadrimesterCrimeData, { x: "date", y: "totalCrime", fill: "steelblue", tip: true, title: (d) => `${d.label}, Total Crimes: ${d.totalCrime}` }),

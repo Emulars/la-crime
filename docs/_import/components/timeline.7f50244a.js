@@ -1,4 +1,4 @@
-import * as Plot from "../../_npm/@observablehq/plot@0.6.16/6fc5a277.js";
+import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
 import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
 export function timeline(events, crimeData, { width, height } = {}) {
@@ -80,6 +80,12 @@ export function timeline(events, crimeData, { width, height } = {}) {
         dy: -10,
         lineWidth: 10,
         fontSize: 12,
+      }),
+
+      // Linee tratteggiate manuali per l'origine dell'asse Y
+      Plot.ruleY([40000], { 
+          stroke: "lightgrey", 
+          strokeWidth: 2.5
       }),
 
       // Quadrimester crime line chart

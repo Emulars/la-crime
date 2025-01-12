@@ -95,7 +95,9 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
                 stroke: "white",
                 strokeDasharray: "4 4",
                 strokeWidth: 2,
-                tip: true
+                tip: true,
+                // Tooltip content with month and average crime count
+                title: (d) => `${monthLabels[d[0] - 1]} Avg Crimes: ${d[1].toFixed(2)}`
             }),
             
             // Etichetta della media

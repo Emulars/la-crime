@@ -12,17 +12,17 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide.67ad1980.css">
 <link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
-<link rel="modulepreload" href="./_observablehq/client.3209cb3c.js">
+<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
 <link rel="modulepreload" href="./_import/components/inputs/yearSelector.8f3e891b.js">
 <link rel="modulepreload" href="./_import/components/inputs/dropdown.01ed81c6.js">
-<link rel="modulepreload" href="./_import/components/choropleth.f7739d8c.js">
+<link rel="modulepreload" href="./_import/components/choropleth.dcd08842.js">
 <link rel="modulepreload" href="./_import/components/scatter.2b2415a0.js">
-<link rel="modulepreload" href="./_import/components/lineChartCrimeIndex.e168acb0.js">
+<link rel="modulepreload" href="./_import/components/lineChartCrimeIndex.bcc1b5ae.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.d397b6a8.js">
 <link rel="modulepreload" href="./_node/d3@7.9.0/index.e21134d2.js">
-<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/6fc5a277.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/063eb405.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
@@ -56,7 +56,7 @@
 <link rel="modulepreload" href="./_node/d3-timer@3.0.1/index.0ee6092b.js">
 <link rel="modulepreload" href="./_node/d3-transition@3.0.1/index.d140d658.js">
 <link rel="modulepreload" href="./_node/d3-zoom@3.0.0/index.0e732a91.js">
-<link rel="modulepreload" href="./_npm/d3@7.9.0/3f7f119a.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
 <link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/a62ae5ce.js">
 <link rel="modulepreload" href="./_node/internmap@2.0.3/index.4106013c.js">
 <link rel="modulepreload" href="./_node/delaunator@5.0.1/index.70ae1478.js">
@@ -97,16 +97,16 @@
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.3209cb3c.js";
+import {define} from "./_observablehq/client.55fa937c.js";
 import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
-registerFile("./data/LAPD_Division_5922489107755548254.geojson", {"name":"./data/LAPD_Division_5922489107755548254.geojson","mimeType":"application/geo+json","path":"./_file/data/LAPD_Division_5922489107755548254.bda8ccd5.geojson","lastModified":1734426807274,"size":705759});
-registerFile("./data/LAPD_Division_IDs.json", {"name":"./data/LAPD_Division_IDs.json","mimeType":"application/json","path":"./_file/data/LAPD_Division_IDs.a179279a.json","lastModified":1734952127368,"size":819});
-registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.fb2e067c.csv","lastModified":1734953288514,"size":15753});
-registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.5d2c449a.csv","lastModified":1734953288527,"size":453600});
+registerFile("./data/LAPD_Division_5922489107755548254.geojson", {"name":"./data/LAPD_Division_5922489107755548254.geojson","mimeType":"application/geo+json","path":"./_file/data/LAPD_Division_5922489107755548254.bda8ccd5.geojson","lastModified":1734342471535,"size":705759});
+registerFile("./data/LAPD_Division_IDs.json", {"name":"./data/LAPD_Division_IDs.json","mimeType":"application/json","path":"./_file/data/LAPD_Division_IDs.a179279a.json","lastModified":1734947464380,"size":819});
+registerFile("./data/district_crime_analysis.csv", {"name":"./data/district_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/district_crime_analysis.c2359453.csv","lastModified":1736693556256,"size":15810});
+registerFile("./data/hourly_crime_analysis.csv", {"name":"./data/hourly_crime_analysis.csv","mimeType":"text/csv","path":"./_file/data/hourly_crime_analysis.5d2c449a.csv","lastModified":1736693556256,"size":453600});
 
 define({id: "4a3d4ec1", outputs: ["viewSlider","dropdown","choroplethMap","scatterPlot","lineChartCrimeIndex","MIN_YEAR","MAX_YEAR"], body: async () => {
-const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}, {lineChartCrimeIndex}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.01ed81c6.js"), import("./_import/components/choropleth.f7739d8c.js"), import("./_import/components/scatter.2b2415a0.js"), import("./_import/components/lineChartCrimeIndex.e168acb0.js")]);
+const [{viewSlider}, {dropdown}, {choroplethMap}, {scatterPlot}, {lineChartCrimeIndex}] = await Promise.all([import("./_import/components/inputs/yearSelector.8f3e891b.js"), import("./_import/components/inputs/dropdown.01ed81c6.js"), import("./_import/components/choropleth.dcd08842.js"), import("./_import/components/scatter.2b2415a0.js"), import("./_import/components/lineChartCrimeIndex.bcc1b5ae.js")]);
 // Import and CONSTANTS
 
 const MIN_YEAR = 2010;
@@ -231,7 +231,7 @@ Los Angeles is ever-changing, and its crime patterns shift accordingly across di
 <h2 id="mapping-l-a-s-crime-hotspots" tabindex="-1"><a class="observablehq-header-anchor" href="#mapping-l-a-s-crime-hotspots">“Mapping L.A.’s Crime Hotspots”</a></h2>
 <div class="grid grid-cols-1">
 The map before you illustrates each area’s Crime Index, a standardized indicator of “danger level”.<br> Under the hood, Weighted Crime Index factors in the severity of each crime type (e.g., violent crimes carry a higher weight than petty theft) and its frequency, while Crime Density measures how many crimes occur per square kilometer. A high danger_index, therefore, can reflect either a large volume of less-severe crimes, a smaller volume of very severe crimes—or both.<br>
-Notice how districts such as Olympic and Rampart show higher indices, suggesting a mix of highly severe crime types and high population density. This heatmap not only pinpoints trouble spots but also highlights that crime isn’t uniformly distributed across Los Angeles.<br>
+Notice how districts such as Central, Olympic and Rampart show higher indices, suggesting a mix of highly severe crime types and high population density. This heatmap not only pinpoints trouble spots but also highlights that crime isn’t uniformly distributed across Los Angeles.<br>
 </div>
 <div class="grid grid-cols-1">For a more in detail look at the crime index computation and its components, check out the <a href="https://emulars.github.io/la-crime/dataPreparation#introduction-of-the-crime-relevance-column" target="_blank" rel="noopener noreferrer">Crime Index Calculation<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a></div>
 <div class="grid grid-cols-2">

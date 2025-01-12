@@ -30,7 +30,7 @@ The *Crime Index* for each district is a composite metric designed to quantify t
 DangerIndexDistrict = α • WeightedCrimeIndexDistrict + β • CrimeDensityDistrict
 
 
-- **\(α\)** and **\(β\)** are weights that determine the relative importance of crime severity and crime density, respectively. For this project, the initial values were set to \( α = 0.6 \) and \( β = 0.4 \), prioritizing the gravity of crimes.
+- **\(α\)** and **\(β\)** are weights that determine the relative importance of crime severity and crime density, respectively. For this project, the initial values were set to \( α = 0.5 \) and \( β = 0.5 \), prioritizing the gravity of crimes.
 
 #### Weighted Crime Index
 The *Weighted Crime Index* quantifies crime severity within a district by summing the weighted counts of various crime types. The formula normalizes this value across districts:

@@ -10,13 +10,13 @@
 <link rel="preload" as="style" href="./_observablehq/theme-slate,alt,alt,wide.67ad1980.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-slate,alt,alt,wide.67ad1980.css">
-<link rel="modulepreload" href="./_observablehq/client.3209cb3c.js">
+<link rel="modulepreload" href="./_observablehq/client.55fa937c.js">
 <link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
 <link rel="modulepreload" href="./_node/d3-sankey@0.12.3/index.01c7f8ef.js">
-<link rel="modulepreload" href="./_import/components/grouped_barchart.f86e3724.js">
-<link rel="modulepreload" href="./_npm/d3@7.9.0/3f7f119a.js">
-<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/6fc5a277.js">
+<link rel="modulepreload" href="./_import/components/grouped_barchart.5c1d5e5b.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/7055d4c5.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.16/e828d8c8.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/407f7a1f.js">
 <link rel="modulepreload" href="./_node/d3-array@2.12.1/index.62e7d53a.js">
 <link rel="modulepreload" href="./_node/d3-shape@1.3.7/index.83d6a97d.js">
@@ -60,15 +60,15 @@
 <link rel="icon" href="./_file/image/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.3209cb3c.js";
+import {define} from "./_observablehq/client.55fa937c.js";
 import {registerFile} from "./_observablehq/stdlib.95bfbf7e.js";
 
-registerFile("./data/grouped_bar_chart_data.csv", {"name":"./data/grouped_bar_chart_data.csv","mimeType":"text/csv","path":"./_file/data/grouped_bar_chart_data.eb4073af.csv","lastModified":1734953288527,"size":927});
-registerFile("./data/links.json", {"name":"./data/links.json","mimeType":"application/json","path":"./_file/data/links.43f3f8fc.json","lastModified":1734953288511,"size":11328});
-registerFile("./data/nodes.json", {"name":"./data/nodes.json","mimeType":"application/json","path":"./_file/data/nodes.1d99d618.json","lastModified":1734953288510,"size":1367});
+registerFile("./data/grouped_bar_chart_data.csv", {"name":"./data/grouped_bar_chart_data.csv","mimeType":"text/csv","path":"./_file/data/grouped_bar_chart_data.eb4073af.csv","lastModified":1736693556256,"size":927});
+registerFile("./data/links.json", {"name":"./data/links.json","mimeType":"application/json","path":"./_file/data/links.43f3f8fc.json","lastModified":1736693556255,"size":11328});
+registerFile("./data/nodes.json", {"name":"./data/nodes.json","mimeType":"application/json","path":"./_file/data/nodes.1d99d618.json","lastModified":1736693556254,"size":1367});
 
 define({id: "65fd8bb5", inputs: ["FileAttachment"], outputs: ["sankey","sankeyLinkHorizontal","groupedBar","nodesData"], body: async (FileAttachment) => {
-const [{sankey, sankeyLinkHorizontal}, {groupedBar}] = await Promise.all([import("./_node/d3-sankey@0.12.3/index.01c7f8ef.js"), import("./_import/components/grouped_barchart.f86e3724.js")]);
+const [{sankey, sankeyLinkHorizontal}, {groupedBar}] = await Promise.all([import("./_node/d3-sankey@0.12.3/index.01c7f8ef.js"), import("./_import/components/grouped_barchart.5c1d5e5b.js")]);
 
 // Load and process the data
 const nodesData = FileAttachment("./data/nodes.json").json();
@@ -319,7 +319,9 @@ Women, on the other hand, present a different picture. While their overall victi
 <br>
 As age increases, the data shows a drop in crimes affecting both men and women. However, those over 60 remain more vulnerable to fraud and financial crimes—evidence of how “invisible crime,” from online scams to identity theft, can target people with fixed or retirement incomes, or those less familiar with emerging forms of deception.
 <br>
-Taken together, these patterns offer valuable insights for rethinking prevention priorities. While socioeconomic and job-inclusion interventions may prove crucial for young adults, women of childbearing age require robust support against gender-based violence. Finally, seniors would benefit from financial literacy and digital assistance, helping curb their vulnerability in an increasingly “tech-driven” criminal landscape.
+These patterns offer valuable insights for rethinking prevention priorities. While socioeconomic and job-inclusion interventions may prove crucial for young adults, women of childbearing age require robust support against gender-based violence. Finally, seniors would benefit from financial literacy and digital assistance, helping curb their vulnerability in an increasingly tech-driven criminal landscape.
+<br>
+By comparing age brackets in the charts, one quickly sees the significance of the social context in which crimes occur. The intersections of age, gender, and ethnicity confirm how targeted interventions, such as programs addressing domestic violence or rehabilitation for youth in disadvantaged areas, can significantly reduce exposure to specific offenses.
 </div>
 <div class="grid grid-cols-1">
   <div class="card">
@@ -331,7 +333,8 @@ Taken together, these patterns offer valuable insights for rethinking prevention
   </div>
 </div>
 <div class="grid grid-cols-1">
-By comparing age brackets in the charts, one quickly sees the significance of the social context in which crimes occur. The intersections of age, gender, and ethnicity confirm how targeted interventions, such as programs addressing domestic violence or rehabilitation for youth in disadvantaged areas, can significantly reduce exposure to specific offenses.
+The alluvial chart above provides an in-depth view of how gender, ethnicity, and age interconnect in the victimization landscape of Los Angeles. By illustrating the flow between demographic groups and crime types, it becomes evident that certain subgroups are disproportionately affected.<br>
+Young Hispanic males in the 20–29 age bracket emerge as one of the most vulnerable groups, with higher incidences of violent crime. This vulnerability may be attributed to socioeconomic challenges and gang-related violence prevalent in certain neighborhoods. Women in the same age group, on the other hand, are more frequently victims of domestic violence and family-related assaults, highlighting the need for stronger support systems and protection programs.
 </div>
 <div class="grid grid-cols-1">
   <div class="card">
@@ -339,12 +342,10 @@ By comparing age brackets in the charts, one quickly sees the significance of th
   </div>
 </div>
 <div class="grid grid-cols-1">
-look at the bar chart reveals that both men and women see the highest crime volumes between ages 20 and 29, though women in this range are more frequently tied to domestic violence and relationship-based assaults. Meanwhile, men stand out in property crimes, car thefts and break-ins, typical of high-density urban environments. Over time, as age goes up, the scenario shifts: fraud and financial crimes become more prevalent, often facilitated by a weaker grasp of digital tools.
+The bar chart further clarifies these trends by showing that the highest crime volumes for both men and women occur between the ages of 20 and 29. While women in this range are primarily affected by domestic violence, men are more frequently involved in property crimes, car thefts, and break-ins. Over time, as age increases, a shift occurs: fraud and financial crimes become the predominant concern, particularly among the elderly. This shift underscores the importance of enhancing financial literacy and digital awareness to protect older populations from modern scams.
 </div>
 <h1 id="the-human-face-of-safety-in-los-angeles" tabindex="-1"><a class="observablehq-header-anchor" href="#the-human-face-of-safety-in-los-angeles">The Human Face of Safety in Los Angeles</a></h1>
 <div class="grid grid-cols-1">
-As confirmed by LAPD data published on the “Open Data” portal, and echoed in local news coverage, crime in Los Angeles is a layered phenomenon shaped by multiple variables: demographic differences, economic disparities, and the effectiveness of prevention and victim support policies. In 2022, for instance, the Los Angeles Times reported an uptick in violent crimes compared to pre-pandemic levels, pointing out how post-lockdown reopenings revived latent tensions and introduced new challenges (including a rise in homelessness).
-<br>
 In such a complex setting, understanding “who” bears the brunt of criminal acts is just as crucial as “how much” and “where.” Seeing how age, gender, and ethnicity map onto different victimization patterns paves the way for reflections on legislative reforms and social programs. From specialized task forces for domestic abuse to financial literacy for older adults and integrated interventions in the most vulnerable districts, institutional and community efforts can make all the difference.
 <br>
 These numbers aren’t simply figures on a graph; they are the stories of people living, working, and seeking safety in one of the world’s most dynamic cities. As analysts and social workers caution, a one-size-fits-all approach seldom works in such a multifaceted context. Instead, a mosaic of tailored actions is needed to tackle specific vulnerabilities, from combating gender violence to preventing youth gang recidivism and protecting the elderly from online scams.

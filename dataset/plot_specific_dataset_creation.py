@@ -21,22 +21,62 @@ from collections import Counter
 from datetime import datetime
 import numpy as np
 
-def danger_index(alpha, beta, crime_severity, crime_count, area):
+def danger_index(alpha, beta, crime_severity, crime_count, tot_crime_count, area, max_weighted_crime_index, max_crime_density, year):
+
     # Calcola l'indice pesato
     weighted_crime_values = [crime_severity[crime] * crime_count[crime] for crime in crime_severity]
     weighted_crime_index = sum(weighted_crime_values)
-    max_weighted_crime_index = max(weighted_crime_values)
     normalized_weighted_crime_index = weighted_crime_index / max_weighted_crime_index if max_weighted_crime_index > 0 else 0
 
     # Calcola la densità di crimini e normalizzala
-    crime_density = sum(crime_count.values()) / area
-    max_crime_density = sum(crime_count.values())  # Densità massima teorica (usando area = 1 come riferimento)
-    normalized_crime_density = crime_density / max_crime_density if max_crime_density > 0 else 0
+    crime_density = (tot_crime_count / area) / max_crime_density
     
-    index = (alpha * normalized_weighted_crime_index) + (beta * normalized_crime_density)
+    index = (alpha * normalized_weighted_crime_index) + (beta * crime_density)
+
+    # Print all the values for 2023
+    # if year == 2023:
+    #     print("Crime Count: ", crime_count)
+    #     print("Total Crimes: ", tot_crime_count)
+    #     print("Area: ", area)
+    #     print("Weighted Crime Index: ", weighted_crime_index)
+    #     print("Normalized Weighted Crime Index: ", normalized_weighted_crime_index)
+    #     print("Crime Density: ", crime_density)
+    #     print("District Index: ", index)
+    #     print("\n")
 
     return index
 
+def compute_max_values(data):
+    """
+    Compute the maximum weighted crime index and maximum crime density
+    across all years and districts in the dataset.
+
+    Parameters:
+    data (DataFrame): The input dataset with columns 'Year', 'District',
+                      'Crime type', 'Crime Value', 'DistrictKm2'.
+
+    Returns:
+    tuple: (max_weighted_crime_index, max_crime_density)
+    """
+    max_weighted_crime_index = 0
+    max_crime_density = 0
+
+    for (year, district), group in data.groupby(['Year', 'District']):
+        crime_severity = dict(zip(group['Crime type'], group['Crime Value']))
+        crime_count = dict(Counter(group['Crime type']))
+        total_crimes = len(group)
+        area = group['DistrictKm2'].iloc[0]
+
+        # Compute weighted crime index
+        weighted_crime_values = [crime_severity[crime] * crime_count[crime] for crime in crime_severity]
+        weighted_crime_index = sum(weighted_crime_values)
+        max_weighted_crime_index = max(max_weighted_crime_index, weighted_crime_index)
+
+        # Compute crime density
+        crime_density = total_crimes / area
+        max_crime_density = max(max_crime_density, crime_density)
+
+    return max_weighted_crime_index, max_crime_density
 
 
 
@@ -58,21 +98,21 @@ crime_summary = crime_summary.merge(avg_monthly_crime, on='Year')
 def analyze_district(df):
     results = []
     district_indexes = []
+
+    max_weighted_crime_index, max_crime_density = compute_max_values(df)
+
     for (year, district), group in df.groupby(['Year', 'District']):
+        # Print the distric only for 2023
         total_crimes = len(group)
         crime_type_counts = Counter(group['Crime type'])
         most_frequent_crime, crime_count = crime_type_counts.most_common(1)[0]
         area = group['DistrictKm2'].iloc[0]
         crime_severity = dict(zip(group['Crime type'], group['Crime Value']))
         crime_count_dict = dict(Counter(group['Crime type']))
-        district_index = danger_index(0.5, 0.5, crime_severity, crime_count_dict, area)
+        district_index = danger_index(0.5, 0.5, crime_severity, crime_count_dict, total_crimes, area, max_weighted_crime_index, max_crime_density, year)
         district_indexes.append(district_index)
         results.append([year, district, total_crimes, most_frequent_crime, crime_count, district_index])
-    # Normalize DistrictIndex
-    max_index = max(district_indexes)
-    min_index = min(district_indexes)
-    for result in results:
-        result[-1] = (result[-1] - min_index) / (max_index - min_index) if max_index > min_index else 0
+    
     return pd.DataFrame(results, columns=['Year', 'District', 'TotalCrimes', 'MostFrequentCrime', 'CrimeCount', 'DistrictIndex'])
 
 district_summary = analyze_district(data)
@@ -240,7 +280,7 @@ def prepare_victim_age_gender(df):
     data = df[df['Gender'].isin(['M', 'F'])]
 
     # Crea il range di età
-    data['AgeRange'] = data['Age'].apply(age_range)
+    data.loc[:, 'AgeRange'] = data['Age'].apply(age_range)
     data = data[data['AgeRange'] != 'Unknown']
 
     # Raggruppa i dati e calcola il conteggio totale di crimini
@@ -268,7 +308,7 @@ def prepare_victim_age_gender(df):
 
     crime_info = (
         data.groupby(['AgeRange', 'Gender'])
-        .apply(most_common_crime)
+        .apply(most_common_crime, include_groups=False)
         .reset_index()
     )
 
@@ -290,9 +330,6 @@ def prepare_victim_age_gender(df):
 
 
 pivot_data = prepare_victim_age_gender(data)
-
-
-
 
 # Save to JSON for D3
 nodes_df.to_json('../src/data/nodes.json', orient='records')

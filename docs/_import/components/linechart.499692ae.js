@@ -1,4 +1,4 @@
-import * as Plot from "../../_npm/@observablehq/plot@0.6.16/6fc5a277.js";
+import * as Plot from "../../_npm/@observablehq/plot@0.6.16/e828d8c8.js";
 import * as d3 from "../../_node/d3@7.9.0/index.e21134d2.js";
 
 export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
@@ -95,7 +95,9 @@ export function LineChart(data, yearlyCrimes, colorScale, {width} = {}) {
                 stroke: "white",
                 strokeDasharray: "4 4",
                 strokeWidth: 2,
-                tip: true
+                tip: true,
+                // Tooltip content with month and average crime count
+                title: (d) => `${monthLabels[d[0] - 1]} Avg Crimes: ${d[1].toFixed(2)}`
             }),
             
             // Etichetta della media
