@@ -82,6 +82,9 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
                 .attr("stroke", "#000") // Highlighted border color
                 .style("filter", "drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5))"); // More pronounced shadow
 
+            // Remove any existing tooltips
+            d3.select(".tooltip").remove();
+
             // Show tooltip
             d3.select("body")
                 .append("div")
@@ -99,6 +102,7 @@ export function choroplethMap(geoData, divisionData, Alldata, year, district_nam
                     Total Crimes: ${crimeData?.districTotalCrime || "No data"}<br>
                     Most Frequent Crime: ${crimeData?.mostFrequentCrime || "No data"} (${crimeData?.mostFrequentCrimeCount || "No data"} cases)
                 `);
+
         })
         .on("mouseout", (event) => {
             d3.select(event.target)
